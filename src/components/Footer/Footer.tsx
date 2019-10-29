@@ -41,7 +41,7 @@ export default function Footer() {
       <div>
         <div className={styles.footerLabel}>Contact</div>
         <a
-          href="mailto:team@tilde.com"
+          href="mailto:team@birch.app"
           target="_blank"
           rel="noopener noreferrer"
         >

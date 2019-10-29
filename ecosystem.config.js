@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'tilde',
+      name: 'birch',
       script: 'npm',
       args: 'run start-prod',
     },

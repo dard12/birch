@@ -10,7 +10,7 @@ const prerender = require('prerender-node');
 const app = express();
 const { NODE_ENV, SENTRY_DSN, PRERENDER_TOKEN, SERVER_PORT } = process.env;
 const isProd = NODE_ENV === 'production';
-const origin = isProd ? 'https://tilde.app' : 'http://localhost';
+const origin = isProd ? 'https://birch.app' : 'http://localhost';
 
 if (isProd) {
   Sentry.init({ dsn: SENTRY_DSN });

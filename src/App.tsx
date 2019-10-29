@@ -13,7 +13,6 @@ const RecordingProfile = lazy(() =>
   import('./layouts/RecordingProfile/RecordingProfile'),
 );
 const AlbumProfile = lazy(() => import('./layouts/AlbumProfile/AlbumProfile'));
-const Charts = lazy(() => import('./layouts/Charts/Charts'));
 
 function PrivateRoute({ component: Component, ...rest }: any) {
   return (
@@ -75,15 +74,6 @@ function App() {
                   {...props}
                 />
               )}
-            />
-            <Route
-              exact
-              path="/charts"
-              render={props => <Redirect to="/charts/best-albums-of-2019" />}
-            />
-            <Route
-              path="/charts/:chart"
-              render={props => <Charts chart={props.match.params.chart} />}
             />
             <Route
               path="/profile/:username"

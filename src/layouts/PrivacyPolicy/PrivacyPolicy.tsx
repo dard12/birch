@@ -16,7 +16,7 @@ export default function PrivacyPolicy() {
 
         <div>
           Please read this Privacy Policy carefully before using
-          https://tilde.app ("us", "we", "our", the "Site", or the "Service").
+          https://birch.app ("us", "we", "our", the "Site", or the "Service").
           We are committed to ensuring the privacy of your information. This
           page informs you of our policies regarding the collection, use and
           disclosure of Personal Information we receive from users of the Site.

@@ -69,7 +69,7 @@ function Home(props: HomeProps) {
           </div>
 
           <a
-            href="mailto:team@tilde.com"
+            href="mailto:team@birch.app"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.feedbackLink}

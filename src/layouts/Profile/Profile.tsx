@@ -54,7 +54,7 @@ function Profile(props: ProfileProps) {
   const songsLink = `/profile/${targetUsername}/songs`;
   const followersLink = `/profile/${targetUsername}/followers`;
   const followingLink = `/profile/${targetUsername}/following`;
-  const profileLink = `tilde.app/profile/${targetUsername}`;
+  const profileLink = `birch.app/profile/${targetUsername}`;
 
   const copyLink = () => {
     const shareLink = document.querySelector('#share-link') as HTMLInputElement;

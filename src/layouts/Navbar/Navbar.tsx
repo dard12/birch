@@ -25,7 +25,7 @@ function Navbar(props: NavbarProps) {
     <div className={styles.navbarContainer}>
       <div className={styles.navbar}>
         <Link to={username ? '/home' : '/'} className={styles.brand}>
-          Tilde
+          Birch
         </Link>
 
         <SearchBar query={getQueryParams('query')} />
@@ -51,10 +51,6 @@ function Navbar(props: NavbarProps) {
 
         <NavLink to="/search" activeClassName={styles.active}>
           Music
-        </NavLink>
-
-        <NavLink to="/charts" activeClassName={styles.active}>
-          Charts
         </NavLink>
 
         {username && (

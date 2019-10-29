@@ -23,10 +23,10 @@ Sentry.init({
 
 // if (window.cookieconsent) {
 //   window.cookieconsent.initialise({
-//     cookie: { domain: 'www.tilde.com' },
+//     cookie: { domain: 'www.birch.app' },
 //     palette: null,
 //     content: {
-//       href: 'https://www.tilde.app/legal/privacy-policy',
+//       href: 'https://www.birch.app/legal/privacy-policy',
 //       message: 'We use cookies to give you the best experience on our website.',
 //     },
 //   });
@@ -38,12 +38,9 @@ const init = rootElement.hasChildNodes() ? hydrate : render;
 init(
   <Provider store={store}>
     <Helmet>
-      <title>Tilde | Social Music Discovery</title>
-      <meta
-        name="description"
-        content="Tilde is a social network for music lovers. Rate your music. Discover 20 million songs. Listen on all major streaming platforms."
-      />
-      <link rel="canonical" href="https://tilde.app" />
+      <title>Birch</title>
+      <meta name="description" content="Birch" />
+      <link rel="canonical" href="https://birch.app" />
     </Helmet>
 
     <Router history={history}>

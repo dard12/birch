@@ -23,7 +23,7 @@ export default function UserGuidelines() {
           <div className="heading-2 faded">
             Intellectual property infringement.
           </div>
-          https://tilde.app is a publishing, rather than a file sharing
+          https://birch.app is a publishing, rather than a file sharing
           platform, so we recognize that copyrighted materials are often used in
           fair use context. We strongly support this and urge copyright holders
           to take this into consideration before submitting complaints. If

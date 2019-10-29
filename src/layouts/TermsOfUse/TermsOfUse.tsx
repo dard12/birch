@@ -16,7 +16,7 @@ export default function TermsOfUse() {
         </div>
         <div>
           Please read these Terms of Use ("Terms", "Terms of Use") carefully
-          before using https://tilde.app ("us", "we", "our", the "Site", or the
+          before using https://birch.app ("us", "we", "our", the "Site", or the
           "Service"). Our Services are offered subject to your acceptance,
           without modification, of all of the terms and conditions contained
           herein and all other operating rules, policies (including, without
@@ -47,7 +47,7 @@ export default function TermsOfUse() {
           result of such acts or omissions.
           <br />
           <br />
-          When you create a https://tilde.app account, we consider that to be an
+          When you create a https://birch.app account, we consider that to be an
           inquiry about our products and services, which means that we may
           contact you to share more details about what we have to offer. Don’t
           worry — if you aren’t interested in learning more, you can opt out of
@@ -114,7 +114,7 @@ export default function TermsOfUse() {
           </ul>
           We also have not reviewed, and cannot review, all of the material,
           including computer software, made available through the websites and
-          web pages that link to, or are linked from, https://tilde.app. For
+          web pages that link to, or are linked from, https://birch.app. For
           example:
           <ul>
             <li>
@@ -240,18 +240,18 @@ export default function TermsOfUse() {
 
         <div>
           <div className="heading-2 faded">License</div>
-          By submitting Content to https://tilde.app, you grant
-          https://tilde.app a world-wide, royalty-free, non-exclusive,
+          By submitting Content to https://birch.app, you grant
+          https://birch.app a world-wide, royalty-free, non-exclusive,
           irrevocable, perpetual and sub-licensable license to use, reproduce,
           distribute, display (including for commercial purposes), modify, and
-          adapt the Content. This license also allows https://tilde.app to make
+          adapt the Content. This license also allows https://birch.app to make
           any publicly-posted Content available to third parties selected by
-          https://tilde.app.
+          https://birch.app.
         </div>
 
         <div>
           <div className="heading-2 faded">Prohibited Uses</div>
-          By using https://tilde.app, you represent and warrant that your
+          By using https://birch.app, you represent and warrant that your
           Content and conduct do not violate the{' '}
           <Link className="link" to="/legal/user-guidelines">
             User Guidelines
@@ -280,7 +280,7 @@ export default function TermsOfUse() {
 
         <div>
           <div className="heading-2 faded">Limitation of Liability</div>
-          In no event will https://tilde.app, or its suppliers or licensors, be
+          In no event will https://birch.app, or its suppliers or licensors, be
           liable with respect to any subject matter of the Agreement under any
           contract, negligence, strict liability or other legal or equitable
           theory for: (i) any special, incidental or consequential damages; (ii)
@@ -296,7 +296,7 @@ export default function TermsOfUse() {
 
         <div>
           <div className="heading-2 faded">Indemnification</div>
-          You agree to indemnify and hold harmless https://tilde.app, its
+          You agree to indemnify and hold harmless https://birch.app, its
           contractors, and its licensors, and their respective directors,
           officers, employees, and agents from and against any and all losses,
           liabilities, demands, damages, costs, claims, and expenses, including
@@ -308,11 +308,11 @@ export default function TermsOfUse() {
 
         <div>
           <div className="heading-2 faded">Disclaimer of Warranties</div>
-          Our Services are provided “as is.” https://tilde.app and its suppliers
+          Our Services are provided “as is.” https://birch.app and its suppliers
           and licensors hereby disclaim all warranties of any kind, express or
           implied, including, without limitation, the warranties of
           merchantability, fitness for a particular purpose and
-          non-infringement. Neither https://tilde.app, nor its suppliers and
+          non-infringement. Neither https://birch.app, nor its suppliers and
           licensors, makes any warranty that our Services will be error free or
           that access thereto will be continuous or uninterrupted. You
           understand that you download from, or otherwise obtain content or
