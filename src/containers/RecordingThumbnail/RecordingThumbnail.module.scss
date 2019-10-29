@@ -1,0 +1,16 @@
+@import '../../template.scss';
+
+.result {
+  display: grid;
+  grid-auto-rows: max-content;
+  justify-content: center;
+}
+
+.resultThumbnail {
+  @extend .shadow-2;
+  margin-bottom: $margin-2;
+  height: calc(200rem / 14);
+  width: calc(200rem / 14);
+  overflow: hidden;
+  border-radius: $border-radius-2;
+}

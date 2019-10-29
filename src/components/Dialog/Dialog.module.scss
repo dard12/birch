@@ -1,0 +1,41 @@
+@import '../../template.scss';
+
+.overlay {
+  animation: fadeIn 0.1s ease;
+  background-color: rgba(45, 45, 56, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.modal {
+  @extend .shadow-2;
+  max-width: calc(350rem / 14);
+  background-color: $white;
+  padding: $margin-4;
+  outline: none;
+  border-radius: $border-radius-2;
+  display: grid;
+  grid-gap: $margin-3;
+  font-size: $text-3;
+}
+
+.content {
+  background-color: $dark-1;
+  border-radius: $border-radius-1;
+  padding: $margin-3;
+}
+
+.actions {
+  text-align: right;
+  font-size: $text-2;
+
+  button {
+    margin-left: $margin-2;
+  }
+}

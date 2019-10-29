@@ -1,0 +1,19 @@
+@import '../../template.scss';
+
+.reviewForm {
+  @extend .card;
+  display: grid;
+  grid-gap: $margin-4;
+}
+
+.rating {
+  font-size: $text-5;
+}
+
+.submitRow {
+  text-align: right;
+}
+
+.submitRow button {
+  margin-left: $margin-3;
+}

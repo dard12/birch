@@ -1,0 +1,24 @@
+@import '../../template.scss';
+
+.toggleButton {
+  @extend .pane;
+  @extend .transition;
+  display: inline-block;
+  margin-right: $margin-2;
+  margin-bottom: $margin-2;
+  background-color: $dark-2;
+  font-size: $text-1;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  input {
+    display: none;
+  }
+
+  &.active {
+    border-color: $pink-4;
+    color: $pink-5;
+    background-color: $white;
+  }
+}

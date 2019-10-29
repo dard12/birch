@@ -1,0 +1,20 @@
+@import '../../template.scss';
+
+.likeButton {
+  @extend .transition;
+  font-weight: 600;
+  color: $dark-5;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+
+  &:hover,
+  &.active .likeIcon,
+  &:hover .likeIcon {
+    color: $pink-4;
+  }
+}
+
+.likeIcon {
+  margin-right: $margin-1;
+}

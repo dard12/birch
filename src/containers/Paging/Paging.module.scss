@@ -1,0 +1,14 @@
+@import '../../template.scss';
+
+.pageGrid {
+  display: grid;
+  grid-gap: $margin-3;
+}
+
+.gridGap3 {
+  grid-gap: $margin-3;
+}
+
+.gridGap4 {
+  grid-gap: $margin-4;
+}

@@ -1,0 +1,31 @@
+@import '../../template.scss';
+
+.commentRow {
+  display: flex;
+  align-self: flex-start;
+
+  > a {
+    margin-top: $margin-2;
+    flex-shrink: 0;
+  }
+}
+
+.commentContent {
+  background-color: $dark-1;
+  border-radius: $border-radius-1;
+  padding: $margin-2 $margin-3;
+  white-space: pre-line;
+  width: 100%;
+  margin-left: $margin-3;
+}
+
+.previousComments {
+  @extend .hoverLink;
+  font-size: $text-1;
+  padding: 0;
+}
+
+.commentAuthor {
+  font-weight: 600;
+  font-size: $text-1;
+}

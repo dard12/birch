@@ -1,0 +1,8 @@
+@import '../../template.scss';
+
+.listenHeader {
+  @extend .heading-1;
+  color: $dark-6;
+  margin-top: $margin-4;
+  margin-bottom: $margin-1;
+}

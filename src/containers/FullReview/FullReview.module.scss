@@ -1,0 +1,27 @@
+@import '../../template.scss';
+
+.reviewRow {
+  display: grid;
+  grid-template-columns: calc(150rem / 14) auto;
+  grid-gap: $margin-4;
+  align-items: flex-start;
+
+  @media (max-device-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-gap: $margin-3;
+  }
+}
+
+.reviewThumbnail {
+  @extend .shadow-2;
+  overflow: hidden;
+  border-radius: $border-radius-2;
+  width: calc(150rem / 14);
+  height: calc(150rem / 14);
+  margin-bottom: $margin-2;
+
+  @media (max-device-width: 768px) {
+    width: 85vw;
+    height: calc(250rem / 14);
+  }
+}

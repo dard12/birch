@@ -1,0 +1,30 @@
+@import '../../template.scss';
+
+.ratingSize {
+  font-size: $text-3;
+}
+
+.ratingContainer {
+  color: $dark-4;
+  white-space: nowrap;
+
+  svg {
+    margin: 0 -1px;
+  }
+
+  &.editable {
+    cursor: pointer;
+  }
+
+  &.editable:hover,
+  &.rated {
+    color: $pink-4;
+  }
+}
+
+.editable .ratingStar:hover,
+.ratingStar.active {
+  ~ .ratingStar {
+    color: $dark-4;
+  }
+}

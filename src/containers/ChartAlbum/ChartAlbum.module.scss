@@ -1,0 +1,47 @@
+@import '../../template.scss';
+
+.chartItem {
+  @extend .card;
+  @extend .transition;
+  display: grid;
+  grid-template-columns: calc(120rem / 14) calc(130rem / 14) auto;
+  align-items: center;
+  padding: $margin-3 0;
+  font-size: $text-4;
+
+  &:hover {
+    color: $pink-5;
+  }
+
+  @media (max-device-width: 768px) {
+    font-size: $text-3;
+    grid-template-columns: calc(60rem / 14) calc(100rem / 14) auto;
+  }
+}
+
+.chartPosition {
+  font-size: $text-8;
+  font-weight: 600;
+  text-align: center;
+
+  @media (max-device-width: 768px) {
+    font-size: $text-6;
+  }
+}
+
+.chartThumbnail {
+  @extend .shadow-2;
+  height: calc(100rem / 14);
+  width: calc(100rem / 14);
+  overflow: hidden;
+  border-radius: $border-radius-2;
+
+  div div {
+    font-size: $text-1;
+  }
+
+  @media (max-device-width: 768px) {
+    height: calc(80rem / 14);
+    width: calc(80rem / 14);
+  }
+}

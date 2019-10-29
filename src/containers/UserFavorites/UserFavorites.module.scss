@@ -1,0 +1,11 @@
+@import '../../template.scss';
+
+.favoriteLink {
+  @extend .link;
+  font-size: $text-1;
+  color: $dark-5;
+
+  &:hover {
+    color: $pink-5;
+  }
+}

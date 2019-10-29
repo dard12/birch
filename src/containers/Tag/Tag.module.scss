@@ -1,0 +1,8 @@
+@import '../../template.scss';
+
+.tag {
+  @extend .chip;
+  display: inline-block;
+  margin-right: $margin-2;
+  margin-bottom: $margin-2;
+}

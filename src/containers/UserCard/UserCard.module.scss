@@ -1,0 +1,16 @@
+@import '../../template.scss';
+
+.userCard {
+  display: flex;
+  align-items: center;
+
+  > :first-child {
+    margin-right: $margin-3;
+  }
+}
+
+.userLinks {
+  > * + * {
+    margin-left: $margin-2;
+  }
+}

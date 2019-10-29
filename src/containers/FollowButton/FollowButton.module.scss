@@ -1,0 +1,13 @@
+@import '../../template.scss';
+
+.follow {
+  @extend .btn;
+
+  &:after {
+    content: 'Following';
+  }
+
+  &:hover:after {
+    content: 'Unfollow';
+  }
+}

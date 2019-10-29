@@ -1,0 +1,21 @@
+@import '../../template.scss';
+
+.filterContainer:not(:first-of-type) {
+  border-top: 1px solid $dark-2;
+  padding-top: $margin-4;
+}
+
+.filterHeader {
+  font-weight: 600;
+  font-size: $text-3;
+  margin-bottom: $margin-1;
+}
+
+.filterDescription {
+  color: $dark-6;
+  font-size: $text-1;
+}
+
+.filterControl {
+  margin-top: $margin-3;
+}

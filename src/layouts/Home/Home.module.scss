@@ -1,0 +1,33 @@
+@import '../../template.scss';
+
+.homePage {
+  width: $width-5;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: $margin-5;
+  align-items: flex-start;
+
+  @media (max-device-width: 768px) {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+}
+
+.homeFeed {
+  display: grid;
+  grid-gap: $margin-4;
+}
+
+.homeSidebar {
+  display: grid;
+  grid-gap: $margin-5;
+}
+
+.feedbackLink {
+  @extend .hoverLink;
+  color: $dark-5;
+  display: block;
+  text-align: center;
+  margin-top: $margin-4;
+}

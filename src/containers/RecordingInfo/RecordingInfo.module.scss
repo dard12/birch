@@ -1,0 +1,12 @@
+@import '../../template.scss';
+
+.recordingInfo {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    @extend .truncate;
+    max-width: 100%;
+  }
+}

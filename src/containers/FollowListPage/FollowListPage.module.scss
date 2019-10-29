@@ -1,0 +1,14 @@
+@import '../../template.scss';
+
+.followCard {
+  @extend .card;
+  padding: $margin-3 $margin-4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.followsList {
+  display: grid;
+  grid-gap: $margin-3;
+}

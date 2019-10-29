@@ -1,0 +1,14 @@
+@import '../../template.scss';
+
+.toggleLink {
+  @extend .hoverLink;
+  padding: 0;
+  color: $pink-4;
+  margin-top: $margin-3;
+  margin-left: $margin-2;
+}
+
+.verticalTruncate {
+  overflow: hidden;
+  max-height: 300px;
+}

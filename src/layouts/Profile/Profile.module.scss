@@ -1,0 +1,66 @@
+@import '../../template.scss';
+
+.profilePage {
+  width: $width-3;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: $margin-4;
+
+  @media (max-device-width: 768px) {
+    width: 100%;
+  }
+}
+
+.profileCard {
+  @extend .card;
+  padding: $margin-3 $margin-4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $dark-1;
+
+  @media (max-device-width: 768px) {
+    font-size: $text-1;
+    padding: $margin-3;
+  }
+}
+
+.profileBadge {
+  @extend .badge;
+  width: $text-10;
+  height: $text-10;
+  font-size: $text-7;
+  background-color: $pink-4;
+  color: $white;
+
+  @media (max-device-width: 768px) {
+    width: $text-7;
+    height: $text-7;
+    font-size: $text-4;
+  }
+}
+
+.profileLink {
+  @extend .chip;
+  border: none;
+  appearance: none;
+  color: $dark-6;
+  background-color: $dark-2;
+  max-width: 150px;
+  overflow-x: auto;
+  margin-right: $margin-2;
+
+  @media (max-device-width: 768px) {
+    max-width: 30px;
+  }
+}
+
+.profileShare {
+  display: flex;
+  align-items: center;
+}
+
+.copiedText {
+  color: $pink-4;
+  margin-right: $margin-3;
+}
