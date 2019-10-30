@@ -7,10 +7,8 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styles from './Navbar.module.scss';
-import { getQueryParams } from '../../history';
 import { logoutAction } from '../../redux/actions';
 import { axios } from '../../App';
-import { SearchBar } from '../../containers/SearchBar/SearchBar';
 import { usernameSelector } from '../../redux/selectors';
 
 interface NavbarProps extends RouteComponentProps {
@@ -27,8 +25,6 @@ function Navbar(props: NavbarProps) {
         <Link to={username ? '/home' : '/'} className={styles.brand}>
           Birch
         </Link>
-
-        <SearchBar query={getQueryParams('query')} />
 
         {username ? (
           <NavLink
@@ -48,10 +44,6 @@ function Navbar(props: NavbarProps) {
             Home
           </NavLink>
         )}
-
-        <NavLink to="/search" activeClassName={styles.active}>
-          Music
-        </NavLink>
 
         {username && (
           <NavLink to={`/profile/${username}`} activeClassName={styles.active}>

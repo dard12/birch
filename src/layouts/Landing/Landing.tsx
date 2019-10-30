@@ -5,8 +5,6 @@ import styles from './Landing.module.scss';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import { userSelector } from '../../redux/selectors';
-import Paging from '../../containers/Paging/Paging';
-import ReviewListPage from '../../containers/ReviewListPage/ReviewListPage';
 
 interface LandingProps {
   user?: string;
@@ -64,16 +62,6 @@ function Landing(props: LandingProps) {
 
         <div className={styles.landingFeed}>
           <div className={styles.landingReviews}>Recent Music Reviews</div>
-          <Paging
-            component={ReviewListPage}
-            params={{
-              sort: 'vote',
-              created_at: 'recent',
-              pageSize: 3,
-            }}
-            seeMore={false}
-            gridGap="4"
-          />
 
           <div className={styles.landingFeedCTA}>
             <Link to="/register" className="ctaButton">

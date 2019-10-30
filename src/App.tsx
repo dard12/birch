@@ -1,18 +1,11 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Axios from 'axios';
-import _ from 'lodash';
-import { getQueryParams } from './history';
 import Navbar from './layouts/Navbar/Navbar';
 
 const Home = lazy(() => import('./layouts/Home/Home'));
 const Login = lazy(() => import('./layouts/Login/Login'));
 const Profile = lazy(() => import('./layouts/Profile/Profile'));
-const Search = lazy(() => import('./layouts/Search/Search'));
-const RecordingProfile = lazy(() =>
-  import('./layouts/RecordingProfile/RecordingProfile'),
-);
-const AlbumProfile = lazy(() => import('./layouts/AlbumProfile/AlbumProfile'));
 
 function PrivateRoute({ component: Component, ...rest }: any) {
   return (
@@ -49,31 +42,6 @@ function App() {
               exact
               path="/register"
               render={props => <Login {...props} />}
-            />
-            <Route
-              exact
-              path="/search"
-              render={props => (
-                <Search queryParams={getQueryParams()} {...props} />
-              )}
-            />
-            <Route
-              path="/recording/:recording"
-              render={props => (
-                <RecordingProfile
-                  recording={_.toInteger(props.match.params.recording)}
-                  {...props}
-                />
-              )}
-            />
-            <Route
-              path="/album/:release_group"
-              render={props => (
-                <AlbumProfile
-                  release_group={_.toInteger(props.match.params.release_group)}
-                  {...props}
-                />
-              )}
             />
             <Route
               path="/profile/:username"

@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
-import { NavLink, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createSelector } from 'redux-starter-kit';
 import styles from './Profile.module.scss';
 import FollowButton from '../../containers/FollowButton/FollowButton';
 import UserCard from '../../containers/UserCard/UserCard';
-import FollowList from '../../containers/FollowList/FollowList';
 import { createDocSelector, userSelector } from '../../redux/selectors';
-import FavoriteSongs from '../../containers/FavoriteSongs/FavoriteSongs';
-import FollowCount from '../../containers/FollowCount/FollowCount';
 import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
 import { UserDoc } from '../../../src-server/models';
 import { loadDocsAction } from '../../redux/actions';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import { Button } from '../../components/Button/Button';
 import SignUp from '../../components/SignUp/SignUp';
-import ReviewListPage from '../../containers/ReviewListPage/ReviewListPage';
-import Paging from '../../containers/Paging/Paging';
 
 interface ProfileProps {
   user?: string;
@@ -50,10 +44,6 @@ function Profile(props: ProfileProps) {
 
   const targetUser = userDoc.id;
   const isMyProfile = user === targetUser;
-  const reviewsLink = `/profile/${targetUsername}/reviews`;
-  const songsLink = `/profile/${targetUsername}/songs`;
-  const followersLink = `/profile/${targetUsername}/followers`;
-  const followingLink = `/profile/${targetUsername}/following`;
   const profileLink = `birch.app/profile/${targetUsername}`;
 
   const copyLink = () => {
@@ -106,48 +96,7 @@ function Profile(props: ProfileProps) {
             </div>
           )}
         </div>
-
-        <div className="tabs">
-          <NavLink to={reviewsLink} activeClassName="active">
-            Latest Reviews
-          </NavLink>
-          <NavLink to={songsLink} activeClassName="active">
-            Favorite Songs
-          </NavLink>
-          <NavLink to={followersLink} activeClassName="active">
-            Followers (<FollowCount target="follower" user={targetUser} />)
-          </NavLink>
-          <NavLink to={followingLink} activeClassName="active">
-            Following (<FollowCount target="following" user={targetUser} />)
-          </NavLink>
-        </div>
       </div>
-
-      <Switch>
-        <Route
-          path={reviewsLink}
-          render={() => (
-            <Paging
-              component={ReviewListPage}
-              params={{ 'ratings.review.author_id': targetUser }}
-              gridGap="4"
-            />
-          )}
-        />
-        <Route
-          path={songsLink}
-          render={() => <FavoriteSongs user={targetUser} />}
-        />
-        <Route
-          path={followersLink}
-          render={() => <FollowList target="follower" user={targetUser} />}
-        />
-        <Route
-          path={followingLink}
-          render={() => <FollowList target="following" user={targetUser} />}
-        />
-        <Route render={() => <Redirect to={reviewsLink} />} />
-      </Switch>
     </div>
   );
 }

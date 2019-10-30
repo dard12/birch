@@ -49,14 +49,8 @@ app.get('*', (req, res) => {
 });
 
 import './routes/auth';
-import './routes/comment';
 import './routes/follow';
-import './routes/recording';
-import './routes/release_group';
-import './routes/review';
-import './routes/tag';
 import './routes/user';
-import './routes/vote';
 
 if (isProd) {
   app.use(Sentry.Handlers.errorHandler());

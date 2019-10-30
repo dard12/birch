@@ -57,100 +57,100 @@ const passwordStrategy = new LocalStrategy(async (username, password, done) => {
   }
 });
 
-const facebookStrategy = new FacebookStrategy(
-  {
-    clientID: FACEBOOK_CLIENT,
-    clientSecret: FACEBOOK_SECRET,
-    callbackURL: `${origin}/auth/facebook/callback`,
-    // https://developers.facebook.com/docs/facebook-login/permissions#reference-default
-    profileFields: ['id', 'first_name', 'last_name', 'email'],
-    enableProof: true,
-  },
-  async (accessToken, refreshToken, profile, done) => {
-    const { id: facebook_id, name, emails } = profile;
-    const first_name = _.get(name, 'givenName') || '';
-    const last_name = _.get(name, 'familyName') || '';
+// const facebookStrategy = new FacebookStrategy(
+//   {
+//     clientID: FACEBOOK_CLIENT,
+//     clientSecret: FACEBOOK_SECRET,
+//     callbackURL: `${origin}/auth/facebook/callback`,
+//     // https://developers.facebook.com/docs/facebook-login/permissions#reference-default
+//     profileFields: ['id', 'first_name', 'last_name', 'email'],
+//     enableProof: true,
+//   },
+//   async (accessToken, refreshToken, profile, done) => {
+//     const { id: facebook_id, name, emails } = profile;
+//     const first_name = _.get(name, 'givenName') || '';
+//     const last_name = _.get(name, 'familyName') || '';
 
-    const email = _.first(_.compact(_.map(emails, 'value'))) || '';
-    const id = uuid();
+//     const email = _.first(_.compact(_.map(emails, 'value'))) || '';
+//     const id = uuid();
 
-    try {
-      await pg.raw(
-        `
-        INSERT INTO ratings.user (id, facebook_id, first_name, last_name, email, username, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-        ON CONFLICT (facebook_id)
-        DO NOTHING
-        `,
-        [id, facebook_id, first_name, last_name, email, id, new Date()],
-      );
-    } catch (error) {
-      // Do nothing
-    }
+//     try {
+//       await pg.raw(
+//         `
+//         INSERT INTO ratings.user (id, facebook_id, first_name, last_name, email, username, created_at)
+//         VALUES (?, ?, ?, ?, ?, ?, ?)
+//         ON CONFLICT (facebook_id)
+//         DO NOTHING
+//         `,
+//         [id, facebook_id, first_name, last_name, email, id, new Date()],
+//       );
+//     } catch (error) {
+//       // Do nothing
+//     }
 
-    try {
-      await pg
-        .update({ facebook_id })
-        .from('ratings.user')
-        .where({ email });
+//     try {
+//       await pg
+//         .update({ facebook_id })
+//         .from('ratings.user')
+//         .where({ email });
 
-      const user = await pg
-        .first('*')
-        .from('ratings.user')
-        .where({ facebook_id });
+//       const user = await pg
+//         .first('*')
+//         .from('ratings.user')
+//         .where({ facebook_id });
 
-      done(null, user);
-    } catch (error) {
-      done(error);
-    }
-  },
-);
+//       done(null, user);
+//     } catch (error) {
+//       done(error);
+//     }
+//   },
+// );
 
-const googleStrategy = new GoogleStrategy(
-  {
-    clientID: GOOGLE_CLIENT,
-    clientSecret: GOOGLE_SECRET,
-    callbackURL: `${origin}/auth/google/callback`,
-  },
-  async (token, tokenSecret, profile, done) => {
-    const { id: google_id, name, emails, photos } = profile;
-    const first_name = _.get(name, 'givenName') || '';
-    const last_name = _.get(name, 'familyName') || '';
-    const photo = _.first(_.compact(_.map(photos, 'value'))) || '';
-    const email = _.first(_.compact(_.map(emails, 'value'))) || '';
-    const id = uuid();
+// const googleStrategy = new GoogleStrategy(
+//   {
+//     clientID: GOOGLE_CLIENT,
+//     clientSecret: GOOGLE_SECRET,
+//     callbackURL: `${origin}/auth/google/callback`,
+//   },
+//   async (token, tokenSecret, profile, done) => {
+//     const { id: google_id, name, emails, photos } = profile;
+//     const first_name = _.get(name, 'givenName') || '';
+//     const last_name = _.get(name, 'familyName') || '';
+//     const photo = _.first(_.compact(_.map(photos, 'value'))) || '';
+//     const email = _.first(_.compact(_.map(emails, 'value'))) || '';
+//     const id = uuid();
 
-    try {
-      await pg.raw(
-        `
-        INSERT INTO ratings.user (id, google_id, first_name, last_name, email, username, photo, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        ON CONFLICT (google_id)
-        DO NOTHING
-      `,
-        [id, google_id, first_name, last_name, email, id, photo, new Date()],
-      );
-    } catch (error) {
-      // do nothing
-    }
+//     try {
+//       await pg.raw(
+//         `
+//         INSERT INTO ratings.user (id, google_id, first_name, last_name, email, username, photo, created_at)
+//         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+//         ON CONFLICT (google_id)
+//         DO NOTHING
+//       `,
+//         [id, google_id, first_name, last_name, email, id, photo, new Date()],
+//       );
+//     } catch (error) {
+//       // do nothing
+//     }
 
-    try {
-      await pg
-        .update({ google_id, photo })
-        .from('ratings.user')
-        .where({ email });
+//     try {
+//       await pg
+//         .update({ google_id, photo })
+//         .from('ratings.user')
+//         .where({ email });
 
-      const user = await pg
-        .first('*')
-        .from('ratings.user')
-        .where({ google_id });
+//       const user = await pg
+//         .first('*')
+//         .from('ratings.user')
+//         .where({ google_id });
 
-      done(undefined, user);
-    } catch (error) {
-      done(error);
-    }
-  },
-);
+//       done(undefined, user);
+//     } catch (error) {
+//       done(error);
+//     }
+//   },
+// );
 
 const jwtStrategy = new JWTStrategy(
   {
@@ -179,8 +179,8 @@ const jwtStrategy = new JWTStrategy(
 );
 
 passport.use(passwordStrategy);
-passport.use(facebookStrategy);
-passport.use(googleStrategy);
+// passport.use(facebookStrategy);
+// passport.use(googleStrategy);
 passport.use(jwtStrategy);
 
 passport.serializeUser((user: UserDoc, done) => done(null, user.id));

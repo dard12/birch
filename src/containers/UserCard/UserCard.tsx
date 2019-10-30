@@ -4,7 +4,6 @@ import UserName from '../UserName/UserName';
 import UserBadge from '../UserBadge/UserBadge';
 import FollowCount from '../FollowCount/FollowCount';
 import styles from './UserCard.module.scss';
-import UserFavorites from '../UserFavorites/UserFavorites';
 import { createDocSelector } from '../../redux/selectors';
 import { loadDocsAction } from '../../redux/actions';
 import { UserDoc } from '../../../src-server/models';
@@ -49,7 +48,6 @@ function UserCard(props: UserCardProps) {
       <div className="truncate">
         <div className={styles.userLinks}>
           <UserName user={user} />
-          <UserFavorites user={user} />
         </div>
 
         {meta || (
