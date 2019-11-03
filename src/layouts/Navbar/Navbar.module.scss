@@ -1,7 +1,6 @@
 @import '../../template.scss';
 
 .navbarContainer {
-  background-color: $white;
   width: 100vw;
 }
 
@@ -36,7 +35,7 @@
   .brand {
     font-family: $serif;
     font-weight: 600;
-    margin-right: $margin-5;
+    margin-right: auto;
     font-size: $text-5;
     padding: 0;
 

@@ -26,15 +26,7 @@ function Navbar(props: NavbarProps) {
           Birch
         </Link>
 
-        {username ? (
-          <NavLink
-            to="/home"
-            className={styles.home}
-            activeClassName={styles.active}
-          >
-            Home
-          </NavLink>
-        ) : (
+        {!username && (
           <NavLink
             exact
             to="/"
@@ -46,8 +38,18 @@ function Navbar(props: NavbarProps) {
         )}
 
         {username && (
+          <NavLink
+            to="/home"
+            className={styles.home}
+            activeClassName={styles.active}
+          >
+            Myself
+          </NavLink>
+        )}
+
+        {username && (
           <NavLink to={`/profile/${username}`} activeClassName={styles.active}>
-            Profile
+            Relationships
           </NavLink>
         )}
 

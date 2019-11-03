@@ -15,18 +15,6 @@ export default function Footer() {
         </div>
       </div>
       <div>
-        <div className={styles.footerLabel}>Top Charts</div>
-        <div>
-          <Link to="/charts/best-albums-of-2019">Best of 2019</Link>
-        </div>
-        <div>
-          <Link to="/charts/best-albums-of-all-time">Best of All Time</Link>
-        </div>
-        <div>
-          <Link to="/charts/best-albums-of-1990">Best of the {"90's"}</Link>
-        </div>
-      </div>
-      <div>
         <div className={styles.footerLabel}>Legal</div>
         <div>
           <Link to="/legal/privacy-policy">Privacy Policy</Link>
