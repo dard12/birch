@@ -199,12 +199,6 @@ $line-height-1: 1.2;
   grid-gap: $margin-1;
 }
 
-@mixin placeholder($color) {
-  &::placeholder {
-    color: $color;
-  }
-}
-
 input {
   @extend .transition;
   outline: none;
@@ -282,6 +276,7 @@ textarea {
 
 .ql-editor {
   padding: 0;
+  min-height: 100vh;
 }
 
 .ql-bubble .ql-editor blockquote {
@@ -303,5 +298,6 @@ textarea {
 
 .ql-editor.ql-blank::before {
   font-style: normal;
-  color: $dark-4;
+  color: $dark-6;
+  left: 0;
 }
