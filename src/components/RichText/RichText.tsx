@@ -40,30 +40,39 @@ class RichText extends Component<RichTextProps> {
     const { readOnly, onChange, onEnter, placeholder } = this.props;
     const { id } = this.state;
     const allowedFormatting = ['bold', 'italic', 'link', 'blockquote'];
+    const getContents = () => {
+      const isEmpty = _.isEmpty(_.trim(quill.getText()));
+      return isEmpty ? '' : quill.getContents();
+    };
+    const enterKey = 13;
+
     const quill = new Quill(`#${id}`, {
       theme: 'bubble',
       placeholder,
       readOnly,
       formats: allowedFormatting,
-      modules: { toolbar: allowedFormatting },
+      modules: {
+        toolbar: allowedFormatting,
+        keyboard: {
+          bindings: {
+            custom: {
+              key: enterKey,
+              handler: () => {
+                onEnter && onEnter(getContents());
+                return true;
+              },
+            },
+          },
+        },
+      },
     });
-
-    this.setState({ quill });
-    this.updateContent(quill);
-
-    const getContents = () => {
-      const isEmpty = _.isEmpty(_.trim(quill.getText()));
-      return isEmpty ? '' : quill.getContents();
-    };
 
     if (onChange) {
       quill.on('text-change', () => onChange(getContents()));
     }
 
-    if (onEnter) {
-      const enter = 13;
-      quill.keyboard.addBinding({ key: enter }, () => onEnter(getContents()));
-    }
+    this.setState({ quill });
+    this.updateContent(quill);
   }
 
   updateContent = (quill: any) => {
