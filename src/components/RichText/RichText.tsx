@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Quill from 'quill';
 import _ from 'lodash';
+import classNames from 'classnames';
 import styles from './RichText.module.scss';
 
 const Delta = Quill.import('delta');
@@ -10,6 +11,7 @@ interface RichTextProps {
   onChange?: Function;
   content?: any;
   placeholder?: string;
+  className?: string;
 }
 
 interface RichTextState {
@@ -68,9 +70,9 @@ class RichText extends Component<RichTextProps> {
   };
 
   render() {
-    const { placeholder, onChange } = this.props;
+    const { placeholder, onChange, className } = this.props;
     const { id, quill } = this.state;
-    const quillElement = document.querySelector('.ql-editor.ql-blank');
+    const quillElement = document.querySelector(`#${id} .ql-editor.ql-blank`);
 
     if (quillElement && placeholder) {
       quillElement.setAttribute('data-placeholder', placeholder);
@@ -80,7 +82,7 @@ class RichText extends Component<RichTextProps> {
       this.updateContent(quill);
     }
 
-    return <div id={id} className={styles.richText} />;
+    return <div id={id} className={classNames(styles.richText, className)} />;
   }
 }
 
