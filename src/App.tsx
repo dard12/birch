@@ -37,11 +37,15 @@ function App() {
       <div className="page-container">
         <Suspense fallback={null}>
           <Switch>
-            <Route exact path="/login" render={props => <Login {...props} />} />
+            <Route
+              exact
+              path="/login"
+              render={(props: any) => <Login {...props} />}
+            />
             <Route
               exact
               path="/register"
-              render={props => <Login {...props} />}
+              render={(props: any) => <Login {...props} />}
             />
             <Route
               path="/profile/:username"

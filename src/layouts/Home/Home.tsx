@@ -5,12 +5,16 @@ import RichText from '../../components/RichText/RichText';
 interface HomeProps {}
 
 function Home(props: HomeProps) {
+  const onEnter = (contents: any) => {
+    console.log(contents);
+  };
+
   return (
     <div className={styles.homePage}>
       <div>
         <div className="heading-1">Values</div>
         <div className={styles.journal}>
-          <RichText placeholder="What are your values?" />
+          <RichText placeholder="What are your values?" onEnter={onEnter} />
         </div>
       </div>
 

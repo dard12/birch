@@ -9,6 +9,7 @@ const Delta = Quill.import('delta');
 interface RichTextProps {
   readOnly?: boolean;
   onChange?: Function;
+  onEnter?: Function;
   content?: any;
   placeholder?: string;
   className?: string;
@@ -36,7 +37,7 @@ class RichText extends Component<RichTextProps> {
   state: RichTextState = { id: `id_${_.random(10000)}`, quill: undefined };
 
   componentDidMount() {
-    const { readOnly, onChange, placeholder } = this.props;
+    const { readOnly, onChange, onEnter, placeholder } = this.props;
     const { id } = this.state;
     const allowedFormatting = ['bold', 'italic', 'link', 'blockquote'];
     const quill = new Quill(`#${id}`, {
@@ -50,13 +51,18 @@ class RichText extends Component<RichTextProps> {
     this.setState({ quill });
     this.updateContent(quill);
 
-    if (onChange) {
-      quill.on('text-change', () => {
-        const isEmpty = _.isEmpty(_.trim(quill.getText()));
-        const contents = isEmpty ? '' : quill.getContents();
+    const getContents = () => {
+      const isEmpty = _.isEmpty(_.trim(quill.getText()));
+      return isEmpty ? '' : quill.getContents();
+    };
 
-        onChange(contents);
-      });
+    if (onChange) {
+      quill.on('text-change', () => onChange(getContents()));
+    }
+
+    if (onEnter) {
+      const enter = 13;
+      quill.keyboard.addBinding({ key: enter }, () => onEnter(getContents()));
     }
   }
 

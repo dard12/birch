@@ -1,11 +1,20 @@
 import { createSelector } from 'redux-starter-kit';
 import _ from 'lodash';
 
-export const userSelector = createSelector({ user: 'login.id' });
-export const usernameSelector = createSelector({ username: 'login.username' });
+export const userSelector = createSelector(
+  state => _.get(state, 'login.id'),
+  user => ({ user }),
+);
+export const usernameSelector = createSelector(
+  state => _.get(state, 'login.username'),
+  username => ({ username }),
+);
 
 export const createCollectionSelector = (collectionName: string) => {
-  return createSelector({ [collectionName]: `collections.${collectionName}` });
+  return createSelector(
+    state => _.get(state, `collections.${collectionName}`),
+    collection => ({ [collectionName]: collection }),
+  );
 };
 
 export const createDocSelector = ({

@@ -36,6 +36,13 @@
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "import/no-named-default": "off",
-    "react/jsx-fragments": "off"
+    "react/jsx-fragments": "off",
+
+    "react/jsx-curly-newline": "off",
+    "react/static-property-placement": "off",
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "react/state-in-constructor": "off",
+    "@typescript-eslint/consistent-type-assertions": "off"
   }
 }
