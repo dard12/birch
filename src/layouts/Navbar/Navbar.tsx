@@ -43,7 +43,7 @@ function Navbar(props: NavbarProps) {
             className={styles.home}
             activeClassName={styles.active}
           >
-            Myself
+            Home
           </NavLink>
         )}
 

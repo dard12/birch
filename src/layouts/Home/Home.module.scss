@@ -23,3 +23,17 @@
     content: '•  ';
   }
 }
+
+.reflect {
+  @extend .card;
+  display: grid;
+  grid-gap: $margin-2;
+}
+
+.item {
+  cursor: pointer;
+
+  &:hover {
+    color: $pink-5;
+  }
+}
