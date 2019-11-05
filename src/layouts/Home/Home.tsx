@@ -33,6 +33,13 @@ function Home(props: HomeProps) {
           </div>
         </div>
       </div>
+
+      <div>
+        <div className="heading-1">Other Notes</div>
+        <div className="card">
+          <RichText placeholder="What's on your mind?" />
+        </div>
+      </div>
     </div>
   );
 }
