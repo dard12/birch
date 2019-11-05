@@ -1,32 +1,9 @@
 @import '../../template.scss';
 
-.homePage {
+.myselfPage {
   width: $width-4;
   margin: 0 auto;
   display: grid;
-  grid-gap: $margin-5;
-
-  @media (max-device-width: 768px) {
-    grid-template-columns: 1fr;
-    width: 100%;
-  }
-}
-
-.journal {
-  @extend .card;
-
-  [data-placeholder]:before {
-    left: 15px;
-  }
-
-  p:before {
-    content: '•  ';
-  }
-}
-
-.tasks {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
   grid-gap: $margin-4;
 }
 
@@ -34,12 +11,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: $margin-4;
-}
-
-.reflect {
-  display: grid;
-  grid-gap: $margin-3;
-  width: $width-1;
 }
 
 .item {
@@ -60,5 +31,17 @@
 
   &:hover {
     color: $pink-5;
+  }
+}
+
+.journal {
+  @extend .card;
+
+  [data-placeholder]:before {
+    left: 15px;
+  }
+
+  p:before {
+    content: '•  ';
   }
 }

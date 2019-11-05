@@ -6,6 +6,7 @@ import Navbar from './layouts/Navbar/Navbar';
 const Home = lazy(() => import('./layouts/Home/Home'));
 const Login = lazy(() => import('./layouts/Login/Login'));
 const Profile = lazy(() => import('./layouts/Profile/Profile'));
+const Myself = lazy(() => import('./layouts/Myself/Myself'));
 
 function PrivateRoute({ component: Component, ...rest }: any) {
   return (
@@ -58,6 +59,7 @@ function App() {
             />
 
             <PrivateRoute path="/home" component={Home} />
+            <PrivateRoute path="/myself" component={Myself} />
 
             <Route render={() => <Redirect to="/" />} />
           </Switch>

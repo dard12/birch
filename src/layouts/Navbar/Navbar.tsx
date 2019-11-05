@@ -48,6 +48,12 @@ function Navbar(props: NavbarProps) {
         )}
 
         {username && (
+          <NavLink to="/myself" activeClassName={styles.active}>
+            Myself
+          </NavLink>
+        )}
+
+        {username && (
           <NavLink to={`/profile/${username}`} activeClassName={styles.active}>
             Relationships
           </NavLink>
