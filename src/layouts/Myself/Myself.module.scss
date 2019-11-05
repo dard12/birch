@@ -4,15 +4,8 @@
   width: $width-4;
   margin: 0 auto;
   display: grid;
-  grid-gap: $margin-4;
+  grid-gap: $margin-3;
 }
-
-.understanding {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: $margin-4;
-}
-
 .item {
   @extend .card;
   padding: $margin-3;
