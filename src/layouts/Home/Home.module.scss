@@ -14,4 +14,12 @@
 
 .journal {
   @extend .card;
+
+  [data-placeholder]:before {
+    left: 15px;
+  }
+
+  p:before {
+    content: '•  ';
+  }
 }
