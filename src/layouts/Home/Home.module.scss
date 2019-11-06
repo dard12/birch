@@ -12,18 +12,6 @@
   }
 }
 
-.journal {
-  @extend .card;
-
-  [data-placeholder]:before {
-    left: 15px;
-  }
-
-  p:before {
-    content: '•  ';
-  }
-}
-
 .tasks {
   display: grid;
   grid-template-columns: 2fr 1fr;

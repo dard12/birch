@@ -1,0 +1,13 @@
+@import '../../template.scss';
+
+.note {
+  @extend .card;
+
+  [data-placeholder]:before {
+    left: 15px;
+  }
+
+  p:before {
+    content: '•  ';
+  }
+}
