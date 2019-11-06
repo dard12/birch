@@ -7,12 +7,6 @@
   grid-gap: $margin-4;
 }
 
-.myselfGrid {
-  display: grid;
-  grid-gap: $margin-4;
-  grid-template-columns: 1fr 1fr;
-}
-
 .item {
   @extend .card;
   padding: $margin-3;

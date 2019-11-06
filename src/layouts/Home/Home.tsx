@@ -32,13 +32,6 @@ function Home(props: HomeProps) {
           </div>
         </div>
       </div>
-
-      <Note
-        type="other"
-        header="Other Notes"
-        placeholder="What's on your mind?"
-        bullets={false}
-      />
     </div>
   );
 }
