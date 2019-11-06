@@ -41,7 +41,7 @@ function Note(props: NoteProps) {
 
   const onChange = _.debounce(content => {
     axios.post('/api/note', { content, type });
-  }, 1000);
+  }, 500);
 
   if (!isSuccess) {
     return <Skeleton card count={4} />;

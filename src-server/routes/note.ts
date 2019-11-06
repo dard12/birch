@@ -25,7 +25,7 @@ router.post('/api/note', requireAuth, async (req, res) => {
     `
       INSERT INTO note (id, content, type, author_id)
       VALUES (?, ?, ?, ?)
-      ON CONFLICT ON CONSTRAINT note_type_author_id_idx
+      ON CONFLICT (type, author_id)
       DO UPDATE
       SET content = ?
       `,
