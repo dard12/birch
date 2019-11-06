@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Home.module.scss';
-import RichText from '../../components/RichText/RichText';
 import Note from '../../containers/Note/Note';
 
 interface HomeProps {}
@@ -9,7 +8,11 @@ function Home(props: HomeProps) {
   return (
     <div className={styles.homePage}>
       <div className={styles.tasks}>
-        <Note header="To Do" placeholder="What needs to get done?" />
+        <Note
+          type="todo"
+          header="To Do"
+          placeholder="What needs to get done?"
+        />
 
         <div>
           <div className="heading-1">Reflect on This</div>
@@ -31,6 +34,7 @@ function Home(props: HomeProps) {
       </div>
 
       <Note
+        type="other"
         header="Other Notes"
         placeholder="What's on your mind?"
         bullets={false}

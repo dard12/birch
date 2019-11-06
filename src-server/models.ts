@@ -11,3 +11,10 @@ export interface UserDoc {
   bot?: boolean;
   onboarding_welcome?: boolean;
 }
+
+export interface NoteDoc {
+  id: string;
+  content: string;
+  type: string;
+  author_id: string;
+}

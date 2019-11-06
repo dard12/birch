@@ -7,11 +7,23 @@ interface MyselfProps {}
 function Myself(props: MyselfProps) {
   return (
     <div className={styles.myselfPage}>
-      <Note title="Values" placeholder="What are your values?" />
-      <Note title="Strengths" placeholder="What are your strengths?" />
-      <Note title="Weaknesses" placeholder="What are your weaknesses?" />
-      <Note title="Likes" placeholder="What makes you happy?" />
-      <Note title="Dislikes" placeholder="What makes you unhappy?" />
+      <Note type="values" title="Values" placeholder="What are your values?" />
+      <Note
+        type="strengths"
+        title="Strengths"
+        placeholder="What are your strengths?"
+      />
+      <Note
+        type="weaknesses"
+        title="Weaknesses"
+        placeholder="What are your weaknesses?"
+      />
+      <Note type="likes" title="Likes" placeholder="What makes you happy?" />
+      <Note
+        type="dislikes"
+        title="Dislikes"
+        placeholder="What makes you unhappy?"
+      />
     </div>
   );
 }

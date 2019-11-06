@@ -33,7 +33,7 @@ const passwordStrategy = new LocalStrategy(async (username, password, done) => {
   try {
     user = await pg
       .first('*')
-      .from('ratings.user')
+      .from('user')
       .where({ username });
   } catch (error) {
     done(error);
@@ -77,7 +77,7 @@ const passwordStrategy = new LocalStrategy(async (username, password, done) => {
 //     try {
 //       await pg.raw(
 //         `
-//         INSERT INTO ratings.user (id, facebook_id, first_name, last_name, email, username, created_at)
+//         INSERT INTO user (id, facebook_id, first_name, last_name, email, username, created_at)
 //         VALUES (?, ?, ?, ?, ?, ?, ?)
 //         ON CONFLICT (facebook_id)
 //         DO NOTHING
@@ -91,12 +91,12 @@ const passwordStrategy = new LocalStrategy(async (username, password, done) => {
 //     try {
 //       await pg
 //         .update({ facebook_id })
-//         .from('ratings.user')
+//         .from('user')
 //         .where({ email });
 
 //       const user = await pg
 //         .first('*')
-//         .from('ratings.user')
+//         .from('user')
 //         .where({ facebook_id });
 
 //       done(null, user);
@@ -123,7 +123,7 @@ const passwordStrategy = new LocalStrategy(async (username, password, done) => {
 //     try {
 //       await pg.raw(
 //         `
-//         INSERT INTO ratings.user (id, google_id, first_name, last_name, email, username, photo, created_at)
+//         INSERT INTO user (id, google_id, first_name, last_name, email, username, photo, created_at)
 //         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 //         ON CONFLICT (google_id)
 //         DO NOTHING
@@ -137,12 +137,12 @@ const passwordStrategy = new LocalStrategy(async (username, password, done) => {
 //     try {
 //       await pg
 //         .update({ google_id, photo })
-//         .from('ratings.user')
+//         .from('user')
 //         .where({ email });
 
 //       const user = await pg
 //         .first('*')
-//         .from('ratings.user')
+//         .from('user')
 //         .where({ google_id });
 
 //       done(undefined, user);
@@ -168,7 +168,7 @@ const jwtStrategy = new JWTStrategy(
 
       const user = await pg
         .first('*')
-        .from('ratings.user')
+        .from('user')
         .where({ id });
 
       done(null, user);
@@ -188,7 +188,7 @@ passport.deserializeUser(async (id, done) => {
   try {
     const user = await pg
       .first('*')
-      .from('ratings.user')
+      .from('user')
       .where({ id });
 
     done(null, user);
@@ -237,8 +237,8 @@ router.post('/register', async (req, res) => {
   const { username, password, email } = req.body;
 
   const user = await pg
-    .first('ratings.user.id')
-    .from('ratings.user')
+    .first('user.id')
+    .from('user')
     .where({ username })
     .orWhere({ email });
 
@@ -256,7 +256,7 @@ router.post('/register', async (req, res) => {
 
       const users: UserDoc[] = await pg
         .insert({ id, username, email, password: hash, created_at: new Date() })
-        .into('ratings.user')
+        .into('user')
         .returning('*');
       const user = _.first(users);
 
@@ -314,7 +314,7 @@ router.get('/auth/me', async (req, res) => {
 
     const user = await pg
       .first('*')
-      .from('ratings.user')
+      .from('user')
       .where({ id });
     const username = _.get(user, 'username');
 

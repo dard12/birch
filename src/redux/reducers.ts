@@ -42,8 +42,8 @@ export const collectionsReducer = createReducer<CollectionsInterface>(
       const { docs, name } = action.payload;
 
       _.each(docs, doc => {
-        if (doc.gid) {
-          state[name] = { ...state[name], [doc.id]: doc, [doc.gid]: doc };
+        if (name === 'note') {
+          state[name] = { ...state[name], [doc.id]: doc, [doc.type]: doc };
         } else if (name === 'user') {
           state[name] = { ...state[name], [doc.id]: doc, [doc.username]: doc };
         } else {

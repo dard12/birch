@@ -1,6 +1,6 @@
+import _ from 'lodash';
 import { router, requireAuth } from '..';
 import pg from '../pg';
-import _ from 'lodash';
 import execute from '../execute';
 
 router.get('/api/follow', async (req, res) => {
@@ -15,12 +15,12 @@ router.get('/api/follow', async (req, res) => {
   if (query.count) {
     result = await pg
       .count('*')
-      .from('ratings.follow')
+      .from('follow')
       .where(where);
   } else {
     const pgQuery = pg
       .select('*')
-      .from('ratings.follow')
+      .from('follow')
       .where(where)
       .orderBy('created_at', 'desc');
 
@@ -39,7 +39,7 @@ router.post('/api/follow', requireAuth, async (req, res) => {
     deleted: false,
   };
 
-  await pg.insert(followDoc).into('ratings.follow');
+  await pg.insert(followDoc).into('follow');
 
   res.status(200).send();
 });
@@ -55,7 +55,7 @@ router.delete('/api/follow', requireAuth, async (req, res) => {
   const deleted_at = new Date();
   await pg
     .update({ deleted: true, deleted_at })
-    .from('ratings.follow')
+    .from('follow')
     .where(where);
 
   res.status(200).send();
