@@ -7,23 +7,25 @@ const Home = lazy(() => import('./layouts/Home/Home'));
 const Login = lazy(() => import('./layouts/Login/Login'));
 const Profile = lazy(() => import('./layouts/Profile/Profile'));
 
-function PrivateRoute({ component: Component, ...rest }: any) {
+function PrivateRoute({ component: Component, render, ...rest }: any) {
   return (
     <Route
       {...rest}
       render={props => {
         const user = localStorage.getItem('id');
 
-        return user ? (
-          <Component {...props} user={user} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: props.location },
-            }}
-          />
-        );
+        if (!user) {
+          return (
+            <Redirect
+              to={{
+                pathname: '/login',
+                state: { from: props.location },
+              }}
+            />
+          );
+        }
+
+        return Component ? <Component {...props} user={user} /> : render(props);
       }}
     />
   );
@@ -58,6 +60,12 @@ function App() {
             />
 
             <PrivateRoute path="/home" component={Home} />
+            <PrivateRoute
+              path="/notes/:note"
+              render={(props: any) => (
+                <Home note={props.match.params.note} {...props} />
+              )}
+            />
 
             <Route render={() => <Redirect to="/" />} />
           </Switch>

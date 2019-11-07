@@ -33,7 +33,7 @@ function NoteSidebar(props: NoteSidebarProps) {
         <React.Fragment>No notes yet.</React.Fragment>
       ) : (
         _.map(docs, ({ id, header }) => (
-          <Link to="/" key={id}>
+          <Link to={`/notes/${id}`} key={id}>
             {header}
           </Link>
         ))

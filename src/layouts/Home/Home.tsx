@@ -1,16 +1,19 @@
 import React from 'react';
 import styles from './Home.module.scss';
 import NoteSidebar from '../../containers/NoteSidebar/NoteSidebar';
+import Note from '../../containers/Note/Note';
 
-interface HomeProps {}
+interface HomeProps {
+  note?: string;
+}
 
 function Home(props: HomeProps) {
+  const { note } = props;
+
   return (
     <div className={styles.homePage}>
-      <div>
-        <NoteSidebar />
-      </div>
-      <div>Main</div>
+      <NoteSidebar />
+      {note && <Note note={note} />}
     </div>
   );
 }
