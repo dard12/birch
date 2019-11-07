@@ -14,7 +14,7 @@ export interface UserDoc {
 
 export interface NoteDoc {
   id: string;
+  header: string;
   content: string;
-  type: string;
   author_id: string;
 }

@@ -11,56 +11,40 @@ import { NoteDoc } from '../../../src-server/models';
 import Skeleton from '../../components/Skeleton/Skeleton';
 
 interface NoteProps {
-  type: string;
+  note: string;
   placeholder: string;
   noteDoc?: NoteDoc;
-  title?: string;
-  header?: string;
-  bullets?: boolean;
   loadDocsAction?: Function;
 }
 
 function Note(props: NoteProps) {
-  const {
-    type,
-    title,
-    header,
-    placeholder,
-    noteDoc,
-    bullets = true,
-    loadDocsAction,
-  } = props;
-
-  const { result, isSuccess } = useAxiosGet(
+  const { note, placeholder, noteDoc, loadDocsAction } = props;
+  const { result } = useAxiosGet(
     '/api/note',
-    { type },
+    { id: note },
     { name: 'Note', cachedResult: noteDoc },
   );
 
   useLoadDocs({ collection: 'note', result, loadDocsAction });
 
   const onChange = _.debounce(content => {
-    axios.post('/api/note', { content, type });
+    axios.post('/api/note', { content, id: note });
   }, 500);
 
-  if (!isSuccess) {
+  if (!noteDoc) {
     return <Skeleton card count={4} />;
   }
 
-  const content = _.get(noteDoc, 'content');
+  const { content, header } = noteDoc;
 
   return (
     <div>
-      {header && <div className="heading-1">{header}</div>}
-
-      <div className={bullets ? styles.note : 'card'}>
-        {title && <div className="heading-1">{title}</div>}
-        <RichText
-          placeholder={placeholder}
-          onChange={onChange}
-          content={content}
-        />
-      </div>
+      <div className="heading-1">{header}</div>
+      <RichText
+        placeholder={placeholder}
+        onChange={onChange}
+        content={content}
+      />
     </div>
   );
 }
@@ -68,7 +52,7 @@ function Note(props: NoteProps) {
 export default connect(
   createDocSelector({
     collection: 'note',
-    id: 'type',
+    id: 'note',
     prop: 'noteDoc',
   }),
   { loadDocsAction },
