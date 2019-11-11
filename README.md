@@ -1,3 +1,13 @@
+content marketing:
+
+website like tell-me-what-to-do.com
+that just randomly tells you something to do and why it's good
+with a CTA like
+> want to customize what i tell you to do?
+> there's an app for that!
+> hint: this is content marketing for that app
+
+
 server setup process
 
 ```
