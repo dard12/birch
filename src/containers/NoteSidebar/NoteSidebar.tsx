@@ -1,18 +1,19 @@
 import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import styles from './NoteSidebar.module.scss';
 
 interface NoteSidebarProps {
+  note?: string;
   loadDocsAction?: Function;
 }
 
 function NoteSidebar(props: NoteSidebarProps) {
-  const { loadDocsAction } = props;
+  const { note, loadDocsAction } = props;
   const { result, isSuccess } = useAxiosGet(
     '/api/note',
     {},
@@ -26,6 +27,11 @@ function NoteSidebar(props: NoteSidebarProps) {
   }
 
   const { docs } = result;
+  const firstNote = _.get(docs, '[0].id');
+
+  if (!note && firstNote) {
+    return <Redirect to={`/notes/${firstNote}`} />;
+  }
 
   return (
     <div className={styles.sidebar}>

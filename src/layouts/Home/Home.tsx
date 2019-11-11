@@ -12,7 +12,7 @@ function Home(props: HomeProps) {
 
   return (
     <div className={styles.homePage}>
-      <NoteSidebar />
+      <NoteSidebar note={note} />
       {note && <Note note={note} />}
     </div>
   );
