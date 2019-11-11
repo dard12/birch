@@ -17,19 +17,19 @@ router.get('/api/note', requireAuth, async (req, res) => {
 
 router.post('/api/note', requireAuth, async (req, res) => {
   const { body, user }: any = req;
-  const { content, type } = body;
+  const { content, header } = body;
   const id = uuid();
   const author_id = user.id;
 
   const docs = await pg.raw(
     `
-      INSERT INTO note (id, content, type, author_id)
+      INSERT INTO note (id, content, header, author_id)
       VALUES (?, ?, ?, ?)
-      ON CONFLICT (type, author_id)
+      ON CONFLICT (id)
       DO UPDATE
       SET content = ?
       `,
-    [id, content, type, author_id, content],
+    [id, content, header, author_id, content],
   );
 
   res.status(200).send({ docs });
