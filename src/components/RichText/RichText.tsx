@@ -33,13 +33,20 @@ export function getDelta(rawContent = '') {
   return delta;
 }
 
+export function getShouldTruncate(content: any) {
+  const delta = getDelta(content);
+  const deltaString = JSON.stringify(delta);
+  const numberNewline = _.size(_.split(deltaString, /\\n/g));
+
+  return delta.length() > 1300 || numberNewline > 20;
+}
+
 class RichText extends Component<RichTextProps> {
-  state: RichTextState = { id: `id_${_.random(10000)}`, quill: undefined };
+  state: RichTextState = { id: `id_${_.random(10000000)}`, quill: undefined };
 
   componentDidMount() {
     const { readOnly, onChange, onEnter, placeholder } = this.props;
     const { id } = this.state;
-    const allowedFormatting = ['bold', 'italic', 'link', 'blockquote'];
     const getContents = () => {
       const isEmpty = _.isEmpty(_.trim(quill.getText()));
       return isEmpty ? '' : quill.getContents();
@@ -50,9 +57,9 @@ class RichText extends Component<RichTextProps> {
       theme: 'bubble',
       placeholder,
       readOnly,
-      formats: allowedFormatting,
+      formats: ['bold', 'italic', 'list'],
       modules: {
-        toolbar: allowedFormatting,
+        toolbar: ['bold', 'italic', { list: 'ordered' }, { list: 'bullet' }],
         keyboard: {
           bindings: {
             custom: {
