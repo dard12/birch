@@ -31,15 +31,13 @@ function Note(props: NoteProps) {
   }, 500);
 
   return (
-    <div>
+    <div className={styles.note}>
       <div className="heading-3">{header}</div>
-      <div className={styles.note}>
-        <RichText
-          placeholder="What do you think?"
-          onChange={onChange}
-          content={content}
-        />
-      </div>
+      <RichText
+        placeholder="What do you think?"
+        onChange={onChange}
+        content={content}
+      />
     </div>
   );
 }
