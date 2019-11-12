@@ -32,7 +32,7 @@ function Note(props: NoteProps) {
 
   return (
     <div>
-      <div className="heading-1">{header}</div>
+      <div className="heading-2">{header}</div>
       <div className={styles.note}>
         <RichText
           placeholder="What do you think?"

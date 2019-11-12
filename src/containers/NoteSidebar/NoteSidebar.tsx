@@ -35,8 +35,6 @@ function NoteSidebar(props: NoteSidebarProps) {
 
   return (
     <div className={styles.sidebar}>
-      <div className="heading-1">Notes</div>
-
       {_.isEmpty(docs) ? (
         <React.Fragment>No notes yet.</React.Fragment>
       ) : (

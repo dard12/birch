@@ -1,7 +1,8 @@
 @import '../../template.scss';
 
 .richText {
-  font-size: $text-2;
+  font-size: $text-5;
+  font-family: $serif;
   color: $dark-10;
   padding: 0;
 
@@ -22,6 +23,6 @@
   }
 
   li {
-    padding-left: $margin-2 !important;
+    padding-left: $margin-3 !important;
   }
 }
