@@ -83,16 +83,16 @@ class RichText extends Component<RichTextProps> {
   }
 
   updateContent = (quill: any) => {
-    const { content } = this.props;
+    const { content, readOnly } = this.props;
 
-    if (quill) {
+    if (quill && !readOnly) {
       const delta = getDelta(content);
       quill.setContents(delta);
     }
   };
 
   render() {
-    const { placeholder, onChange, className } = this.props;
+    const { placeholder, className } = this.props;
     const { id, quill } = this.state;
     const quillElement = document.querySelector(`#${id} .ql-editor.ql-blank`);
 
@@ -100,9 +100,7 @@ class RichText extends Component<RichTextProps> {
       quillElement.setAttribute('data-placeholder', placeholder);
     }
 
-    if (!onChange) {
-      this.updateContent(quill);
-    }
+    this.updateContent(quill);
 
     return <div id={id} className={classNames(styles.richText, className)} />;
   }
