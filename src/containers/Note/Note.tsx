@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import styles from './Note.module.scss';
+// import styles from './Note.module.scss';
 import RichText from '../../components/RichText/RichText';
 import { axios } from '../../App';
 import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
@@ -27,15 +27,15 @@ function Note(props: NoteProps) {
 
   useLoadDocs({ collection: 'note', result, loadDocsAction });
 
-  const onChange = _.debounce(content => {
-    axios.post('/api/note', { content, id: note });
-  }, 500);
-
   if (!noteDoc) {
     return <Skeleton card count={4} />;
   }
 
-  const { content, header } = noteDoc;
+  const { id, content, header } = noteDoc;
+
+  const onChange = _.debounce(newContent => {
+    axios.post('/api/note', { id, header, content: newContent });
+  }, 500);
 
   return (
     <div>
