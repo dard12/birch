@@ -6,6 +6,8 @@ import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import styles from './NoteSidebar.module.scss';
+import { Button } from '../../components/Button/Button';
+import { IoIosAdd } from 'react-icons/io';
 
 interface NoteSidebarProps {
   note?: string;
@@ -38,11 +40,24 @@ function NoteSidebar(props: NoteSidebarProps) {
       {_.isEmpty(docs) ? (
         <React.Fragment>No notes yet.</React.Fragment>
       ) : (
-        _.map(docs, ({ id, header }) => (
-          <NavLink to={`/notes/${id}`} key={id} activeClassName={styles.active}>
-            {header}
-          </NavLink>
-        ))
+        <React.Fragment>
+          <div>
+            <Button className={styles.addBtn}>
+              <IoIosAdd />
+              New Page
+            </Button>
+          </div>
+
+          {_.map(docs, ({ id, header }) => (
+            <NavLink
+              to={`/notes/${id}`}
+              key={id}
+              activeClassName={styles.active}
+            >
+              {header}
+            </NavLink>
+          ))}
+        </React.Fragment>
       )}
     </div>
   );
