@@ -3,6 +3,8 @@
 .sidebar {
   display: grid;
   grid-gap: $margin-2;
+  margin-top: $margin-3;
+  font-size: $margin-3;
 }
 
 .active {
