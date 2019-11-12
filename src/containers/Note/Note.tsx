@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import styles from './Note.module.scss';
 import RichText from '../../components/RichText/RichText';
 import { axios } from '../../App';
 import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
@@ -39,11 +40,13 @@ function Note(props: NoteProps) {
   return (
     <div>
       <div className="heading-1">{header}</div>
-      <RichText
-        placeholder={placeholder}
-        onChange={onChange}
-        content={content}
-      />
+      <div className={styles.note}>
+        <RichText
+          placeholder={placeholder}
+          onChange={onChange}
+          content={content}
+        />
+      </div>
     </div>
   );
 }

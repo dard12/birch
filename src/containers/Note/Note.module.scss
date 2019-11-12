@@ -1,0 +1,5 @@
+@import '../../template.scss';
+
+.note [contenteditable] {
+  min-height: 80vh;
+}
