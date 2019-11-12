@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Redirect, NavLink } from 'react-router-dom';
-import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
+import { useAxiosGet, useLoadDocs, axiosPost } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import styles from './NoteSidebar.module.scss';
@@ -35,10 +35,14 @@ function NoteSidebar(props: NoteSidebarProps) {
     return <Redirect to={`/notes/${firstNote}`} />;
   }
 
+  const newPageOnClick = () => {
+    axiosPost('/api/note', {});
+  };
+
   return (
     <div className={styles.sidebar}>
       <div>
-        <Button className={styles.addBtn}>
+        <Button className={styles.addBtn} onClick={newPageOnClick}>
           <IoIosAdd />
           New Page
         </Button>

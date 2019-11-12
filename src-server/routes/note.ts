@@ -19,7 +19,7 @@ router.get('/api/note', requireAuth, async (req, res) => {
 
 router.post('/api/note', requireAuth, async (req, res) => {
   const { body, user }: any = req;
-  const { content, header, id = uuid() } = body;
+  const { content = '', header = '', id = uuid() } = body;
   const author_id = user.id;
 
   const result = await pg.raw(
