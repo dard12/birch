@@ -1,33 +1,26 @@
 import React from 'react';
 import _ from 'lodash';
-import { connect } from 'react-redux';
 import styles from './Note.module.scss';
 import RichText from '../../components/RichText/RichText';
-import { axios } from '../../App';
-import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
-import { loadDocsAction } from '../../redux/actions';
-import { createDocSelector } from '../../redux/selectors';
+import { useAxiosGet } from '../../hooks/useAxios';
 import { NoteDoc } from '../../../src-server/models';
 import Skeleton from '../../components/Skeleton/Skeleton';
+import { axios } from '../../App';
 
 interface NoteProps {
   note: string;
-  placeholder: string;
-  noteDoc?: NoteDoc;
-  loadDocsAction?: Function;
 }
 
 function Note(props: NoteProps) {
-  const { note, placeholder, noteDoc, loadDocsAction } = props;
-  const { result } = useAxiosGet(
+  const { note } = props;
+  const { result, isSuccess } = useAxiosGet(
     '/api/note',
     { id: note },
-    { name: 'Note', cachedResult: noteDoc },
+    { name: 'Note', reloadOnChange: true },
   );
+  const noteDoc: NoteDoc = _.get(result, 'docs[0]');
 
-  useLoadDocs({ collection: 'note', result, loadDocsAction });
-
-  if (!noteDoc) {
+  if (!noteDoc || !isSuccess) {
     return <Skeleton card count={4} />;
   }
 
@@ -42,7 +35,7 @@ function Note(props: NoteProps) {
       <div className="heading-1">{header}</div>
       <div className={styles.note}>
         <RichText
-          placeholder={placeholder}
+          placeholder="What do you think?"
           onChange={onChange}
           content={content}
         />
@@ -51,11 +44,4 @@ function Note(props: NoteProps) {
   );
 }
 
-export default connect(
-  createDocSelector({
-    collection: 'note',
-    id: 'note',
-    prop: 'noteDoc',
-  }),
-  { loadDocsAction },
-)(Note);
+export default Note;
