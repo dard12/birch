@@ -46,7 +46,7 @@ function Note(props: NoteProps) {
   const headerOnChange = (event: any) => {
     const header = event.currentTarget.value;
     setHeader(header);
-    // postHeader(header);
+    postHeader(header);
   };
 
   return (
