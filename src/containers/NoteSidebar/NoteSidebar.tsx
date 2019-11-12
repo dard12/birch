@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, NavLink } from 'react-router-dom';
 import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import Skeleton from '../../components/Skeleton/Skeleton';
@@ -35,13 +35,15 @@ function NoteSidebar(props: NoteSidebarProps) {
 
   return (
     <div className={styles.sidebar}>
+      <div className="heading-1">Notes</div>
+
       {_.isEmpty(docs) ? (
         <React.Fragment>No notes yet.</React.Fragment>
       ) : (
         _.map(docs, ({ id, header }) => (
-          <Link to={`/notes/${id}`} key={id}>
+          <NavLink to={`/notes/${id}`} key={id} activeClassName={styles.active}>
             {header}
-          </Link>
+          </NavLink>
         ))
       )}
     </div>
