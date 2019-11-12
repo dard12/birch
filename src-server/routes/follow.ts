@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { router, requireAuth } from '..';
 import pg from '../pg';
-import execute from '../execute';
+import { execute } from '../util';
 
 router.get('/api/follow', async (req, res) => {
   const { query } = req;
