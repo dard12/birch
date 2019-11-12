@@ -37,27 +37,21 @@ function NoteSidebar(props: NoteSidebarProps) {
 
   return (
     <div className={styles.sidebar}>
-      {_.isEmpty(docs) ? (
-        <React.Fragment>No notes yet.</React.Fragment>
-      ) : (
-        <React.Fragment>
-          <div>
-            <Button className={styles.addBtn}>
-              <IoIosAdd />
-              New Page
-            </Button>
-          </div>
+      <div>
+        <Button className={styles.addBtn}>
+          <IoIosAdd />
+          New Page
+        </Button>
+      </div>
 
-          {_.map(docs, ({ id, header }) => (
-            <NavLink
-              to={`/notes/${id}`}
-              key={id}
-              activeClassName={styles.active}
-            >
-              {header}
-            </NavLink>
-          ))}
-        </React.Fragment>
+      {_.isEmpty(docs) ? (
+        <div className="faded">No notes yet.</div>
+      ) : (
+        _.map(docs, ({ id, header }) => (
+          <NavLink to={`/notes/${id}`} key={id} activeClassName={styles.active}>
+            {header}
+          </NavLink>
+        ))
       )}
     </div>
   );

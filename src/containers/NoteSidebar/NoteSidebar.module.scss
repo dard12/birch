@@ -1,10 +1,20 @@
 @import '../../template.scss';
 
 .sidebar {
-  display: grid;
-  grid-gap: $margin-2;
+  @extend .transition;
   margin-top: $margin-2;
   font-size: $margin-3;
+  opacity: 0.3;
+  min-height: 100vh;
+
+  a {
+    display: block;
+    margin-bottom: $margin-2;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
 
   a:hover {
     color: $pink-5;
