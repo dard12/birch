@@ -53,7 +53,7 @@ function NoteSidebar(props: NoteSidebarProps) {
       ) : (
         _.map(docs, ({ id, header }) => (
           <NavLink to={`/notes/${id}`} key={id} activeClassName={styles.active}>
-            {header}
+            {header || 'Untitled'}
           </NavLink>
         ))
       )}

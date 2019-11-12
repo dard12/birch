@@ -1,5 +1,11 @@
 @import '../../template.scss';
 
+.header {
+  @extend .heading-3;
+  padding: 0;
+  border: 0;
+}
+
 .note [contenteditable] {
   min-height: 80vh;
   line-height: $line-height-4;
