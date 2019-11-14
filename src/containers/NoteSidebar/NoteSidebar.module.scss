@@ -7,16 +7,40 @@
   opacity: 0.3;
   min-height: 100vh;
 
-  a {
-    display: block;
-    margin-bottom: $margin-2;
-  }
-
   &:hover {
     opacity: 1;
+
+    .tabMore {
+      opacity: 0.3;
+    }
+  }
+}
+
+.sidetab {
+  display: flex;
+  align-items: center;
+  margin-bottom: $margin-2;
+
+  a {
+    width: 100%;
   }
 
   a:hover {
+    color: $pink-5;
+  }
+
+  &:hover .tabMore {
+    opacity: 1;
+  }
+}
+
+.tabMore {
+  @extend .transition;
+  opacity: 0;
+  cursor: pointer;
+  font-size: $text-6;
+
+  &:hover {
     color: $pink-5;
   }
 }

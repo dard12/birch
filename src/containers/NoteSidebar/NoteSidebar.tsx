@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Redirect, NavLink } from 'react-router-dom';
-import { IoIosAdd } from 'react-icons/io';
+import { IoIosAdd, IoMdMore } from 'react-icons/io';
 import { useAxiosGet, useLoadDocs, axiosPost } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import Skeleton from '../../components/Skeleton/Skeleton';
@@ -55,20 +55,22 @@ function NoteSidebar(props: NoteSidebarProps) {
 
   return (
     <div className={styles.sidebar}>
-      <div>
-        <Button className={styles.addBtn} onClick={newPageOnClick}>
-          <IoIosAdd />
-          New Page
-        </Button>
-      </div>
+      <Button className={styles.addBtn} onClick={newPageOnClick}>
+        <IoIosAdd />
+        New Page
+      </Button>
 
       {_.isEmpty(noteDocs) ? (
         <div className="faded">No notes yet.</div>
       ) : (
         _.map(noteDocs, ({ id, header }) => (
-          <NavLink to={`/notes/${id}`} key={id} activeClassName={styles.active}>
-            {header || 'Untitled'}
-          </NavLink>
+          <div key={id} className={styles.sidetab}>
+            <NavLink to={`/notes/${id}`} activeClassName={styles.active}>
+              {header || 'Untitled'}
+            </NavLink>
+
+            <IoMdMore className={styles.tabMore} />
+          </div>
         ))
       )}
     </div>
