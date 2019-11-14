@@ -14,6 +14,10 @@
       opacity: 0.3;
     }
   }
+
+  @media (max-device-width: 768px) {
+    min-height: auto;
+  }
 }
 
 .sidetab {
@@ -22,6 +26,7 @@
   margin-bottom: $margin-2;
 
   a {
+    @extend .truncate;
     width: 100%;
   }
 
@@ -29,8 +34,12 @@
     color: $pink-5;
   }
 
-  &:hover .tabMore {
-    opacity: 1;
+  &:hover {
+    background-color: $dark-1;
+
+    .tabMore {
+      opacity: 1;
+    }
   }
 }
 
@@ -56,6 +65,7 @@ button.addBtn {
   font-weight: 600;
   font-size: $text-2;
   border: 1px solid $dark-9;
+  background-color: $white;
 
   svg {
     margin-right: $margin-1;

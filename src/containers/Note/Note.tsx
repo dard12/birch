@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import TextareaAutosize from 'react-textarea-autosize';
 import styles from './Note.module.scss';
 import RichText from '../../components/RichText/RichText';
 import { useAxiosGet, axiosPost } from '../../hooks/useAxios';
 import { NoteDoc } from '../../../src-server/models';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import { axios } from '../../App';
-import { Input } from '../../components/Input/Input';
 import { loadDocsAction } from '../../redux/actions';
 
 interface NoteProps {
@@ -58,8 +58,8 @@ function Note(props: NoteProps) {
 
   return (
     <div className={styles.note}>
-      <Input
-        className={styles.header}
+      <TextareaAutosize
+        className="heading-3"
         value={header || ''}
         placeholder="Untitled"
         onChange={headerOnChange}

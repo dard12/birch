@@ -67,7 +67,7 @@ function App() {
               )}
             />
 
-            <Route render={() => <Redirect to="/" />} />
+            <Route render={() => <Redirect to="/login" />} />
           </Switch>
         </Suspense>
       </div>

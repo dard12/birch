@@ -5,12 +5,12 @@ import 'normalize.css';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { App } from './App.tsx';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import history from './history';
 import { withTracker } from './components/WithTracker/WithTracker';
 import * as Sentry from '@sentry/browser';
 import Helmet from 'react-helmet';
-import Landing from './layouts/Landing/Landing';
+// import Landing from './layouts/Landing/Landing';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import TermsOfUse from './layouts/TermsOfUse/TermsOfUse';
 import PrivacyPolicy from './layouts/PrivacyPolicy/PrivacyPolicy';
@@ -46,7 +46,7 @@ init(
     <Router history={history}>
       <ScrollToTop>
         <Switch>
-          <Route exact path="/" component={withTracker(Landing)} />
+          {/* <Route exact path="/" component={withTracker(Landing)} /> */}
           <Route exact path="/legal/terms-of-use" component={TermsOfUse} />
           <Route exact path="/legal/privacy-policy" component={PrivacyPolicy} />
           <Route

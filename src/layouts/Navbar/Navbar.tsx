@@ -26,7 +26,7 @@ function Navbar(props: NavbarProps) {
           Birch
         </Link>
 
-        {!username && (
+        {/* {!username && (
           <NavLink
             exact
             to="/"
@@ -35,7 +35,7 @@ function Navbar(props: NavbarProps) {
           >
             Home
           </NavLink>
-        )}
+        )} */}
 
         {username && (
           <NavLink
