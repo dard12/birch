@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Redirect, NavLink } from 'react-router-dom';
-import { IoIosAdd, IoMdMore } from 'react-icons/io';
+import { IoIosAdd, IoIosClose } from 'react-icons/io';
 import { useAxiosGet, useLoadDocs, axiosPost } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import Skeleton from '../../components/Skeleton/Skeleton';
@@ -69,7 +69,7 @@ function NoteSidebar(props: NoteSidebarProps) {
               {header || 'Untitled'}
             </NavLink>
 
-            <IoMdMore className={styles.tabMore} />
+            <IoIosClose className={styles.tabMore} />
           </div>
         ))
       )}

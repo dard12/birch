@@ -4,3 +4,8 @@
   min-height: 80vh;
   line-height: $line-height-4;
 }
+
+.heading {
+  @extend .heading-3;
+  min-height: 4rem;
+}

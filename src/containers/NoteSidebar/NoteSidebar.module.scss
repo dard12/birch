@@ -11,7 +11,7 @@
     opacity: 1;
 
     .tabMore {
-      opacity: 0.3;
+      opacity: 0.1;
     }
   }
 
@@ -23,7 +23,8 @@
 .sidetab {
   display: flex;
   align-items: center;
-  margin-bottom: $margin-2;
+  padding: $margin-1;
+  border-radius: $border-radius-1;
 
   a {
     @extend .truncate;
@@ -48,6 +49,7 @@
   opacity: 0;
   cursor: pointer;
   font-size: $text-6;
+  margin-left: $margin-3;
 
   &:hover {
     color: $pink-5;
@@ -61,7 +63,7 @@
 button.addBtn {
   display: flex;
   align-items: center;
-  margin-bottom: $margin-3;
+  margin-bottom: $margin-4;
   font-weight: 600;
   font-size: $text-2;
   border: 1px solid $dark-9;
@@ -69,6 +71,7 @@ button.addBtn {
 
   svg {
     margin-right: $margin-1;
+    font-size: $text-5;
   }
 
   &:hover {

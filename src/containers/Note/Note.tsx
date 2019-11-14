@@ -59,7 +59,7 @@ function Note(props: NoteProps) {
   return (
     <div className={styles.note}>
       <TextareaAutosize
-        className="heading-3"
+        className={styles.heading}
         value={header || ''}
         placeholder="Untitled"
         onChange={headerOnChange}
