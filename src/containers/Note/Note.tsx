@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
+import { connect } from 'react-redux';
 import styles from './Note.module.scss';
 import RichText from '../../components/RichText/RichText';
-import { useAxiosGet } from '../../hooks/useAxios';
+import { useAxiosGet, axiosPost } from '../../hooks/useAxios';
 import { NoteDoc } from '../../../src-server/models';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import { axios } from '../../App';
 import { Input } from '../../components/Input/Input';
+import { loadDocsAction } from '../../redux/actions';
 
 interface NoteProps {
   note: string;
+  loadDocsAction?: Function;
 }
 
 function Note(props: NoteProps) {
-  const { note } = props;
+  const { note, loadDocsAction } = props;
   const { result, isSuccess } = useAxiosGet(
     '/api/note',
     { id: note },
     { name: 'Note', reloadOnChange: true },
   );
-  const [header, setHeader] = useState();
+  const [header, setHeader] = useState<string | undefined>(undefined);
   const [isLoaded, setIsLoaded] = useState(false);
   const noteDoc: NoteDoc = _.get(result, 'docs[0]');
 
@@ -40,7 +43,11 @@ function Note(props: NoteProps) {
   }, 500);
 
   const postHeader = _.debounce(header => {
-    axios.post('/api/note', { id, header });
+    axiosPost(
+      '/api/note',
+      { id, header },
+      { collection: 'note', loadDocsAction },
+    );
   }, 500);
 
   const headerOnChange = (event: any) => {
@@ -67,4 +74,7 @@ function Note(props: NoteProps) {
   );
 }
 
-export default Note;
+export default connect(
+  null,
+  { loadDocsAction },
+)(Note);

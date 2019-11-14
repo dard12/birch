@@ -11,7 +11,6 @@ router.get('/api/note', requireAuth, async (req, res) => {
     .select('*')
     .from('note')
     .where(where)
-    .orderBy('position')
     .limit(10);
 
   res.status(200).send({ docs });

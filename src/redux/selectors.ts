@@ -36,3 +36,32 @@ export const createDocSelector = ({
     }),
   );
 };
+
+export const createDocListSelector = ({
+  collection,
+  filter,
+  prop,
+  orderBy,
+}: {
+  collection: string;
+  filter: string;
+  prop: string;
+  orderBy?: any[];
+}): any => {
+  return createSelector(
+    [
+      createCollectionSelector(collection),
+      (state: any, props: any) => props[filter],
+    ],
+    (collections, filterObj) => {
+      const collectionDict = collections[collection];
+      let docList = _.filter(collectionDict, filterObj);
+
+      if (orderBy) {
+        docList = _.orderBy(docList, ...orderBy);
+      }
+
+      return { [prop]: docList };
+    },
+  );
+};
