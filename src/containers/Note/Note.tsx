@@ -22,13 +22,13 @@ function Note(props: NoteProps) {
     { id: note },
     { name: 'Note', reloadOnChange: true },
   );
-  const [header, setHeader] = useState<string | undefined>(undefined);
+  const [header, setHeader] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
   const noteDoc: NoteDoc = _.get(result, 'docs[0]');
 
   if (!noteDoc || !isSuccess) {
     isLoaded && setIsLoaded(false);
-    return <Skeleton card count={4} />;
+    return <Skeleton count={4} />;
   }
 
   const { id, content, header: savedHeader } = noteDoc;
@@ -60,7 +60,7 @@ function Note(props: NoteProps) {
     <div className={styles.note}>
       <Input
         className={styles.header}
-        value={header}
+        value={header || ''}
         placeholder="Untitled"
         onChange={headerOnChange}
       />
