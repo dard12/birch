@@ -10,6 +10,7 @@ import styles from './NoteSidebar.module.scss';
 import { Button } from '../../components/Button/Button';
 import { createDocListSelector } from '../../redux/selectors';
 import { NoteDoc } from '../../../src-server/models';
+import history from '../../history';
 
 interface NoteSidebarProps {
   note?: string;
@@ -38,7 +39,18 @@ function NoteSidebar(props: NoteSidebarProps) {
   }
 
   const newPageOnClick = () => {
-    axiosPost('/api/note', {}, { collection: 'note', loadDocsAction });
+    const maxNote = _.maxBy(noteDocs, 'position');
+    const maxPosition = _.get(maxNote, 'position') || 0;
+    const position = maxPosition + 1;
+
+    axiosPost(
+      '/api/note',
+      { position },
+      { collection: 'note', loadDocsAction },
+    ).then(({ docs }) => {
+      const noteId = _.get(docs, '[0].id');
+      noteId && history.push(`/notes/${noteId}`);
+    });
   };
 
   return (
