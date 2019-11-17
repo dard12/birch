@@ -18,9 +18,10 @@ create A records in cloudflare that point to the IP of the digitialocean droplet
 setup ufw, non-root user with ssh + sudo https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
 install nginx https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04
 setup sites-available https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04#step-5-%E2%80%93-setting-up-server-blocks-(recommended)
+setup certbot and nginx more https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04#step-1-%E2%80%94-installing-certbot
 setup nginx for HTTPS https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04#step-3-%E2%80%94-allowing-https-through-the-firewall
 install letsencrypt https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04
-install node + npm https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04
+install node + npm USING PPA https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-18-04#step-1-%E2%80%94-installing-nodejs
 install pm2 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-18-04
 git clone

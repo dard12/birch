@@ -16,6 +16,7 @@ import TermsOfUse from './layouts/TermsOfUse/TermsOfUse';
 import PrivacyPolicy from './layouts/PrivacyPolicy/PrivacyPolicy';
 import UserGuidelines from './layouts/UserGuidelines/UserGuidelines';
 // import 'cookieconsent';
+import * as serviceWorker from './serviceWorker';
 
 Sentry.init({
   dsn: 'https://ec90141dbd46419ca6a2cf8d0a0a29cd@sentry.io/1524308',
@@ -67,3 +68,5 @@ init(
   </Provider>,
   rootElement,
 );
+
+serviceWorker.register();

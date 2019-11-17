@@ -1,8 +1,14 @@
 @import '../../template.scss';
 
-.note [contenteditable] {
-  min-height: 80vh;
-  line-height: $line-height-4;
+.note {
+  [contenteditable] {
+    min-height: 80vh;
+    line-height: $line-height-4;
+  }
+
+  ul:hover {
+    color: $pink-5;
+  }
 }
 
 .heading {
