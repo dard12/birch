@@ -38,11 +38,7 @@ function Navbar(props: NavbarProps) {
         )} */}
 
         {username && (
-          <NavLink
-            to="/home"
-            className={styles.home}
-            activeClassName={styles.active}
-          >
+          <NavLink to="/home" activeClassName={styles.active}>
             Home
           </NavLink>
         )}
