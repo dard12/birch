@@ -28,7 +28,7 @@ function Note(props: NoteProps) {
 
   if (!noteDoc || !isSuccess) {
     isLoaded && setIsLoaded(false);
-    return <Skeleton count={4} />;
+    return null;
   }
 
   const { id, content, header: savedHeader } = noteDoc;

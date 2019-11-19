@@ -45,6 +45,7 @@
     "react-waypoint": "^9.0.2",
     "redux": "^4.0.4",
     "redux-starter-kit": "^1.0.1",
+    "tether": "^1.4.7",
     "uuid": "^3.3.3"
   },
   "proxy": "http://localhost:8080",
