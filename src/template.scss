@@ -339,3 +339,11 @@ textarea {
 .ql-editor li.ql-indent-9:not(.ql-direction-rtl) {
   padding-left: 30 * $margin-2;
 }
+
+// https://github.com/quilljs/quill/issues/1374#issuecomment-520296215
+.ql-clipboard {
+  position: fixed;
+  display: none;
+  left: 50%;
+  top: 50%;
+}
