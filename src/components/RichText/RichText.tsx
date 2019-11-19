@@ -7,6 +7,7 @@ import styles from './RichText.module.scss';
 const Delta = Quill.import('delta');
 const Link = Quill.import('formats/link');
 
+// https://github.com/quilljs/quill/issues/1966#issuecomment-528317638
 class ClickableLink extends Link {
   public static create(value: string): ClickableLink {
     const node = super.create(value);
