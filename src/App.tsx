@@ -5,6 +5,8 @@ import Navbar from './layouts/Navbar/Navbar';
 
 const Home = lazy(() => import('./layouts/Home/Home'));
 const Login = lazy(() => import('./layouts/Login/Login'));
+const Reminder = lazy(() => import('./layouts/Reminder/Reminder'));
+const Relationship = lazy(() => import('./layouts/Relationship/Relationship'));
 
 function PrivateRoute({ component: Component, render, ...rest }: any) {
   return (
@@ -50,8 +52,8 @@ function App() {
             />
 
             <PrivateRoute path="/home" component={Home} />
-            <PrivateRoute path="/reminders" component={Home} />
-            <PrivateRoute path="/relationships" component={Home} />
+            <PrivateRoute path="/reminders" component={Reminder} />
+            <PrivateRoute path="/relationships" component={Relationship} />
 
             <PrivateRoute
               path="/notes/:note"
