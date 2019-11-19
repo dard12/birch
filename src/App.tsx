@@ -49,17 +49,11 @@ function App() {
               path="/register"
               render={(props: any) => <Login {...props} />}
             />
-            <Route
-              path="/profile/:username"
-              render={props => (
-                <Profile
-                  targetUsername={props.match.params.username}
-                  {...props}
-                />
-              )}
-            />
 
             <PrivateRoute path="/home" component={Home} />
+            <PrivateRoute path="/reminders" component={Home} />
+            <PrivateRoute path="/relationships" component={Home} />
+
             <PrivateRoute
               path="/notes/:note"
               render={(props: any) => (
