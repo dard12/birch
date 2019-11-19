@@ -1,5 +1,6 @@
 import React from 'react';
 import Tippy, { TippyProps } from '@tippy.js/react';
+import 'tippy.js/dist/tippy.css';
 
 export default function Tooltip(props: TippyProps) {
   const { children } = props;
