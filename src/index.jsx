@@ -5,7 +5,7 @@ import 'normalize.css';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { App } from './App.tsx';
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import { withTracker } from './components/WithTracker/WithTracker';
 import * as Sentry from '@sentry/browser';
