@@ -5,7 +5,6 @@ import Navbar from './layouts/Navbar/Navbar';
 
 const Home = lazy(() => import('./layouts/Home/Home'));
 const Login = lazy(() => import('./layouts/Login/Login'));
-const Profile = lazy(() => import('./layouts/Profile/Profile'));
 
 function PrivateRoute({ component: Component, render, ...rest }: any) {
   return (
