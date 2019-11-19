@@ -37,6 +37,7 @@
     "jsx-a11y/label-has-associated-control": "off",
     "import/no-named-default": "off",
     "react/jsx-fragments": "off",
+    "max-classes-per-file": "off",
 
     "react/jsx-curly-newline": "off",
     "react/static-property-placement": "off",

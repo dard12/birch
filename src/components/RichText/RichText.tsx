@@ -5,6 +5,20 @@ import classNames from 'classnames';
 import styles from './RichText.module.scss';
 
 const Delta = Quill.import('delta');
+const Link = Quill.import('formats/link');
+
+class ClickableLink extends Link {
+  public static create(value: string): ClickableLink {
+    const node = super.create(value);
+    node.setAttribute('href', Link.sanitize(value));
+    node.setAttribute('target', '_blank');
+    node.setAttribute('contenteditable', 'false');
+
+    return node;
+  }
+}
+
+Quill.register('formats/link', ClickableLink, true);
 
 interface RichTextProps {
   readOnly?: boolean;
