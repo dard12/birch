@@ -294,14 +294,19 @@ textarea {
   color: transparent;
 }
 
-.ql-bubble .ql-tooltip {
-  background-color: $dark-9;
+.ql-container.ql-bubble:not(.ql-disabled) a::before,
+.ql-container.ql-bubble:not(.ql-disabled) a::after {
+  display: none;
 }
 
 .ql-editor[data-placeholder]:before {
   font-style: normal;
   color: $dark-5;
   left: 0;
+}
+
+.ql-container.ql-bubble:not(.ql-disabled) a {
+  white-space: normal;
 }
 
 .ql-editor li.ql-indent-1:not(.ql-direction-rtl) {
