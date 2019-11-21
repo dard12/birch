@@ -14,7 +14,7 @@ function Landing(props: LandingProps) {
   const { user } = props;
 
   if (user) {
-    return <Redirect to="/home" />;
+    return <Redirect to="/notes" />;
   }
 
   return (

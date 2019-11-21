@@ -50,15 +50,15 @@ function App() {
               render={(props: any) => <Login {...props} />}
             />
 
-            <PrivateRoute path="/home" component={Home} />
-            <PrivateRoute path="/relationships" component={Relationship} />
-
+            <PrivateRoute exact path="/notes" component={Home} />
             <PrivateRoute
               path="/notes/:note"
               render={(props: any) => (
                 <Home note={props.match.params.note} {...props} />
               )}
             />
+
+            <PrivateRoute path="/relationships" component={Relationship} />
 
             <Route render={() => <Redirect to="/login" />} />
           </Switch>

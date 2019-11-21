@@ -11,7 +11,7 @@ import { logoutAction } from '../../redux/actions';
 import { axios } from '../../App';
 import { usernameSelector } from '../../redux/selectors';
 import { Button } from '../../components/Button/Button';
-import { IoIosRefresh } from 'react-icons/io';
+import { IoIosRefresh, IoIosArrowDown } from 'react-icons/io';
 
 interface NavbarProps extends RouteComponentProps {
   logoutAction?: Function;
@@ -24,7 +24,7 @@ function Navbar(props: NavbarProps) {
   return (
     <div className={styles.navbarContainer}>
       <div className={styles.navbar}>
-        <Link to={username ? '/home' : '/'} className={styles.brand}>
+        <Link to={username ? '/notes' : '/'} className={styles.brand}>
           Birch
         </Link>
 
@@ -40,8 +40,8 @@ function Navbar(props: NavbarProps) {
         )} */}
 
         {username && (
-          <NavLink to="/home" activeClassName={styles.active}>
-            Home
+          <NavLink to="/notes" activeClassName={styles.active}>
+            Notes
           </NavLink>
         )}
 
@@ -54,6 +54,10 @@ function Navbar(props: NavbarProps) {
         <Button className={styles.shuffleBtn}>
           <IoIosRefresh />
           What Should I Do
+        </Button>
+
+        <Button className={styles.settingBtn}>
+          <IoIosArrowDown />
         </Button>
 
         {username ? (
