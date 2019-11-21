@@ -80,6 +80,9 @@ class RichText extends Component<RichTextProps> {
       readOnly,
       formats: ['bold', 'italic', 'link', 'blockquote', 'list', 'indent'],
       modules: {
+        history: {
+          userOnly: true,
+        },
         toolbar: [
           'bold',
           'italic',
@@ -102,11 +105,13 @@ class RichText extends Component<RichTextProps> {
       },
     });
 
-    if (onChange) {
-      quill.on('text-change', () => onChange(getContents()));
-    }
+    this.setState({ quill }, () => {
+      this.updateContent();
 
-    this.setState({ quill }, this.updateContent);
+      if (onChange) {
+        quill.on('text-change', () => onChange(getContents()));
+      }
+    });
   }
 
   updateContent = () => {

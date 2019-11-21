@@ -6,7 +6,6 @@ import styles from './Note.module.scss';
 import RichText from '../../components/RichText/RichText';
 import { useAxiosGet, axiosPost } from '../../hooks/useAxios';
 import { NoteDoc } from '../../../src-server/models';
-import Skeleton from '../../components/Skeleton/Skeleton';
 import { axios } from '../../App';
 import { loadDocsAction } from '../../redux/actions';
 
