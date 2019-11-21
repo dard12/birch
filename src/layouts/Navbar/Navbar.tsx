@@ -10,6 +10,8 @@ import styles from './Navbar.module.scss';
 import { logoutAction } from '../../redux/actions';
 import { axios } from '../../App';
 import { usernameSelector } from '../../redux/selectors';
+import { Button } from '../../components/Button/Button';
+import { IoIosRefresh } from 'react-icons/io';
 
 interface NavbarProps extends RouteComponentProps {
   logoutAction?: Function;
@@ -44,16 +46,15 @@ function Navbar(props: NavbarProps) {
         )}
 
         {username && (
-          <NavLink to="/reminders" activeClassName={styles.active}>
-            Reminders
-          </NavLink>
-        )}
-
-        {username && (
           <NavLink to="/relationships" activeClassName={styles.active}>
             Relationships
           </NavLink>
         )}
+
+        <Button className={styles.shuffleBtn}>
+          <IoIosRefresh />
+          What Should I Do
+        </Button>
 
         {username ? (
           <NavLink

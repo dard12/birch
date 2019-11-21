@@ -48,3 +48,22 @@
 .logoutBtn {
   color: $dark-5;
 }
+
+button.shuffleBtn {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  border: 1px solid $dark-9;
+  background-color: $white;
+  margin: 0 $margin-3;
+
+  svg {
+    margin-right: $margin-2;
+    font-size: $text-3;
+  }
+
+  &:hover {
+    color: $pink-5;
+    border-color: $pink-5;
+  }
+}
