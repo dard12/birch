@@ -60,10 +60,15 @@
   font-weight: 600;
 }
 
+.sidebarButtons {
+  display: grid;
+  grid-gap: $margin-2;
+  margin-bottom: $margin-4;
+}
+
 button.addBtn {
   display: flex;
   align-items: center;
-  margin-bottom: $margin-4;
   font-weight: 600;
   font-size: $text-2;
   border: 1px solid $dark-9;

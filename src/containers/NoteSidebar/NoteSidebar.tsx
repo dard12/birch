@@ -56,12 +56,16 @@ function NoteSidebar(props: NoteSidebarProps) {
 
   return (
     <div className={styles.sidebar}>
-      <Button className={styles.addBtn} onClick={newPageOnClick}>
-        <IoIosAdd />
-        New Page
-      </Button>
+      <div className={styles.sidebarButtons}>
+        <RemindBtn />
 
-      <RemindBtn />
+        <div>
+          <Button className={styles.addBtn} onClick={newPageOnClick}>
+            <IoIosAdd />
+            New Page
+          </Button>
+        </div>
+      </div>
 
       <div className={styles.label}>Pages</div>
       {_.isEmpty(noteDocs) ? (
