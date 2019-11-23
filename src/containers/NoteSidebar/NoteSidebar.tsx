@@ -60,8 +60,24 @@ function NoteSidebar(props: NoteSidebarProps) {
         New Page
       </Button>
 
+      <div className={styles.label}>Pages</div>
       {_.isEmpty(noteDocs) ? (
-        <div className="faded">No notes yet.</div>
+        <div className="faded">No pages yet.</div>
+      ) : (
+        _.map(noteDocs, ({ id, header }) => (
+          <div key={id} className={styles.sidetab}>
+            <NavLink to={`/notes/${id}`} activeClassName={styles.active}>
+              {header || 'Untitled'}
+            </NavLink>
+
+            <IoIosClose className={styles.tabMore} />
+          </div>
+        ))
+      )}
+
+      <div className={styles.label}>Reminders</div>
+      {_.isEmpty(noteDocs) ? (
+        <div className="faded">No reminders yet.</div>
       ) : (
         _.map(noteDocs, ({ id, header }) => (
           <div key={id} className={styles.sidetab}>

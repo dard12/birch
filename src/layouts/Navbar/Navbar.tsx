@@ -53,7 +53,7 @@ function Navbar(props: NavbarProps) {
 
         <Button className={styles.shuffleBtn}>
           <IoIosRefresh />
-          What Should I Do
+          Remind Me
         </Button>
 
         <Button className={styles.settingBtn}>
