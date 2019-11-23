@@ -11,6 +11,7 @@ import { Button } from '../../components/Button/Button';
 import { createDocListSelector } from '../../redux/selectors';
 import { NoteDoc } from '../../../src-server/models';
 import history from '../../history';
+import RemindBtn from '../../components/RemindBtn/RemindBtn';
 
 interface NoteSidebarProps {
   note?: string;
@@ -59,6 +60,8 @@ function NoteSidebar(props: NoteSidebarProps) {
         <IoIosAdd />
         New Page
       </Button>
+
+      <RemindBtn />
 
       <div className={styles.label}>Pages</div>
       {_.isEmpty(noteDocs) ? (

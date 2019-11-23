@@ -10,8 +10,6 @@ import styles from './Navbar.module.scss';
 import { logoutAction } from '../../redux/actions';
 import { axios } from '../../App';
 import { usernameSelector } from '../../redux/selectors';
-import { Button } from '../../components/Button/Button';
-import { IoIosRefresh, IoIosArrowDown } from 'react-icons/io';
 
 interface NavbarProps extends RouteComponentProps {
   logoutAction?: Function;
@@ -50,15 +48,6 @@ function Navbar(props: NavbarProps) {
             Relationships
           </NavLink>
         )}
-
-        <Button className={styles.shuffleBtn}>
-          <IoIosRefresh />
-          Remind Me
-        </Button>
-
-        <Button className={styles.settingBtn}>
-          <IoIosArrowDown />
-        </Button>
 
         {username ? (
           <NavLink
