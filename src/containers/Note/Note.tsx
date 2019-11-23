@@ -8,6 +8,7 @@ import { useAxiosGet, axiosPost } from '../../hooks/useAxios';
 import { NoteDoc } from '../../../src-server/models';
 import { axios } from '../../App';
 import { loadDocsAction } from '../../redux/actions';
+import useFocus from '../../hooks/useFocus';
 
 interface NoteProps {
   note: string;
@@ -16,14 +17,16 @@ interface NoteProps {
 
 function Note(props: NoteProps) {
   const { note, loadDocsAction } = props;
-  const { result, isSuccess } = useAxiosGet(
-    '/api/note',
-    { id: note },
-    { name: 'Note', reloadOnChange: true },
-  );
+  const params = { id: note };
+  const { result, isSuccess, setParams } = useAxiosGet('/api/note', params, {
+    name: 'Note',
+    reloadOnChange: true,
+  });
   const [header, setHeader] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
   const noteDoc: NoteDoc = _.get(result, 'docs[0]');
+
+  useFocus(() => setParams(params));
 
   if (!noteDoc || !isSuccess) {
     isLoaded && setIsLoaded(false);

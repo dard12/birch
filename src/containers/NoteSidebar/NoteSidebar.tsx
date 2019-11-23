@@ -71,15 +71,24 @@ function NoteSidebar(props: NoteSidebarProps) {
       {_.isEmpty(noteDocs) ? (
         <div className="faded">No pages yet.</div>
       ) : (
-        _.map(noteDocs, ({ id, header }) => (
-          <div key={id} className={styles.sidetab}>
-            <NavLink to={`/notes/${id}`} activeClassName={styles.active}>
-              {header || 'Untitled'}
-            </NavLink>
+        <React.Fragment>
+          {_.map(noteDocs, ({ id, header }) => (
+            <div key={id} className={styles.sidetab}>
+              <NavLink to={`/notes/${id}`} activeClassName={styles.active}>
+                {header || 'Untitled'}
+              </NavLink>
 
-            <IoIosClose className={styles.tabMore} />
+              <IoIosClose className={styles.tabMore} />
+            </div>
+          ))}
+
+          <div className={styles.sidetab}>
+            <div className="link">
+              <IoIosAdd />
+              New Page
+            </div>
           </div>
-        ))
+        </React.Fragment>
       )}
 
       <div className={styles.label}>Reminders</div>
