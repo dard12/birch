@@ -7,7 +7,6 @@ import { useAxiosGet, useLoadDocs, axiosPost } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import styles from './NoteSidebar.module.scss';
-import { Button } from '../../components/Button/Button';
 import { createDocListSelector } from '../../redux/selectors';
 import { NoteDoc } from '../../../src-server/models';
 import history from '../../history';
