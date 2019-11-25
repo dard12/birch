@@ -20,6 +20,18 @@
   }
 }
 
+.tabMore {
+  @extend .transition;
+  opacity: 0;
+  cursor: pointer;
+  font-size: $text-6;
+  margin-left: $margin-3;
+
+  &:hover {
+    color: $pink-5;
+  }
+}
+
 .sidebarFaded {
   @extend .faded;
   padding: $margin-1;
