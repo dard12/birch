@@ -3,8 +3,9 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Axios from 'axios';
 import Navbar from './layouts/Navbar/Navbar';
 
-const Home = lazy(() => import('./layouts/Home/Home'));
 const Login = lazy(() => import('./layouts/Login/Login'));
+const Home = lazy(() => import('./layouts/Home/Home'));
+const Reminder = lazy(() => import('./layouts/Reminder/Reminder'));
 const Relationship = lazy(() => import('./layouts/Relationship/Relationship'));
 
 function PrivateRoute({ component: Component, render, ...rest }: any) {
@@ -48,6 +49,14 @@ function App() {
               exact
               path="/register"
               render={(props: any) => <Login {...props} />}
+            />
+
+            <PrivateRoute exact path="/reminders" component={Reminder} />
+            <PrivateRoute
+              path="/reminders/:reminder"
+              render={(props: any) => (
+                <Reminder reminder={props.match.params.reminder} {...props} />
+              )}
             />
 
             <PrivateRoute exact path="/notes" component={Home} />

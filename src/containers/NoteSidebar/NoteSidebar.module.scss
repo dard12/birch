@@ -20,6 +20,11 @@
   }
 }
 
+.sidebarFaded {
+  @extend .faded;
+  padding: $margin-1;
+}
+
 .newPage {
   @extend .truncate;
   display: flex;
@@ -63,18 +68,6 @@
     .tabMore {
       opacity: 1;
     }
-  }
-}
-
-.tabMore {
-  @extend .transition;
-  opacity: 0;
-  cursor: pointer;
-  font-size: $text-6;
-  margin-left: $margin-3;
-
-  &:hover {
-    color: $pink-5;
   }
 }
 

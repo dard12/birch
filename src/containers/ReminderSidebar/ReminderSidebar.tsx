@@ -6,60 +6,65 @@ import { IoIosAdd, IoIosClose } from 'react-icons/io';
 import { useAxiosGet, useLoadDocs, axiosPost } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import Skeleton from '../../components/Skeleton/Skeleton';
-import styles from './NoteSidebar.module.scss';
+import styles from '../NoteSidebar/NoteSidebar.module.scss';
 import { createDocListSelector } from '../../redux/selectors';
-import { NoteDoc } from '../../../src-server/models';
+import { ReminderDoc } from '../../../src-server/models';
 import history from '../../history';
+import RemindBtn from '../../components/RemindBtn/RemindBtn';
 
-interface NoteSidebarProps {
-  note?: string;
-  noteDocs?: NoteDoc[];
+interface ReminderSidebarProps {
+  reminder?: string;
+  reminderDocs?: ReminderDoc[];
   loadDocsAction?: Function;
 }
 
-function NoteSidebar(props: NoteSidebarProps) {
-  const { note, noteDocs, loadDocsAction } = props;
+function ReminderSidebar(props: ReminderSidebarProps) {
+  const { reminder, reminderDocs, loadDocsAction } = props;
   const { result, isSuccess } = useAxiosGet(
-    '/api/note',
+    '/api/reminder',
     {},
-    { name: 'NoteSidebar' },
+    { name: 'ReminderSidebar' },
   );
 
-  useLoadDocs({ collection: 'note', result, loadDocsAction });
+  useLoadDocs({ collection: 'reminder', result, loadDocsAction });
 
   if (!isSuccess) {
     return <Skeleton count={4} />;
   }
 
-  const firstNote = _.get(noteDocs, '[0].id');
+  const firstReminder = _.get(reminderDocs, '[0].id');
 
-  if (!note && firstNote) {
-    return <Redirect to={`/notes/${firstNote}`} />;
+  if (!reminder && firstReminder) {
+    return <Redirect to={`/reminders/${firstReminder}`} />;
   }
 
   const newPageOnClick = () => {
-    const maxNote = _.maxBy(noteDocs, 'position');
-    const maxPosition = _.get(maxNote, 'position') || 0;
+    const maxReminder = _.maxBy(reminderDocs, 'position');
+    const maxPosition = _.get(maxReminder, 'position') || 0;
     const position = maxPosition + 1;
 
     axiosPost(
-      '/api/note',
+      '/api/reminder',
       { position },
-      { collection: 'note', loadDocsAction },
+      { collection: 'reminder', loadDocsAction },
     ).then(({ docs }) => {
-      const noteId = _.get(docs, '[0].id');
-      noteId && history.push(`/notes/${noteId}`);
+      const reminderId = _.get(docs, '[0].id');
+      reminderId && history.push(`/reminders/${reminderId}`);
     });
   };
 
   return (
     <div className={styles.sidebar}>
-      {_.isEmpty(noteDocs) ? (
+      <div className={styles.sidebarButtons}>
+        <RemindBtn />
+      </div>
+
+      {_.isEmpty(reminderDocs) ? (
         <div className={styles.sidebarFaded}>No pages yet.</div>
       ) : (
-        _.map(noteDocs, ({ id, header }) => (
+        _.map(reminderDocs, ({ id, header }) => (
           <div key={id} className={styles.sidetab}>
-            <NavLink to={`/notes/${id}`} activeClassName={styles.active}>
+            <NavLink to={`/reminders/${id}`} activeClassName={styles.active}>
               {header || 'Untitled'}
             </NavLink>
 
@@ -78,10 +83,10 @@ function NoteSidebar(props: NoteSidebarProps) {
 
 export default connect(
   createDocListSelector({
-    collection: 'note',
+    collection: 'reminder',
     filter: 'none',
-    prop: 'noteDocs',
+    prop: 'reminderDocs',
     orderBy: ['position'],
   }),
   { loadDocsAction },
-)(NoteSidebar);
+)(ReminderSidebar);

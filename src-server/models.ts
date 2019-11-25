@@ -18,3 +18,9 @@ export interface NoteDoc {
   content: string;
   author_id: string;
 }
+
+export interface ReminderDoc {
+  id: string;
+  header: string;
+  author_id: string;
+}

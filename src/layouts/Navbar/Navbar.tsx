@@ -44,6 +44,12 @@ function Navbar(props: NavbarProps) {
         )}
 
         {username && (
+          <NavLink to="/reminders" activeClassName={styles.active}>
+            Reminders
+          </NavLink>
+        )}
+
+        {username && (
           <NavLink to="/relationships" activeClassName={styles.active}>
             Relationships
           </NavLink>
