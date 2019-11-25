@@ -10,8 +10,7 @@ router.get('/api/note', requireAuth, async (req, res) => {
   const docs = await pg
     .select('*')
     .from('note')
-    .where(where)
-    .limit(10);
+    .where(where);
 
   res.status(200).send({ docs });
 });

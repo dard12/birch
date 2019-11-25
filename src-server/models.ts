@@ -24,3 +24,8 @@ export interface ReminderDoc {
   header: string;
   author_id: string;
 }
+
+export interface ReminderItemDoc {
+  id: string;
+  content: string;
+}

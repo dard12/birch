@@ -1,0 +1,7 @@
+@import '../../template.scss';
+
+.item {
+  display: list-item;
+  list-style-type: disc;
+  margin-left: $margin-3;
+}

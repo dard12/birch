@@ -1,0 +1,6 @@
+@import '../../template.scss';
+
+.heading {
+  @extend .heading-3;
+  min-height: 4rem;
+}

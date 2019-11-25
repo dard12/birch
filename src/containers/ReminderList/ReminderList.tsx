@@ -1,75 +1,68 @@
-import React, { useState } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import TextareaAutosize from 'react-textarea-autosize';
+import { IoIosAdd } from 'react-icons/io';
 import styles from './ReminderList.module.scss';
-import { useAxiosGet, axiosPost } from '../../hooks/useAxios';
-import { ReminderDoc } from '../../../src-server/models';
+import { useAxiosGet, axiosPost, useLoadDocs } from '../../hooks/useAxios';
+import { ReminderItemDoc } from '../../../src-server/models';
 import { loadDocsAction } from '../../redux/actions';
 import useFocus from '../../hooks/useFocus';
+import ReminderItem from '../ReminderItem/ReminderItem';
+import ReminderName from '../ReminderName/ReminderName';
+import { createDocListSelector } from '../../redux/selectors';
 
 interface ReminderListProps {
   reminder: string;
+  reminderItemDocs?: ReminderItemDoc[];
   loadDocsAction?: Function;
 }
 
 function ReminderList(props: ReminderListProps) {
-  const { reminder, loadDocsAction } = props;
-  const params = { id: reminder };
-  const { result, isSuccess, setParams } = useAxiosGet(
-    '/api/reminder',
-    params,
-    {
-      name: 'ReminderList',
-      reloadOnChange: true,
-    },
-  );
-  const [header, setHeader] = useState();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const reminderDoc: ReminderDoc = _.get(result, 'docs[0]');
+  const { reminder, reminderItemDocs, loadDocsAction } = props;
+  const params = { reminder_id: reminder };
+  const { result, setParams } = useAxiosGet('/api/reminder_item', params, {
+    name: 'ReminderList',
+    reloadOnChange: true,
+  });
+
+  useLoadDocs({ collection: 'reminder_item', result, loadDocsAction });
 
   useFocus(() => setParams(params));
 
-  if (!reminderDoc || !isSuccess) {
-    isLoaded && setIsLoaded(false);
-    return null;
-  }
+  const newPageOnClick = () => {
+    const maxReminder = _.maxBy(reminderItemDocs, 'position');
+    const maxPosition = _.get(maxReminder, 'position') || 0;
+    const position = maxPosition + 1;
 
-  const { id, header: savedHeader } = reminderDoc;
-
-  if (!isLoaded) {
-    setHeader(savedHeader);
-    setIsLoaded(true);
-  }
-
-  const postHeader = _.debounce(header => {
     axiosPost(
-      '/api/reminder',
-      { id, header },
-      { collection: 'reminder', loadDocsAction },
+      '/api/reminder_item',
+      { position, reminder_id: reminder },
+      { collection: 'reminder_item', loadDocsAction },
     );
-  }, 500);
-
-  const headerOnChange = (event: any) => {
-    const header = event.currentTarget.value;
-    setHeader(header);
-    postHeader(header);
   };
 
   return (
     <div className={styles.note}>
-      <TextareaAutosize
-        className={styles.heading}
-        value={header || ''}
-        placeholder="Untitled"
-        onChange={headerOnChange}
-      />
-      reminders
+      <ReminderName reminder={reminder} />
+
+      {_.map(reminderItemDocs, ({ id }) => (
+        <ReminderItem reminder_item={id} key={id} />
+      ))}
+
+      <div className={styles.newItem} onClick={newPageOnClick}>
+        New Item
+        <IoIosAdd />
+      </div>
     </div>
   );
 }
 
 export default connect(
-  null,
+  createDocListSelector({
+    collection: 'reminder_item',
+    filter: 'none',
+    prop: 'reminderItemDocs',
+    orderBy: ['position'],
+  }),
   { loadDocsAction },
 )(ReminderList);

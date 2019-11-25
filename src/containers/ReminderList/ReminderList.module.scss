@@ -1,6 +1,19 @@
 @import '../../template.scss';
 
-.heading {
-  @extend .heading-3;
-  min-height: 4rem;
+.newItem {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: $text-2;
+  color: $dark-5;
+  text-transform: uppercase;
+
+  svg {
+    margin-left: $margin-1;
+    font-size: $text-3;
+  }
+
+  &:hover {
+    color: $pink-5;
+  }
 }

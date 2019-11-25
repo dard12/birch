@@ -53,6 +53,7 @@ import './routes/follow';
 import './routes/user';
 import './routes/note';
 import './routes/reminder';
+import './routes/reminder_item';
 
 if (isProd) {
   app.use(Sentry.Handlers.errorHandler());
