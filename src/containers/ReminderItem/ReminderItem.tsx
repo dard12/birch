@@ -7,7 +7,6 @@ import { ReminderItemDoc } from '../../../src-server/models';
 import { loadDocsAction } from '../../redux/actions';
 import useFocus from '../../hooks/useFocus';
 import RichText from '../../components/RichText/RichText';
-import { axios } from '../../App';
 import { createDocSelector } from '../../redux/selectors';
 
 interface ReminderItemProps {

@@ -29,7 +29,7 @@ function ReminderName(props: ReminderNameProps) {
 
   if (!reminderDoc || !isSuccess) {
     isLoaded && setIsLoaded(false);
-    return <div className={styles.heading}> ... </div>;
+    return <div className={styles.heading} />;
   }
 
   const { id, header: savedHeader } = reminderDoc;
