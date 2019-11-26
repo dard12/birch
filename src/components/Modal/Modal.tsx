@@ -5,15 +5,19 @@ import styles from './Modal.module.scss';
 interface ModalProps {
   buttonRender: (openModal: Function) => any;
   modalRender: (closeModal: Function) => any;
+  onClose?: Function;
 }
 
 ReactModal.setAppElement('#root');
 
 export default function Modal(props: ModalProps) {
-  const { buttonRender, modalRender } = props;
+  const { buttonRender, modalRender, onClose } = props;
   const [isOpen, setIsOpen] = useState(false);
 
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => {
+    onClose && onClose();
+    setIsOpen(false);
+  };
   const openModal = () => setIsOpen(true);
 
   const body = document.querySelector('body');

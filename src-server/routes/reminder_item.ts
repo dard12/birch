@@ -1,16 +1,40 @@
 import { v4 as uuid } from 'uuid';
+import _ from 'lodash';
 import { router, requireAuth } from '../index';
 import pg from '../pg';
 import { upsert } from '../util';
 
 router.get('/api/reminder_item', requireAuth, async (req, res) => {
   const { query, user }: any = req;
-  const where = { ...query, author_id: user.id };
+  const { sort, ...filters } = query;
+  const where = { ...filters, author_id: user.id };
 
-  const docs = await pg
+  const pgQuery = pg
     .select('*')
     .from('reminder_item')
     .where(where);
+
+  let docs;
+
+  if (sort === 'random') {
+    const random = _.random(1);
+
+    docs = await pgQuery
+      .clone()
+      .whereRaw('(random > ?)', [random])
+      // .leftJoin('reminder', 'reminder_id', 'id')
+      .limit(1);
+
+    if (_.isEmpty(docs)) {
+      docs = await pgQuery
+        .clone()
+        .whereRaw('(random <= ?)', [random])
+        // .leftJoin('reminder', 'reminder_id', 'id')
+        .limit(1);
+    }
+  } else {
+    docs = await pgQuery;
+  }
 
   res.status(200).send({ docs });
 });
