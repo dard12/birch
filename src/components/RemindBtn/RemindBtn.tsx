@@ -18,7 +18,10 @@ function RemindBtn(props: RemindBtnProps) {
         )}
         modalRender={closeModal => (
           <div className={styles.remindModal}>
-            Figure out what to do in Taipei, Taiwan, Japan.
+            <div className={styles.remindHeader}>To Do</div>
+            <div className={styles.remindContent}>
+              Figure out what to do in Taipei, Taiwan, Japan.
+            </div>
           </div>
         )}
       />

@@ -43,7 +43,19 @@ button.settingBtn {
   max-width: $width-2;
   background-color: $white;
   padding: $margin-4;
-  border-radius: $border-radius-2;
+  border-radius: $border-radius-1;
+}
+
+.remindHeader {
+  font-size: $text-4;
+  font-weight: 600;
+  color: $dark-7;
+  padding-bottom: $margin-2;
+  margin-bottom: $margin-2;
+  border-bottom: 1px solid $dark-2;
+}
+
+.remindContent {
   font-size: $text-7;
   font-family: $serif;
 }
