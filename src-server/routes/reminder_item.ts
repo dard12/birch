@@ -7,7 +7,7 @@ import { upsert } from '../util';
 router.get('/api/reminder_item', requireAuth, async (req, res) => {
   const { query, user }: any = req;
   const { sort, ...filters } = query;
-  const where = { ...filters, author_id: user.id };
+  const where = { ...filters, 'reminder_item.author_id': user.id };
 
   const pgQuery = pg
     .select('*')
@@ -16,24 +16,23 @@ router.get('/api/reminder_item', requireAuth, async (req, res) => {
 
   let docs;
 
-  if (sort === 'random') {
-    const random = _.random(1, true);
-
+  if (sort === 'last_seen') {
     docs = await pgQuery
-      .clone()
-      .whereRaw('(random > ?)', [random])
-      // .leftJoin('reminder', 'reminder_id', 'id')
+      .select('reminder_item.*', 'reminder.header')
+      .leftJoin('reminder', 'reminder_id', 'reminder.id')
+      .orderBy('reminder_item.last_seen', 'asc')
       .limit(1);
 
-    if (_.isEmpty(docs)) {
-      docs = await pgQuery
-        .clone()
-        .whereRaw('(random <= ?)', [random])
-        // .leftJoin('reminder', 'reminder_id', 'id')
-        .limit(1);
+    const id = _.get(docs, '[0].id');
+
+    if (id) {
+      await pg
+        .update({ last_seen: new Date() })
+        .from('reminder_item')
+        .where({ id });
     }
   } else {
-    docs = await pgQuery;
+    docs = await pgQuery.select('*');
   }
 
   res.status(200).send({ docs });
@@ -42,7 +41,7 @@ router.get('/api/reminder_item', requireAuth, async (req, res) => {
 router.post('/api/reminder_item', requireAuth, async (req, res) => {
   const { body, user }: any = req;
   const { id = uuid() } = body;
-  const update = { ...body, author_id: user.id };
+  const update = { ...body, author_id: user.id, last_seen: new Date() };
 
   const docs = await upsert({ id }, update, 'reminder_item');
 

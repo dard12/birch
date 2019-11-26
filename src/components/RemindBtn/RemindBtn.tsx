@@ -10,12 +10,13 @@ import RichText from '../RichText/RichText';
 interface RemindBtnProps {}
 
 function RemindBtn(props: RemindBtnProps) {
-  const params = { sort: 'random' };
+  const params = { sort: 'last_seen' };
   const { result, setParams } = useAxiosGet('/api/reminder_item', params, {
     name: 'RemindBtn',
     reloadOnChange: true,
   });
   const content = _.get(result, 'docs[0].content');
+  const header = _.get(result, 'docs[0].header');
   const refreshReminder = () => setParams(params);
 
   return (
@@ -30,7 +31,7 @@ function RemindBtn(props: RemindBtnProps) {
         )}
         modalRender={closeModal => (
           <div className={styles.remindModal}>
-            <div className={styles.remindHeader}>To Do</div>
+            <div className={styles.remindHeader}>{header}</div>
             <RichText
               content={content}
               className={styles.remindContent}
