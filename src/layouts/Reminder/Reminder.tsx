@@ -13,7 +13,12 @@ function Reminder(props: ReminderProps) {
   return (
     <div className={styles.reminderPage}>
       <ReminderSidebar reminder={reminder} />
-      {reminder && <ReminderList reminder={reminder} />}
+      {reminder && (
+        <ReminderList
+          reminder={reminder}
+          itemFilter={{ reminder_id: reminder }}
+        />
+      )}
     </div>
   );
 }

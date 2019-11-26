@@ -13,6 +13,7 @@ import { createDocListSelector } from '../../redux/selectors';
 
 interface ReminderListProps {
   reminder: string;
+  itemFilter: any;
   reminderItemDocs?: ReminderItemDoc[];
   loadDocsAction?: Function;
 }
@@ -60,7 +61,7 @@ function ReminderList(props: ReminderListProps) {
 export default connect(
   createDocListSelector({
     collection: 'reminder_item',
-    filter: 'none',
+    filter: 'itemFilter',
     prop: 'reminderItemDocs',
     orderBy: ['position'],
   }),

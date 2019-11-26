@@ -19,10 +19,7 @@ function ReminderName(props: ReminderNameProps) {
   const { result, isSuccess, setParams } = useAxiosGet(
     '/api/reminder',
     params,
-    {
-      name: 'ReminderList',
-      reloadOnChange: true,
-    },
+    { name: 'ReminderList', reloadOnChange: true },
   );
   const [header, setHeader] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,7 +29,7 @@ function ReminderName(props: ReminderNameProps) {
 
   if (!reminderDoc || !isSuccess) {
     isLoaded && setIsLoaded(false);
-    return null;
+    return <div className={styles.heading}> ... </div>;
   }
 
   const { id, header: savedHeader } = reminderDoc;
