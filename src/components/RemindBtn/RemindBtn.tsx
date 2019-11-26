@@ -10,7 +10,7 @@ interface RemindBtnProps {}
 
 function RemindBtn(props: RemindBtnProps) {
   const params = { sort: 'random' };
-  const { result, setParams } = useAxiosGet('/api/remind_item', params, {
+  const { result, setParams } = useAxiosGet('/api/reminder_item', params, {
     name: 'RemindBtn',
     reloadOnChange: true,
   });
