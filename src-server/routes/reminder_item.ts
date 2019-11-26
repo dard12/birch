@@ -17,7 +17,7 @@ router.get('/api/reminder_item', requireAuth, async (req, res) => {
   let docs;
 
   if (sort === 'random') {
-    const random = _.random(1);
+    const random = _.random(1, true);
 
     docs = await pgQuery
       .clone()

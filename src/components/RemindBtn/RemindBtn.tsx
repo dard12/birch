@@ -5,6 +5,7 @@ import styles from './RemindBtn.module.scss';
 import { Button } from '../../components/Button/Button';
 import Modal from '../Modal/Modal';
 import { useAxiosGet } from '../../hooks/useAxios';
+import RichText from '../RichText/RichText';
 
 interface RemindBtnProps {}
 
@@ -30,7 +31,11 @@ function RemindBtn(props: RemindBtnProps) {
         modalRender={closeModal => (
           <div className={styles.remindModal}>
             <div className={styles.remindHeader}>To Do</div>
-            <div className={styles.remindContent}>{content}</div>
+            <RichText
+              content={content}
+              className={styles.remindContent}
+              readOnly
+            />
           </div>
         )}
       />
