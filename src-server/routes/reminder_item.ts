@@ -21,7 +21,10 @@ router.get('/api/reminder_item', requireAuth, async (req, res) => {
       .select('reminder_item.*', 'reminder.header')
       .leftJoin('reminder', 'reminder_id', 'reminder.id')
       .orderBy('reminder_item.last_seen', 'asc')
-      .limit(1);
+      .limit(5);
+
+    docs = docs.length === 5 ? _.shuffle(docs) : docs;
+    docs = _.take(docs, 1);
 
     const id = _.get(docs, '[0].id');
 
