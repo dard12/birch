@@ -37,3 +37,13 @@ button.settingBtn {
     border-color: $pink-5;
   }
 }
+
+.remindModal {
+  @extend .shadow-2;
+  max-width: $width-2;
+  background-color: $white;
+  padding: $margin-4;
+  border-radius: $border-radius-2;
+  font-size: $text-7;
+  font-family: $serif;
+}
