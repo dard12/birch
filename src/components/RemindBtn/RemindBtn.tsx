@@ -10,13 +10,13 @@ function RemindBtn(props: RemindBtnProps) {
   return (
     <div className={styles.remindContainer}>
       <Modal
-        buttonChildren={
-          <Button className={styles.shuffleBtn}>
+        buttonRender={openModal => (
+          <Button className={styles.shuffleBtn} onClick={openModal}>
             <IoIosRefresh />
             Remind Me
           </Button>
-        }
-        render={() => null}
+        )}
+        modalRender={closeModal => null}
       />
 
       <Button className={styles.settingBtn}>
