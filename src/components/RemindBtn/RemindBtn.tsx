@@ -1,5 +1,5 @@
 import React from 'react';
-import { IoIosRefresh, IoIosArrowDown } from 'react-icons/io';
+import { IoIosRefresh } from 'react-icons/io';
 import _ from 'lodash';
 import styles from './RemindBtn.module.scss';
 import { Button } from '../../components/Button/Button';
@@ -40,10 +40,6 @@ function RemindBtn(props: RemindBtnProps) {
           </div>
         )}
       />
-
-      <Button className={styles.settingBtn}>
-        <IoIosArrowDown />
-      </Button>
     </div>
   );
 }
