@@ -67,7 +67,17 @@ function App() {
               )}
             />
 
-            <PrivateRoute path="/relationships" component={Relationship} />
+            <PrivateRoute
+              exact
+              path="/relationships"
+              component={Relationship}
+            />
+            <PrivateRoute
+              path="/relationships/:person"
+              render={(props: any) => (
+                <Relationship person={props.match.params.person} {...props} />
+              )}
+            />
 
             <Route render={() => <Redirect to="/login" />} />
           </Switch>

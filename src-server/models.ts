@@ -29,3 +29,9 @@ export interface ReminderItemDoc {
   id: string;
   content: string;
 }
+
+export interface PersonDoc {
+  id: string;
+  first_name?: string;
+  last_name?: string;
+}
