@@ -14,24 +14,25 @@ export interface UserDoc {
 
 export interface NoteDoc {
   id: string;
-  header: string;
-  content: string;
+  header?: string;
+  content?: string;
   author_id: string;
 }
 
 export interface ReminderDoc {
   id: string;
-  header: string;
+  header?: string;
   author_id: string;
 }
 
 export interface ReminderItemDoc {
   id: string;
-  content: string;
+  content?: string;
 }
 
 export interface PersonDoc {
   id: string;
-  first_name?: string;
-  last_name?: string;
+  header?: string;
+  content?: string;
+  last_meeting: Date;
 }

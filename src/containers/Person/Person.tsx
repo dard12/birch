@@ -7,6 +7,8 @@ import { useAxiosGet, axiosPost } from '../../hooks/useAxios';
 import { PersonDoc } from '../../../src-server/models';
 import { loadDocsAction } from '../../redux/actions';
 import useFocus from '../../hooks/useFocus';
+import RichText from '../../components/RichText/RichText';
+import { axios } from '../../App';
 
 interface PersonProps {
   person: string;
@@ -31,17 +33,21 @@ function Person(props: PersonProps) {
     return null;
   }
 
-  const { id, first_name: savedHeader } = personDoc;
+  const { id, content, header: savedHeader } = personDoc;
 
   if (!isLoaded) {
     setHeader(savedHeader);
     setIsLoaded(true);
   }
 
-  const postHeader = _.debounce(input => {
+  const postContent = _.debounce(newContent => {
+    axios.post('/api/person', { id, content: newContent });
+  }, 500);
+
+  const postHeader = _.debounce(header => {
     axiosPost(
       '/api/person',
-      { id, first_name: input },
+      { id, header },
       { collection: 'person', loadDocsAction },
     );
   }, 500);
@@ -59,6 +65,12 @@ function Person(props: PersonProps) {
         value={header || ''}
         placeholder="Untitled"
         onChange={headerOnChange}
+      />
+
+      <RichText
+        placeholder="What do you think?"
+        onChange={postContent}
+        content={content}
       />
     </div>
   );

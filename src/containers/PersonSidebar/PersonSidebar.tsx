@@ -21,7 +21,7 @@ function PersonSidebar(props: PersonSidebarProps) {
   const { person, personDocs, loadDocsAction } = props;
   const { result, isSuccess } = useAxiosGet(
     '/api/person',
-    { id: person },
+    {},
     { name: 'PersonSidebar' },
   );
 
@@ -57,13 +57,13 @@ function PersonSidebar(props: PersonSidebarProps) {
       {_.isEmpty(personDocs) ? (
         <div className={styles.sidebarFaded}>No relationships yet.</div>
       ) : (
-        _.map(personDocs, ({ id, first_name }) => (
+        _.map(personDocs, ({ id, header }) => (
           <div key={id} className={styles.sidetab}>
             <NavLink
               to={`/relationships/${id}`}
               activeClassName={styles.active}
             >
-              {first_name || 'Untitled'}
+              {header || 'Untitled'}
             </NavLink>
 
             <IoIosClose className={styles.tabMore} />
