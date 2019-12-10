@@ -1,15 +1,4 @@
 @import '../../template.scss';
 
-.relationshipPage {
-  width: $width-5;
-  margin: 0 auto;
-  display: grid;
-  grid-gap: $margin-4;
-  grid-template-columns: 200px minmax(0, 1fr) 200px;
-  align-items: flex-start;
-
-  @media (max-device-width: 768px) {
-    grid-template-columns: minmax(0, 1fr);
-    width: 100%;
-  }
+.overview {
 }
