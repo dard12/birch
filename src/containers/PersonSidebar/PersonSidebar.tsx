@@ -10,6 +10,7 @@ import styles from '../NoteSidebar/NoteSidebar.module.scss';
 import { createDocListSelector } from '../../redux/selectors';
 import { PersonDoc } from '../../../src-server/models';
 import history from '../../history';
+import RemindBtn from '../../components/RemindBtn/RemindBtn';
 
 interface PersonSidebarProps {
   person?: string;
@@ -53,6 +54,10 @@ function PersonSidebar(props: PersonSidebarProps) {
 
   return (
     <div className={styles.sidebar}>
+      <div className={styles.sidebarButtons}>
+        <RemindBtn />
+      </div>
+
       {_.isEmpty(personDocs) ? (
         <div className={styles.sidebarFaded}>No relationships yet.</div>
       ) : (
