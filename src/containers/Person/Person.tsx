@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { IoIosAdd } from 'react-icons/io';
+import { IoIosAdd, IoIosCalendar } from 'react-icons/io';
 import TextareaAutosize from 'react-textarea-autosize';
 import styles from './Person.module.scss';
 import { useAxiosGet, axiosPost } from '../../hooks/useAxios';
@@ -10,6 +10,7 @@ import { loadDocsAction } from '../../redux/actions';
 import useFocus from '../../hooks/useFocus';
 import RichText from '../../components/RichText/RichText';
 import { axios } from '../../App';
+import { Link } from 'react-router-dom';
 
 interface PersonProps {
   person: string;
@@ -87,8 +88,20 @@ function Person(props: PersonProps) {
                 <IoIosAdd />
               </div>
             </div>
-            <div className={styles.event}>Dinner</div>
-            <div className={styles.event}>Dinner</div>
+            <div className={styles.event}>
+              <IoIosCalendar />
+              <Link to="#" className="hoverLink">
+                Coffee with Joseph and Sister
+              </Link>
+              <span className={styles.eventTime}>3 days ago.</span>
+            </div>
+            <div className={styles.event}>
+              <IoIosCalendar />
+              <Link to="#" className="hoverLink">
+                Dinner with Joseph and Sister
+              </Link>
+              <span className={styles.eventTime}>about 1 month ago.</span>
+            </div>
           </div>
         </div>
       </div>
