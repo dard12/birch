@@ -3,5 +3,31 @@
 .item {
   display: list-item;
   list-style-type: disc;
+  width: 100%;
+}
+
+.itemContainer {
   margin-left: $margin-3;
+  display: flex;
+  align-items: flex-start;
+  border-radius: $border-radius-1;
+
+  &:hover {
+    background-color: $dark-1;
+
+    .delete {
+      opacity: 1;
+    }
+  }
+}
+
+.delete {
+  font-size: $text-5;
+  cursor: pointer;
+  margin: $margin-2;
+  opacity: 0;
+
+  &:hover {
+    color: $pink-5;
+  }
 }

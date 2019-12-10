@@ -61,8 +61,12 @@ function ReminderItem(props: ReminderItemProps) {
   };
 
   return (
-    <div className={styles.item}>
-      <RichText content={content} onChange={postContent} />
+    <div className={styles.itemContainer}>
+      <RichText
+        content={content}
+        onChange={postContent}
+        className={styles.item}
+      />
       <IoIosClose className={styles.delete} onClick={deleteItem} />
     </div>
   );
