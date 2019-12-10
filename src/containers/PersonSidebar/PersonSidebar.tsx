@@ -30,9 +30,10 @@ function PersonSidebar(props: PersonSidebarProps) {
   if (!isSuccess) {
     return <Skeleton count={4} />;
   }
+  const firstPerson = _.get(personDocs, '[0].id');
 
-  if (!person) {
-    return <Redirect to="/relationships/overview" />;
+  if (!person && firstPerson) {
+    return <Redirect to={`/relationships/${firstPerson}`} />;
   }
 
   const newPageOnClick = () => {
@@ -52,12 +53,6 @@ function PersonSidebar(props: PersonSidebarProps) {
 
   return (
     <div className={styles.sidebar}>
-      <div className={styles.sidetab}>
-        <NavLink to="/relationships/overview" activeClassName={styles.active}>
-          Overview
-        </NavLink>
-      </div>
-
       {_.isEmpty(personDocs) ? (
         <div className={styles.sidebarFaded}>No relationships yet.</div>
       ) : (

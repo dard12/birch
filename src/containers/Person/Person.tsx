@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import { IoIosAdd } from 'react-icons/io';
 import TextareaAutosize from 'react-textarea-autosize';
 import styles from './Person.module.scss';
 import { useAxiosGet, axiosPost } from '../../hooks/useAxios';
@@ -9,9 +10,6 @@ import { loadDocsAction } from '../../redux/actions';
 import useFocus from '../../hooks/useFocus';
 import RichText from '../../components/RichText/RichText';
 import { axios } from '../../App';
-import TimeAgo from '../../components/TimeAgo/TimeAgo';
-import { Button } from '../../components/Button/Button';
-import { IoIosAdd } from 'react-icons/io';
 
 interface PersonProps {
   person: string;
@@ -36,7 +34,7 @@ function Person(props: PersonProps) {
     return null;
   }
 
-  const { id, content, header: savedHeader, last_meeting } = personDoc;
+  const { id, content, header: savedHeader } = personDoc;
 
   if (!isLoaded) {
     setHeader(savedHeader);
