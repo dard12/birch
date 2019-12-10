@@ -21,6 +21,7 @@ router.get('/api/reminder_item', requireAuth, async (req, res) => {
       .select('reminder_item.*', 'reminder.header')
       .leftJoin('reminder', 'reminder_id', 'reminder.id')
       .orderBy('reminder_item.last_seen', 'asc')
+      .where({ deleted: false })
       .limit(5);
 
     docs = docs.length === 5 ? _.shuffle(docs) : docs;
