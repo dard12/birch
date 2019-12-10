@@ -16,7 +16,7 @@ function Reminder(props: ReminderProps) {
       {reminder && (
         <ReminderList
           reminder={reminder}
-          itemFilter={{ reminder_id: reminder }}
+          itemFilter={{ reminder_id: reminder, deleted: false }}
         />
       )}
     </div>

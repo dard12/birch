@@ -17,15 +17,11 @@ export function useLoadDocs(params: {
   }, [collection, docs, loadDocsAction]);
 }
 
-export function axiosPost(
-  url: string,
-  params: any,
-  options?: {
-    collection: string;
-    loadDocsAction?: Function;
-  },
-) {
-  return axios.post(url, params).then(result => {
+function getLoadResults(options?: {
+  collection: string;
+  loadDocsAction?: Function;
+}) {
+  return (result: any) => {
     const docs = _.get(result, 'data.docs');
 
     if (options) {
@@ -34,7 +30,29 @@ export function axiosPost(
     }
 
     return { docs };
-  });
+  };
+}
+
+export function axiosDelete(
+  url: string,
+  params: any,
+  options?: {
+    collection: string;
+    loadDocsAction?: Function;
+  },
+) {
+  return axios.delete(url, params).then(getLoadResults(options));
+}
+
+export function axiosPost(
+  url: string,
+  params: any,
+  options?: {
+    collection: string;
+    loadDocsAction?: Function;
+  },
+) {
+  return axios.post(url, params).then(getLoadResults(options));
 }
 
 export function useAxiosGet(

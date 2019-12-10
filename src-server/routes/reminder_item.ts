@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import _ from 'lodash';
 import { router, requireAuth } from '../index';
 import pg from '../pg';
-import { upsert } from '../util';
+import { upsert, softDelete } from '../util';
 
 router.get('/api/reminder_item', requireAuth, async (req, res) => {
   const { query, user }: any = req;
@@ -47,6 +47,19 @@ router.post('/api/reminder_item', requireAuth, async (req, res) => {
   const update = { ...body, author_id: user.id, last_seen: new Date() };
 
   const docs = await upsert({ id }, update, 'reminder_item');
+
+  res.status(200).send({ docs });
+});
+
+router.delete('/api/reminder_item', requireAuth, async (req, res) => {
+  const { body, user }: any = req;
+  const where = {
+    ...body,
+    author_id: user.id,
+    deleted: false,
+  };
+
+  const docs = await softDelete(where, 'reminder_item');
 
   res.status(200).send({ docs });
 });

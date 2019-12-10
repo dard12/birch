@@ -49,7 +49,6 @@ app.get('*', (req, res) => {
 });
 
 import './routes/auth';
-import './routes/follow';
 import './routes/user';
 import './routes/note';
 import './routes/reminder';

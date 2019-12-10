@@ -20,7 +20,7 @@ interface ReminderListProps {
 
 function ReminderList(props: ReminderListProps) {
   const { reminder, reminderItemDocs, loadDocsAction } = props;
-  const params = { reminder_id: reminder };
+  const params = { reminder_id: reminder, deleted: false };
   const { result, setParams } = useAxiosGet('/api/reminder_item', params, {
     name: 'ReminderList',
     reloadOnChange: true,

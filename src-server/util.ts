@@ -43,3 +43,12 @@ export async function upsert(query: any, updates: any, collection: string) {
 
   return _.get(result, 'rows');
 }
+
+export function softDelete(query: any, collection: string) {
+  const deleted_at = new Date();
+
+  return pg
+    .update({ deleted: true, deleted_at })
+    .from(collection)
+    .where(query);
+}

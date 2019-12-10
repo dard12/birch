@@ -27,12 +27,3 @@ router.post('/api/user', requireAuth, async (req, res) => {
     res.status(200).send({ docs });
   }
 });
-
-export async function getFollowers(user: string) {
-  const followDocs = await pg
-    .select('following')
-    .from('follow')
-    .where({ follower: user, deleted: false });
-
-  return _.map(followDocs, 'following');
-}

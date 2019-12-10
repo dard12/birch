@@ -18,7 +18,7 @@ router.get('/api/reminder', requireAuth, async (req, res) => {
 router.post('/api/reminder', requireAuth, async (req, res) => {
   const { body, user }: any = req;
   const { id = uuid() } = body;
-  const update = { ...body, author_id: user.id, last_seen: new Date() };
+  const update = { ...body, author_id: user.id };
 
   const docs = await upsert({ id }, update, 'reminder');
 
