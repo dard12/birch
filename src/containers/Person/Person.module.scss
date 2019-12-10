@@ -19,12 +19,15 @@
 
 .timeline {
   display: grid;
-  grid-gap: $margin-3;
+  grid-gap: $margin-2;
 }
 
 .event {
-  background-color: $dark-1;
-  padding: $margin-2;
+  display: list-item;
+  list-style-type: disc;
+  font-size: $text-5;
+  font-family: $serif;
+  color: $dark-10;
 }
 
 .addMeeting {

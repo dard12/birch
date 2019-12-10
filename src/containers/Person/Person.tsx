@@ -87,8 +87,8 @@ function Person(props: PersonProps) {
                 <IoIosAdd />
               </div>
             </div>
-            <div className={styles.event}>asf</div>
-            <div className={styles.event}>asf</div>
+            <div className={styles.event}>Dinner</div>
+            <div className={styles.event}>Dinner</div>
           </div>
         </div>
       </div>
