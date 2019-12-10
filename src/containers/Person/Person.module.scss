@@ -4,3 +4,48 @@
   @extend .heading-3;
   min-height: 4rem;
 }
+
+.sections {
+  display: grid;
+  grid-gap: $margin-4;
+}
+
+.sectionLabel {
+  font-size: $text-1;
+  margin-bottom: $margin-1;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.timeline {
+  display: grid;
+  grid-gap: $margin-3;
+}
+
+.event {
+  background-color: $dark-1;
+  padding: $margin-2;
+}
+
+.addMeeting {
+  @extend .btn;
+}
+
+.newItem {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: $margin-2;
+  font-size: $text-2;
+  color: $dark-5;
+  text-transform: uppercase;
+
+  svg {
+    margin-left: $margin-1;
+    font-size: $text-3;
+  }
+
+  &:hover {
+    color: $pink-5;
+  }
+}

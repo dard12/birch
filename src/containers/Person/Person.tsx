@@ -9,6 +9,9 @@ import { loadDocsAction } from '../../redux/actions';
 import useFocus from '../../hooks/useFocus';
 import RichText from '../../components/RichText/RichText';
 import { axios } from '../../App';
+import TimeAgo from '../../components/TimeAgo/TimeAgo';
+import { Button } from '../../components/Button/Button';
+import { IoIosAdd } from 'react-icons/io';
 
 interface PersonProps {
   person: string;
@@ -33,7 +36,7 @@ function Person(props: PersonProps) {
     return null;
   }
 
-  const { id, content, header: savedHeader } = personDoc;
+  const { id, content, header: savedHeader, last_meeting } = personDoc;
 
   if (!isLoaded) {
     setHeader(savedHeader);
@@ -67,11 +70,31 @@ function Person(props: PersonProps) {
         onChange={headerOnChange}
       />
 
-      <RichText
-        placeholder="What do you think?"
-        onChange={postContent}
-        content={content}
-      />
+      <div className={styles.sections}>
+        <div>
+          <div className={styles.sectionLabel}>Overview</div>
+
+          <RichText
+            placeholder="What do you think?"
+            onChange={postContent}
+            content={content}
+          />
+        </div>
+
+        <div>
+          <div className={styles.sectionLabel}>Timeline</div>
+          <div className={styles.timeline}>
+            <div>
+              <div className={styles.newItem}>
+                New Meeting
+                <IoIosAdd />
+              </div>
+            </div>
+            <div className={styles.event}>asf</div>
+            <div className={styles.event}>asf</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
