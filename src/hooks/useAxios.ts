@@ -41,7 +41,7 @@ export function axiosDelete(
     loadDocsAction?: Function;
   },
 ) {
-  return axios.delete(url, params).then(getLoadResults(options));
+  return axios.delete(url, { data: params }).then(getLoadResults(options));
 }
 
 export function axiosPost(
