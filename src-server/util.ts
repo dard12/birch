@@ -50,5 +50,6 @@ export function softDelete(query: any, collection: string) {
   return pg
     .update({ deleted: true, deleted_at })
     .from(collection)
-    .where(query);
+    .where(query)
+    .returning('*');
 }
