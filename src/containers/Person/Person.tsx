@@ -79,20 +79,6 @@ function Person(props: PersonProps) {
         </div>
 
         <div>
-          <div className={styles.sectionLabel}>Reminders</div>
-          <div className={styles.timeline}>
-            <div>
-              <div className={styles.newItem}>
-                New Reminder
-                <IoIosAdd />
-              </div>
-            </div>
-            <div className={styles.event}>asf</div>
-            <div className={styles.event}>asf</div>
-          </div>
-        </div>
-
-        <div>
           <div className={styles.sectionLabel}>Events</div>
           <div className={styles.timeline}>
             <div>
