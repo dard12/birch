@@ -80,7 +80,7 @@ function Person(props: PersonProps) {
         </div>
 
         <div>
-          <div className={styles.sectionLabel}>Events</div>
+          <div className={styles.sectionLabel}>Events (12)</div>
           <div className={styles.timeline}>
             <div>
               <div className={styles.newItem}>
