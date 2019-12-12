@@ -1,0 +1,16 @@
+@import '../../template.scss';
+
+.eventModal {
+  @extend .shadow-2;
+  max-width: $width-2;
+  background-color: $white;
+  padding: $margin-4;
+  border-radius: $border-radius-1;
+}
+
+.editEvents {
+  display: inline-block;
+  margin-left: $margin-2;
+  text-decoration: underline;
+  cursor: pointer;
+}

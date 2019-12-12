@@ -11,6 +11,7 @@ import { loadDocsAction } from '../../redux/actions';
 import useFocus from '../../hooks/useFocus';
 import RichText from '../../components/RichText/RichText';
 import { axios } from '../../App';
+import EventEdit from '../EventEdit/EventEdit';
 
 interface PersonProps {
   person: string;
@@ -82,7 +83,7 @@ function Person(props: PersonProps) {
         <div>
           <div className={styles.sectionLabel}>
             <span>Events (12)</span>
-            <div className={styles.editEvents}>Edit</div>
+            <EventEdit />
           </div>
           <div className={styles.timeline}>
             <div className={styles.event}>
