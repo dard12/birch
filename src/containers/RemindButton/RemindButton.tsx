@@ -1,18 +1,18 @@
 import React from 'react';
 import { IoIosRefresh } from 'react-icons/io';
 import _ from 'lodash';
-import styles from './RemindBtn.module.scss';
+import styles from './RemindButton.module.scss';
 import { Button } from '../../components/Button/Button';
-import Modal from '../Modal/Modal';
+import Modal from '../../components/Modal/Modal';
 import { useAxiosGet } from '../../hooks/useAxios';
-import RichText from '../RichText/RichText';
+import RichText from '../../components/RichText/RichText';
 
-interface RemindBtnProps {}
+interface RemindButtonProps {}
 
-function RemindBtn(props: RemindBtnProps) {
+function RemindButton(props: RemindButtonProps) {
   const params = { sort: 'last_seen' };
   const { result, setParams } = useAxiosGet('/api/reminder_item', params, {
-    name: 'RemindBtn',
+    name: 'RemindButton',
     reloadOnChange: true,
   });
   const content = _.get(result, 'docs[0].content');
@@ -44,4 +44,4 @@ function RemindBtn(props: RemindBtnProps) {
   );
 }
 
-export default RemindBtn;
+export default RemindButton;
