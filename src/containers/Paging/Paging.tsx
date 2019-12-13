@@ -9,7 +9,7 @@ interface PagingProps {
   props?: any;
   params?: any;
   className?: string;
-  gridGap?: '3' | '4';
+  gridGap?: '2' | '3' | '4';
   seeMore?: boolean;
 }
 
@@ -32,7 +32,13 @@ function Paging(props: PagingProps) {
     setQueryParams({ page: nextPage });
   };
 
-  const gapClass = gridGap === '3' ? styles.gridGap3 : styles.gridGap4;
+  let gapClass = styles.gridGap4;
+
+  if (gridGap === '2') {
+    gapClass = styles.gridGap2;
+  } else if (gridGap === '3') {
+    gapClass = styles.gridGap3;
+  }
 
   return (
     <div className={classNames(className, gapClass)}>

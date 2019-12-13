@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { IoIosCalendar } from 'react-icons/io';
-import { Link } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 import styles from './Person.module.scss';
 import { useAxiosGet, axiosPost } from '../../hooks/useAxios';
-import { PersonDoc } from '../../../src-server/models';
+import { PersonDoc, EventDoc } from '../../../src-server/models';
 import { loadDocsAction } from '../../redux/actions';
 import useFocus from '../../hooks/useFocus';
 import RichText from '../../components/RichText/RichText';
 import { axios } from '../../App';
 import EventEdit from '../EventEdit/EventEdit';
+import Paging from '../Paging/Paging';
+import EventListPage from '../EventListPage/EventListPage';
+import { createDocListSelector } from '../../redux/selectors';
 
 interface PersonProps {
   person: string;
+  eventFilter: any;
+  personEvents?: EventDoc[];
   loadDocsAction?: Function;
 }
 
 function Person(props: PersonProps) {
-  const { person, loadDocsAction } = props;
+  const { person, personEvents, loadDocsAction } = props;
   const params = { id: person };
   const { result, isSuccess, setParams } = useAxiosGet('/api/person', params, {
     name: 'Person',
@@ -61,6 +64,8 @@ function Person(props: PersonProps) {
     postHeader(header);
   };
 
+  const numberEvents = _.size(personEvents);
+
   return (
     <div>
       <TextareaAutosize
@@ -82,25 +87,15 @@ function Person(props: PersonProps) {
 
         <div>
           <div className={styles.sectionLabel}>
-            <span>Events (12)</span>
+            <span>Events {numberEvents ? `(${numberEvents})` : null}</span>
             <EventEdit />
           </div>
-          <div className={styles.timeline}>
-            <div className={styles.event}>
-              <IoIosCalendar />
-              <Link to="#" className="hoverLink">
-                Coffee with Joseph and Sister
-              </Link>
-              <span className={styles.eventTime}>3 days ago.</span>
-            </div>
-            <div className={styles.event}>
-              <IoIosCalendar />
-              <Link to="#" className="hoverLink">
-                Dinner with Joseph and Sister
-              </Link>
-              <span className={styles.eventTime}>about 1 month ago.</span>
-            </div>
-          </div>
+
+          <Paging
+            component={EventListPage}
+            params={{ people: [person] }}
+            gridGap="2"
+          />
         </div>
       </div>
     </div>
@@ -108,6 +103,11 @@ function Person(props: PersonProps) {
 }
 
 export default connect(
-  null,
+  createDocListSelector({
+    collection: 'event',
+    filter: 'eventFilter',
+    prop: 'personEvents',
+    orderBy: ['start_date', 'desc'],
+  }),
   { loadDocsAction },
 )(Person);

@@ -16,25 +16,3 @@
   text-transform: uppercase;
   font-weight: 600;
 }
-
-.timeline {
-  display: grid;
-  grid-gap: $margin-2;
-}
-
-.event {
-  display: flex;
-  align-items: center;
-  font-size: $text-5;
-  font-family: $serif;
-  color: $dark-10;
-
-  svg {
-    margin-right: $margin-2;
-  }
-}
-
-.eventTime {
-  margin-left: $margin-2;
-  color: $dark-5;
-}
