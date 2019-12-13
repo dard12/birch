@@ -107,7 +107,6 @@ export default connect(
     collection: 'event',
     filter: 'eventFilter',
     prop: 'personEvents',
-    orderBy: ['start_date', 'desc'],
   }),
   { loadDocsAction },
 )(Person);

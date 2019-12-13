@@ -9,7 +9,9 @@ function TimeAgo(props: TimeAgoProps) {
   const { timestamp } = props;
 
   return (
-    <React.Fragment>{formatDistanceToNow(parseJSON(timestamp))}</React.Fragment>
+    <React.Fragment>
+      {formatDistanceToNow(parseJSON(timestamp), { addSuffix: true })}
+    </React.Fragment>
   );
 }
 

@@ -46,7 +46,7 @@ function EventListPage(props: EventListPageProps) {
 
             {start_date && (
               <span className={styles.eventTime}>
-                <TimeAgo timestamp={start_date} />
+                <TimeAgo timestamp={start_date} />.
               </span>
             )}
           </div>
