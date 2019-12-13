@@ -77,15 +77,6 @@ function Person(props: PersonProps) {
 
       <div className={styles.sections}>
         <div>
-          <div className={styles.sectionLabel}>Notes</div>
-          <RichText
-            placeholder="What do you think?"
-            onChange={postContent}
-            content={content}
-          />
-        </div>
-
-        <div>
           <div className={styles.sectionLabel}>
             <span>Events {numberEvents ? `(${numberEvents})` : null}</span>
             <EventEdit />
@@ -95,6 +86,15 @@ function Person(props: PersonProps) {
             component={EventListPage}
             params={{ people: [person] }}
             gridGap="2"
+          />
+        </div>
+
+        <div>
+          <div className={styles.sectionLabel}>Notes</div>
+          <RichText
+            placeholder="What do you think?"
+            onChange={postContent}
+            content={content}
           />
         </div>
       </div>
