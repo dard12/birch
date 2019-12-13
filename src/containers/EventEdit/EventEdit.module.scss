@@ -9,8 +9,10 @@
 }
 
 .editEvents {
-  display: inline-block;
+  @extend .link;
   margin-left: $margin-2;
-  text-decoration: underline;
-  cursor: pointer;
+
+  &:hover {
+    color: $pink-5;
+  }
 }
