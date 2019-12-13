@@ -1,24 +1,7 @@
 @import '../../template.scss';
 
-.event {
-  display: flex;
-  align-items: center;
-  font-size: $text-5;
-  font-family: $serif;
-  color: $dark-10;
-
-  svg {
-    margin-right: $margin-2;
-  }
-}
-
 .noEvent {
   font-size: $text-5;
   font-family: $serif;
-  color: $dark-5;
-}
-
-.eventTime {
-  margin-left: $margin-2;
   color: $dark-5;
 }

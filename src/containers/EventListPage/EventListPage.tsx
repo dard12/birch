@@ -1,14 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { IoIosCalendar } from 'react-icons/io';
-import { Link } from 'react-router-dom';
 import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import { Button } from '../../components/Button/Button';
 import styles from './EventListPage.module.scss';
-import TimeAgo from '../../components/TimeAgo/TimeAgo';
+import Event from '../Event/Event';
 
 interface EventListPageProps {
   params: any;
@@ -36,21 +34,7 @@ function EventListPage(props: EventListPageProps) {
       {_.isEmpty(docs) && page === 0 ? (
         <div className={styles.noEvent}>No events yet.</div>
       ) : (
-        _.map(docs, ({ id, summary, start_date }) => (
-          <div key={id} className={styles.event}>
-            <IoIosCalendar />
-
-            <Link to="#" className="hoverLink">
-              {summary}
-            </Link>
-
-            {start_date && (
-              <span className={styles.eventTime}>
-                <TimeAgo timestamp={start_date} />.
-              </span>
-            )}
-          </div>
-        ))
+        _.map(docs, ({ id }) => <Event key={id} event={id} />)
       )}
 
       {seeMore && next && (
