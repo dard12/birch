@@ -21,12 +21,14 @@ function EventEdit(props: EventEditProps) {
       )}
       modalRender={closeModal => (
         <div className={styles.eventModal}>
-          <SearchBar placeholder="Search events..." />
-          <Paging
-            component={EventListPage}
-            params={{ search: query }}
-            gridGap="2"
-          />
+          <div className={styles.modalContent}>
+            <SearchBar placeholder="Search for events..." />
+            <Paging
+              component={EventListPage}
+              params={{ search: query }}
+              gridGap="2"
+            />
+          </div>
         </div>
       )}
     />

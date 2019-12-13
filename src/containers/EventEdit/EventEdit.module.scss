@@ -2,10 +2,17 @@
 
 .eventModal {
   @extend .shadow-2;
-  max-width: $width-2;
+  width: $width-2;
+  height: 500px;
   background-color: $white;
   padding: $margin-4;
   border-radius: $border-radius-1;
+}
+
+.modalContent {
+  display: grid;
+  grid-gap: $margin-3;
+  align-items: flex-start;
 }
 
 .editEvents {
