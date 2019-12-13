@@ -19,7 +19,8 @@ router.get('/api/event', requireAuth, async (req, res) => {
   }
 
   if (search) {
-    pgQuery.whereRaw('(summary ILIKE ?)', [search]);
+    const substringSearch = `%${search}%`;
+    pgQuery.whereRaw('(summary ILIKE ?)', [substringSearch]);
   }
 
   const result = await execute(pgQuery, query);
