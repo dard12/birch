@@ -6,7 +6,7 @@ import { upsert, execute } from '../util';
 
 router.get('/api/event', requireAuth, async (req, res) => {
   const { query, user }: any = req;
-  const { people, page, pageSize, ...remaining } = query;
+  const { search, people, page, pageSize, ...remaining } = query;
   const where = { ...remaining, author_id: user.id };
 
   const pgQuery = pg
@@ -15,7 +15,11 @@ router.get('/api/event', requireAuth, async (req, res) => {
     .where(where);
 
   if (!_.isEmpty(people)) {
-    pgQuery.whereRaw('people && ?', [people]);
+    pgQuery.whereRaw('(people && ?)', [people]);
+  }
+
+  if (search) {
+    pgQuery.whereRaw('(summary ILIKE ?)', [search]);
   }
 
   const result = await execute(pgQuery, query);

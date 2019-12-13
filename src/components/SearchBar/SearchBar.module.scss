@@ -1,0 +1,11 @@
+@import '../../template.scss';
+
+.searchBar {
+  padding: $margin-3;
+  border: none;
+  background-color: $dark-3;
+
+  &::placeholder {
+    color: $dark-8;
+  }
+}
