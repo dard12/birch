@@ -36,3 +36,12 @@ export interface PersonDoc {
   content?: string;
   last_meeting: Date;
 }
+
+export interface EventDoc {
+  id: string;
+  start_date: Date;
+  summary: string;
+  content?: string;
+  people: string[];
+  gcal_id: string;
+}
