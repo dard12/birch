@@ -19,3 +19,47 @@ button.eventBtn {
     border-color: $pink-5;
   }
 }
+
+.eventModal {
+  @extend .shadow-2;
+  max-width: $width-2;
+  background-color: $white;
+  padding: $margin-4;
+  border-radius: $border-radius-1;
+  width: $width-1;
+}
+
+.modalContent {
+  display: grid;
+  grid-gap: $margin-3;
+  align-items: flex-start;
+  font-size: $text-3;
+}
+
+.eventTitle {
+  padding: $margin-3;
+  border: none;
+  background-color: $dark-2;
+}
+
+.datetimeRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: $margin-2;
+}
+
+.createRow {
+  margin-top: $margin-3;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.createButton {
+  @extend .btn;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: $margin-1;
+  }
+}
