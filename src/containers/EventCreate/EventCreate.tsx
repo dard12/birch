@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { IoIosCalendar, IoIosAdd } from 'react-icons/io';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { roundToNearestMinutes } from 'date-fns';
+import {
+  roundToNearestMinutes,
+  getHours,
+  setHours,
+  getMinutes,
+} from 'date-fns';
 import styles from './EventCreate.module.scss';
 import { Button } from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
@@ -11,6 +16,7 @@ import { axiosPost } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import { DatePicker } from '../../components/DatePicker/DatePicker';
 import SelectPerson from '../SelectPerson/SelectPerson';
+import { setMinutes } from 'date-fns/esm';
 
 interface EventButtonProps {
   loadDocsAction?: Function;
@@ -30,17 +36,39 @@ const activityOptions = _.map(activities, value => ({ value, label: value }));
 function EventButton(props: EventButtonProps) {
   const roundNow = roundToNearestMinutes(new Date(), { nearestTo: 30 });
 
-  const [date, setDate] = useState(roundNow);
-  const [time, setTime] = useState(roundNow);
+  const [date, setDate] = useState([roundNow]);
+  const [time, setTime] = useState([roundNow]);
   const [activity, setActivity] = useState();
   const [people, setPeople] = useState();
 
-  const createOnClick = () => {
-    axiosPost(
-      '/api/event',
-      { date, time, activity, people },
-      { collection: 'event', loadDocsAction },
-    );
+  const peopleSummary = _.isEmpty(people)
+    ? '...'
+    : _.truncate(_.join(_.map(people, 'label'), ', '));
+  const summary = activity
+    ? `${activity.label} with ${peopleSummary}`
+    : 'New Event';
+
+  const createOnClick = (closeModal: any) => {
+    return () => {
+      const selectedTime = _.first(time) as Date;
+      const selectedDate = _.first(date) as Date;
+      const hours = getHours(selectedTime);
+      const minutes = getMinutes(selectedTime);
+
+      let start_date = setHours(selectedDate, hours);
+      start_date = setMinutes(start_date, minutes);
+
+      axiosPost(
+        '/api/event',
+        {
+          start_date,
+          activity: _.get(activity, 'value'),
+          people: _.map(people, 'value'),
+          summary,
+        },
+        { collection: 'event', loadDocsAction },
+      ).then(closeModal);
+    };
   };
 
   return (
@@ -55,13 +83,7 @@ function EventButton(props: EventButtonProps) {
         modalRender={closeModal => (
           <div className={styles.eventModal}>
             <div className={styles.modalContent}>
-              <div className={styles.eventTitle}>
-                {activity ? activity.label : 'New Event'}
-
-                {activity && (_.isEmpty(people) ? ' with...' : ' with ')}
-
-                {activity && _.truncate(_.join(_.map(people, 'label'), ', '))}
-              </div>
+              <div className={styles.eventTitle}>{summary}</div>
               <div className={styles.datetimeRow}>
                 <DatePicker
                   placeholder="Date"
@@ -107,7 +129,10 @@ function EventButton(props: EventButtonProps) {
                   </Button>
                 </a>
 
-                <Button className={styles.createButton} onClick={createOnClick}>
+                <Button
+                  className={styles.createButton}
+                  onClick={createOnClick(closeModal)}
+                >
                   <IoIosAdd />
                   Create Event
                 </Button>
