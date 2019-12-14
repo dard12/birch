@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IoIosCalendar, IoIosAdd } from 'react-icons/io';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import { roundToNearestMinutes } from 'date-fns';
 import styles from './EventCreate.module.scss';
 import { Button } from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
@@ -9,6 +10,7 @@ import { Select } from '../../components/Select/Select';
 import { axiosPost } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import { DatePicker } from '../../components/DatePicker/DatePicker';
+import SelectPerson from '../SelectPerson/SelectPerson';
 
 interface EventButtonProps {
   loadDocsAction?: Function;
@@ -26,8 +28,10 @@ const activities = [
 const activityOptions = _.map(activities, value => ({ value, label: value }));
 
 function EventButton(props: EventButtonProps) {
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState();
+  const roundNow = roundToNearestMinutes(new Date(), { nearestTo: 30 });
+
+  const [date, setDate] = useState(roundNow);
+  const [time, setTime] = useState(roundNow);
   const [activity, setActivity] = useState();
   const [friends, setFriends] = useState();
 
@@ -77,11 +81,12 @@ function EventButton(props: EventButtonProps) {
                 onChange={setActivity}
               />
 
-              <Select
+              <SelectPerson
                 placeholder="Invite Friends"
-                options={[{ label: 'Person', value: 'person' }]}
                 value={friends}
                 onChange={setFriends}
+                isMulti
+                isSearchable
               />
 
               <div className={styles.createRow}>
