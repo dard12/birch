@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IoIosCalendar, IoIosAdd } from 'react-icons/io';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import Flatpickr from 'react-flatpickr';
 import styles from './EventCreate.module.scss';
 import { Button } from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
@@ -9,6 +10,8 @@ import { Input } from '../../components/Input/Input';
 import { Select } from '../../components/Select/Select';
 import { axiosPost } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
+
+// import 'flatpickr/dist/themes/theme.css';
 
 interface EventButtonProps {
   loadDocsAction?: Function;
@@ -18,7 +21,6 @@ const activities = [
   'Board Games',
   'Drinks',
   'Hangout',
-  'Concert',
   'Gym',
   'Food',
   'Coffee',
@@ -66,18 +68,17 @@ function EventButton(props: EventButtonProps) {
               />
 
               <div className={styles.datetimeRow}>
-                <Select
-                  placeholder="Date"
-                  options={[{ label: 'Person', value: 'person' }]}
-                  value={date}
-                  onChange={setDate}
-                />
+                <Flatpickr placeholder="Date" value={date} onChange={setDate} />
 
-                <Select
+                <Flatpickr
                   placeholder="Time"
-                  options={[{ label: 'Person', value: 'person' }]}
                   value={time}
                   onChange={setTime}
+                  options={{
+                    enableTime: true,
+                    noCalendar: true,
+                    dateFormat: 'H:i',
+                  }}
                 />
               </div>
 
