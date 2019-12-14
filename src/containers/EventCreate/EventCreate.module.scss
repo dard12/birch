@@ -42,10 +42,21 @@ button.eventBtn {
   grid-gap: $margin-2;
 }
 
+.calendarLink {
+  @extend .link;
+  font-size: $text-2;
+  font-weight: 600;
+}
+
 .createRow {
   margin-top: $margin-3;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.createButtons {
+  display: flex;
 }
 
 .eventTitle {

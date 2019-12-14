@@ -102,6 +102,7 @@ function EventButton(props: EventButtonProps) {
                     enableTime: true,
                     noCalendar: true,
                     dateFormat: 'h:i K',
+                    allowInput: true,
                   }}
                 />
               </div>
@@ -123,22 +124,27 @@ function EventButton(props: EventButtonProps) {
 
               <div className={styles.createRow}>
                 <a
+                  className={styles.calendarLink}
                   href="https://calendar.google.com/calendar/r"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button className="btn" color="grey">
-                    See Calendar
-                  </Button>
+                  Check Calendar
                 </a>
 
-                <Button
-                  className={styles.createButton}
-                  onClick={createOnClick(closeModal)}
-                >
-                  <IoIosAdd />
-                  Create Event
-                </Button>
+                <div className={styles.createButtons}>
+                  <Button className="btn" color="grey" onClick={closeModal}>
+                    Cancel
+                  </Button>
+
+                  <Button
+                    className={styles.createButton}
+                    onClick={createOnClick(closeModal)}
+                  >
+                    <IoIosAdd />
+                    Create Event
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
