@@ -65,7 +65,7 @@ function EventButton(props: EventButtonProps) {
                   options={{
                     enableTime: true,
                     noCalendar: true,
-                    dateFormat: 'H:i',
+                    dateFormat: 'h:i K',
                   }}
                 />
               </div>

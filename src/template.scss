@@ -366,3 +366,24 @@ textarea {
     background-color: $dark-8 !important;
   }
 }
+
+.flatpickr-time {
+  * {
+    background-color: $white !important;
+  }
+
+  .arrowUp,
+  .arrowDown {
+    display: none;
+  }
+
+  .numInputWrapper,
+  .flatpickr-am-pm {
+    width: auto !important;
+    padding: 0 $margin-2;
+  }
+}
+
+.flatpickr-calendar.showTimeInput {
+  width: auto;
+}
