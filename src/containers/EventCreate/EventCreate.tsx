@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { IoIosCalendar, IoIosAdd } from 'react-icons/io';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import Flatpickr from 'react-flatpickr';
 import styles from './EventCreate.module.scss';
 import { Button } from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
@@ -10,8 +9,7 @@ import { Input } from '../../components/Input/Input';
 import { Select } from '../../components/Select/Select';
 import { axiosPost } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
-
-// import 'flatpickr/dist/themes/theme.css';
+import { DatePicker } from '../../components/DatePicker/DatePicker';
 
 interface EventButtonProps {
   loadDocsAction?: Function;
@@ -68,9 +66,13 @@ function EventButton(props: EventButtonProps) {
               />
 
               <div className={styles.datetimeRow}>
-                <Flatpickr placeholder="Date" value={date} onChange={setDate} />
+                <DatePicker
+                  placeholder="Date"
+                  value={date}
+                  onChange={setDate}
+                />
 
-                <Flatpickr
+                <DatePicker
                   placeholder="Time"
                   value={time}
                   onChange={setTime}

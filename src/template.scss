@@ -344,3 +344,12 @@ textarea {
 .ql-editor li.ql-indent-9:not(.ql-direction-rtl) {
   padding-left: 30 * $margin-2;
 }
+
+.flatpickr-current-month {
+  .flatpickr-monthDropdown-months,
+  .cur-year,
+  .numInputWrapper {
+    appearance: none !important;
+    pointer-events: none;
+  }
+}
