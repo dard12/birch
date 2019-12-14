@@ -33,12 +33,12 @@ function EventButton(props: EventButtonProps) {
   const [date, setDate] = useState(roundNow);
   const [time, setTime] = useState(roundNow);
   const [activity, setActivity] = useState();
-  const [friends, setFriends] = useState();
+  const [people, setPeople] = useState();
 
   const createOnClick = () => {
     axiosPost(
       '/api/event',
-      { date, time, activity, friends },
+      { date, time, activity, people },
       { collection: 'event', loadDocsAction },
     );
   };
@@ -55,6 +55,13 @@ function EventButton(props: EventButtonProps) {
         modalRender={closeModal => (
           <div className={styles.eventModal}>
             <div className={styles.modalContent}>
+              <div className={styles.eventTitle}>
+                {activity ? activity.label : 'New Event'}
+
+                {activity && (_.isEmpty(people) ? ' with...' : ' with ')}
+
+                {activity && _.truncate(_.join(_.map(people, 'label'), ', '))}
+              </div>
               <div className={styles.datetimeRow}>
                 <DatePicker
                   placeholder="Date"
@@ -82,9 +89,9 @@ function EventButton(props: EventButtonProps) {
               />
 
               <SelectPerson
-                placeholder="Invite Friends"
-                value={friends}
-                onChange={setFriends}
+                placeholder="Guests"
+                value={people}
+                onChange={setPeople}
                 isMulti
                 isSearchable
               />

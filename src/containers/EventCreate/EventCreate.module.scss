@@ -36,12 +36,6 @@ button.eventBtn {
   font-size: $text-3;
 }
 
-.eventTitle {
-  padding: $margin-3;
-  border: none;
-  background-color: $dark-2;
-}
-
 .datetimeRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -52,6 +46,12 @@ button.eventBtn {
   margin-top: $margin-3;
   display: flex;
   justify-content: flex-end;
+}
+
+.eventTitle {
+  margin-bottom: $margin-2;
+  font-size: $text-5;
+  font-weight: 600;
 }
 
 .createButton {

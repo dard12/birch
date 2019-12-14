@@ -14,7 +14,7 @@ interface SelectPersonProps {
 
 function SelectPerson(props: SelectPersonProps & any) {
   const { personDocs, loadDocsAction, ...remainingProps } = props;
-  const { result } = useAxiosGet('/api/person', {}, { name: 'PersonSidebar' });
+  const { result } = useAxiosGet('/api/person', {}, { name: 'SelectPerson' });
 
   useLoadDocs({ collection: 'person', result, loadDocsAction });
 
