@@ -37,7 +37,7 @@ function EventButton(props: EventButtonProps) {
   const roundNow = roundToNearestMinutes(new Date(), { nearestTo: 30 });
 
   const [date, setDate] = useState([roundNow]);
-  const [time, setTime] = useState([roundNow]);
+  const [time, setTime] = useState([]);
   const [activity, setActivity] = useState();
   const [people, setPeople] = useState();
 
@@ -50,13 +50,16 @@ function EventButton(props: EventButtonProps) {
 
   const createOnClick = (closeModal: any) => {
     return () => {
-      const selectedTime = _.first(time) as Date;
-      const selectedDate = _.first(date) as Date;
-      const hours = getHours(selectedTime);
-      const minutes = getMinutes(selectedTime);
+      const selectedTime = _.first(time);
+      let start_date = _.first(date);
 
-      let start_date = setHours(selectedDate, hours);
-      start_date = setMinutes(start_date, minutes);
+      if (selectedTime && start_date) {
+        const hours = getHours(selectedTime);
+        const minutes = getMinutes(selectedTime);
+
+        start_date = setHours(start_date, hours);
+        start_date = setMinutes(start_date, minutes);
+      }
 
       axiosPost(
         '/api/event',

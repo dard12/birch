@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { IoIosCalendar } from 'react-icons/io';
+import { format } from 'date-fns';
 import styles from './Event.module.scss';
 import { EventDoc } from '../../../src-server/models';
 import TimeAgo from '../../components/TimeAgo/TimeAgo';
@@ -41,6 +42,8 @@ function Event(props: EventProps) {
 
       {start_date && (
         <span className={styles.eventTime}>
+          on {format(new Date(start_date), 'MMM d')}
+          {' — '}
           <TimeAgo timestamp={start_date} />.
         </span>
       )}
