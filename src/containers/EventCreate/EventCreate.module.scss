@@ -58,6 +58,7 @@ button.eventBtn {
   @extend .btn;
   display: flex;
   align-items: center;
+  margin-left: $margin-2;
 
   svg {
     margin-right: $margin-1;

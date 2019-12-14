@@ -85,6 +85,16 @@ function EventButton(props: EventButtonProps) {
               />
 
               <div className={styles.createRow}>
+                <a
+                  href="https://calendar.google.com/calendar/r"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button className="btn" color="grey">
+                    See Calendar
+                  </Button>
+                </a>
+
                 <Button className={styles.createButton} onClick={createOnClick}>
                   <IoIosAdd />
                   Create Event
