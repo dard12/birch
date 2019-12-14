@@ -353,3 +353,16 @@ textarea {
     pointer-events: none;
   }
 }
+
+.flatpickr-day {
+  border-color: transparent !important;
+
+  &:hover:not(.selected) {
+    background-color: $dark-3 !important;
+  }
+
+  &.selected {
+    background: transparent !important;
+    background-color: $dark-8 !important;
+  }
+}

@@ -20,27 +20,25 @@ function RemindButton(props: RemindButtonProps) {
   const refreshReminder = () => setParams(params);
 
   return (
-    <div className={styles.remindContainer}>
-      <Modal
-        onClose={refreshReminder}
-        buttonRender={openModal => (
-          <Button className={styles.shuffleBtn} onClick={openModal}>
-            <IoIosRefresh />
-            Remind Me
-          </Button>
-        )}
-        modalRender={closeModal => (
-          <div className={styles.remindModal}>
-            <div className={styles.remindHeader}>{header}</div>
-            <RichText
-              content={content}
-              className={styles.remindContent}
-              readOnly
-            />
-          </div>
-        )}
-      />
-    </div>
+    <Modal
+      onClose={refreshReminder}
+      buttonRender={openModal => (
+        <Button className={styles.shuffleBtn} onClick={openModal}>
+          <IoIosRefresh />
+          Remind Me
+        </Button>
+      )}
+      modalRender={closeModal => (
+        <div className={styles.remindModal}>
+          <div className={styles.remindHeader}>{header}</div>
+          <RichText
+            content={content}
+            className={styles.remindContent}
+            readOnly
+          />
+        </div>
+      )}
+    />
   );
 }
 

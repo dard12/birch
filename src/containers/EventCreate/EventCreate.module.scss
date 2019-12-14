@@ -1,12 +1,7 @@
 @import '../../template.scss';
 
-.eventContainer {
-  display: flex;
-  white-space: nowrap;
-  font-size: $text-2;
-}
-
 button.eventBtn {
+  font-size: $text-2;
   display: flex;
   align-items: center;
   font-weight: 600;
@@ -22,49 +17,5 @@ button.eventBtn {
   &:hover {
     color: $pink-5;
     border-color: $pink-5;
-  }
-}
-
-.eventModal {
-  @extend .shadow-2;
-  max-width: $width-2;
-  background-color: $white;
-  padding: $margin-4;
-  border-radius: $border-radius-1;
-  width: $width-1;
-}
-
-.modalContent {
-  display: grid;
-  grid-gap: $margin-3;
-  align-items: flex-start;
-  font-size: $text-3;
-}
-
-.eventTitle {
-  padding: $margin-3;
-  border: none;
-  background-color: $dark-2;
-}
-
-.datetimeRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: $margin-2;
-}
-
-.createRow {
-  margin-top: $margin-3;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.createButton {
-  @extend .btn;
-  display: flex;
-  align-items: center;
-
-  svg {
-    margin-right: $margin-1;
   }
 }
