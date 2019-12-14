@@ -10,7 +10,7 @@ import styles from '../NoteSidebar/NoteSidebar.module.scss';
 import { createDocListSelector } from '../../redux/selectors';
 import { PersonDoc } from '../../../src-server/models';
 import history from '../../history';
-import EventButton from '../EventButton/EventButton';
+import EventButton from '../EventCreate/EventCreate';
 
 interface PersonSidebarProps {
   person?: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IoIosCalendar } from 'react-icons/io';
-import styles from './EventButton.module.scss';
+import styles from './EventCreate.module.scss';
 import { Button } from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
 
