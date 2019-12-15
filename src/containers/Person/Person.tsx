@@ -66,7 +66,7 @@ function Person(props: PersonProps) {
   };
 
   const numberEvents = _.size(personEvents);
-  const editOnClose= () => setLastUpdate(new Date());
+  const editOnClose = () => setLastUpdate(new Date());
 
   return (
     <div>

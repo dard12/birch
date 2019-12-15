@@ -8,6 +8,7 @@ import {
   setHours,
   getMinutes,
 } from 'date-fns';
+import { setMinutes } from 'date-fns/esm';
 import styles from './EventCreate.module.scss';
 import { Button } from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
@@ -16,7 +17,7 @@ import { axiosPost } from '../../hooks/useAxios';
 import { loadDocsAction } from '../../redux/actions';
 import { DatePicker } from '../../components/DatePicker/DatePicker';
 import SelectPerson from '../SelectPerson/SelectPerson';
-import { setMinutes } from 'date-fns/esm';
+import history from '../../history';
 
 interface EventButtonProps {
   loadDocsAction?: Function;
@@ -61,16 +62,22 @@ function EventButton(props: EventButtonProps) {
         start_date = setMinutes(start_date, minutes);
       }
 
+      const peopleIds = _.map(people, 'value');
+
       axiosPost(
         '/api/event',
         {
           start_date,
           activity: _.get(activity, 'value'),
-          people: _.map(people, 'value'),
+          people: peopleIds,
           summary,
         },
         { collection: 'event', loadDocsAction },
-      ).then(closeModal);
+      ).then(() => {
+        closeModal();
+        const personId = _.first(peopleIds);
+        personId && history.push(`/relationships/${personId}`);
+      });
     };
   };
 

@@ -10,7 +10,7 @@ import styles from '../NoteSidebar/NoteSidebar.module.scss';
 import { createDocListSelector } from '../../redux/selectors';
 import { PersonDoc } from '../../../src-server/models';
 import history from '../../history';
-import EventButton from '../EventCreate/EventCreate';
+import EventCreate from '../EventCreate/EventCreate';
 
 interface PersonSidebarProps {
   person?: string;
@@ -55,7 +55,7 @@ function PersonSidebar(props: PersonSidebarProps) {
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebarButtons}>
-        <EventButton />
+        <EventCreate />
       </div>
 
       {_.isEmpty(personDocs) ? (
