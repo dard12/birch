@@ -7,7 +7,7 @@ import styles from './EventSearch.module.scss';
 import { EventDoc } from '../../../src-server/models';
 import { createDocSelector } from '../../redux/selectors';
 import { loadDocsAction } from '../../redux/actions';
-import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
+import { useAxiosGet, useLoadDocs, axiosPost } from '../../hooks/useAxios';
 import { Button } from '../../components/Button/Button';
 
 interface EventSearchProps {
@@ -34,6 +34,24 @@ function EventSearch(props: EventSearchProps) {
   const { summary, people, start_date } = eventDoc;
   const hasPerson = _.includes(people, person);
 
+  const updatePeople = (newPeople: string[]) => {
+    axiosPost(
+      '/api/event',
+      { id: event, people: newPeople },
+      { collection: 'event', loadDocsAction },
+    );
+  };
+
+  const addOnClick = () => {
+    const newPeople = _.concat(people, person);
+    updatePeople(newPeople);
+  };
+
+  const removeOnClick = () => {
+    const newPeople = _.without(people, person);
+    updatePeople(newPeople);
+  };
+
   return (
     <div className={styles.event}>
       <IoIosCalendar />
@@ -47,9 +65,11 @@ function EventSearch(props: EventSearchProps) {
 
       <div className={styles.addEvent}>
         {hasPerson ? (
-          <Button color="grey">Remove</Button>
+          <Button color="grey" onClick={removeOnClick}>
+            Remove
+          </Button>
         ) : (
-          <Button>Add</Button>
+          <Button onClick={addOnClick}>Add</Button>
         )}
       </div>
     </div>
