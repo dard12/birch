@@ -77,6 +77,12 @@ function EventButton(props: EventButtonProps) {
   return (
     <div className={styles.eventContainer}>
       <Modal
+        onClose={() => {
+          setDate([roundNow]);
+          setTime([]);
+          setActivity(null);
+          setPeople(null);
+        }}
         buttonRender={openModal => (
           <Button className={styles.eventBtn} onClick={openModal}>
             <IoIosCalendar />
