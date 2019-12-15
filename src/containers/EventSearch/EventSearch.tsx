@@ -46,7 +46,11 @@ function EventSearch(props: EventSearchProps) {
       )}
 
       <div className={styles.addEvent}>
-        {hasPerson ? <Button>Add</Button> : <Button>Remove</Button>}
+        {hasPerson ? (
+          <Button color="grey">Remove</Button>
+        ) : (
+          <Button>Add</Button>
+        )}
       </div>
     </div>
   );
