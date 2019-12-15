@@ -8,15 +8,19 @@ import EventSearchPage from '../EventSearchPage/EventSearchPage';
 
 interface EventEditProps {
   person: string;
+  onClose: Function;
 }
 
 function EventEdit(props: EventEditProps) {
-  const { person } = props;
+  const { person, onClose } = props;
   const query = getQueryParams('query');
 
   return (
     <Modal
-      onClose={() => setQueryParams({ query: undefined })}
+      onClose={() => {
+        setQueryParams({ query: undefined });
+        onClose();
+      }}
       buttonRender={(openModal: any) => (
         <div className={styles.editEvents} onClick={openModal}>
           Edit

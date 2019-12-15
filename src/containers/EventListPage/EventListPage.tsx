@@ -7,20 +7,23 @@ import Skeleton from '../../components/Skeleton/Skeleton';
 import { Button } from '../../components/Button/Button';
 import styles from './EventListPage.module.scss';
 import Event from '../Event/Event';
+import useLastLoad from '../../hooks/useLastLoad';
 
 interface EventListPageProps {
   params: any;
+  lastUpdate?: Date;
   seeMore?: Function;
   loadDocsAction?: Function;
 }
 
 function EventListPage(props: EventListPageProps) {
-  const { params, seeMore, loadDocsAction } = props;
-  const { result, isSuccess } = useAxiosGet('/api/event', params, {
+  const { params, lastUpdate, seeMore, loadDocsAction } = props;
+  const { result, isSuccess, setParams } = useAxiosGet('/api/event', params, {
     reloadOnChange: true,
     name: 'EventListPage',
   });
 
+  useLastLoad({ setParams, params, lastUpdate });
   useLoadDocs({ collection: 'event', result, loadDocsAction });
 
   if (!isSuccess) {

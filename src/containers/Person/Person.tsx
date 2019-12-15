@@ -30,6 +30,7 @@ function Person(props: PersonProps) {
   });
   const [header, setHeader] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [lastUpdate, setLastUpdate] = useState(new Date());
   const personDoc: PersonDoc = _.get(result, 'docs[0]');
 
   useFocus(() => setParams(params));
@@ -65,6 +66,7 @@ function Person(props: PersonProps) {
   };
 
   const numberEvents = _.size(personEvents);
+  const editOnClose= () => setLastUpdate(new Date());
 
   return (
     <div>
@@ -79,11 +81,12 @@ function Person(props: PersonProps) {
         <div>
           <div className={styles.sectionLabel}>
             <span>Events {numberEvents ? `(${numberEvents})` : null}</span>
-            <EventEdit person={person} />
+            <EventEdit person={person} onClose={editOnClose} />
           </div>
 
           <Paging
             component={EventListPage}
+            props={{ lastUpdate }}
             params={{ people: [person] }}
             gridGap="2"
           />
