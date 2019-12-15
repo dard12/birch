@@ -2,13 +2,16 @@ import React from 'react';
 import styles from './EventEdit.module.scss';
 import Modal from '../../components/Modal/Modal';
 import Paging from '../Paging/Paging';
-import EventListPage from '../EventListPage/EventListPage';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { getQueryParams, setQueryParams } from '../../history';
+import EventSearchPage from '../EventSearchPage/EventSearchPage';
 
-interface EventEditProps {}
+interface EventEditProps {
+  person: string;
+}
 
 function EventEdit(props: EventEditProps) {
+  const { person } = props;
   const query = getQueryParams('query');
 
   return (
@@ -24,7 +27,8 @@ function EventEdit(props: EventEditProps) {
           <div className={styles.modalContent}>
             <SearchBar placeholder="Search for events..." />
             <Paging
-              component={EventListPage}
+              component={EventSearchPage}
+              props={{ person }}
               params={{ search: query }}
               gridGap="2"
             />

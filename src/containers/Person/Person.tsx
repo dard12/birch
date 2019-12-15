@@ -79,7 +79,7 @@ function Person(props: PersonProps) {
         <div>
           <div className={styles.sectionLabel}>
             <span>Events {numberEvents ? `(${numberEvents})` : null}</span>
-            <EventEdit />
+            <EventEdit person={person} />
           </div>
 
           <Paging

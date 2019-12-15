@@ -1,26 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { IoIosCalendar } from 'react-icons/io';
 import { format } from 'date-fns';
-import styles from './Event.module.scss';
+import styles from './EventSearch.module.scss';
 import { EventDoc } from '../../../src-server/models';
-import TimeAgo from '../../components/TimeAgo/TimeAgo';
 import { createDocSelector } from '../../redux/selectors';
 import { loadDocsAction } from '../../redux/actions';
 import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
+import { Button } from '../../components/Button/Button';
 
-interface EventProps {
+interface EventSearchProps {
+  person: string;
   event: string;
   eventDoc?: EventDoc;
   loadDocsAction?: Function;
 }
 
-function Event(props: EventProps) {
-  const { event, eventDoc, loadDocsAction } = props;
+function EventSearch(props: EventSearchProps) {
+  const { person, event, eventDoc, loadDocsAction } = props;
   const { result } = useAxiosGet(
     '/api/event',
     { id: event },
-    { name: 'Event', cachedResult: eventDoc },
+    { name: 'EventSearch', cachedResult: eventDoc },
   );
 
   useLoadDocs({ collection: 'event', result, loadDocsAction });
@@ -29,21 +31,23 @@ function Event(props: EventProps) {
     return null;
   }
 
-  const { summary, start_date } = eventDoc;
+  const { summary, people, start_date } = eventDoc;
+  const hasPerson = _.includes(people, person);
 
   return (
     <div className={styles.event}>
       <IoIosCalendar />
-
       <div>{summary}</div>
 
       {start_date && (
         <span className={styles.eventTime}>
           on {format(new Date(start_date), 'MMM d')}
-          {' — '}
-          <TimeAgo timestamp={start_date} />.
         </span>
       )}
+
+      <div className={styles.addEvent}>
+        {hasPerson ? <Button>Add</Button> : <Button>Remove</Button>}
+      </div>
     </div>
   );
 }
@@ -55,4 +59,4 @@ export default connect(
     prop: 'eventDoc',
   }),
   { loadDocsAction },
-)(Event);
+)(EventSearch);
