@@ -6,6 +6,7 @@ import passportJWT from 'passport-jwt';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import _ from 'lodash';
+import { google } from 'googleapis';
 import { Request, Response, Errback } from 'express';
 import { v4 as uuid } from 'uuid';
 import { UserDoc } from '../models';
@@ -23,7 +24,8 @@ const {
 } = process.env;
 
 export async function hashPassword(password: string) {
-  const saltRounds = 10;
+  // https://security.stackexchange.com/questions/17207/recommended-of-rounds-for-bcrypt
+  const saltRounds = 11;
   return bcrypt.hash(password, saltRounds);
 }
 
@@ -106,51 +108,53 @@ const passwordStrategy = new LocalStrategy(async (username, password, done) => {
 //   },
 // );
 
-// const googleStrategy = new GoogleStrategy(
-//   {
-//     clientID: GOOGLE_CLIENT,
-//     clientSecret: GOOGLE_SECRET,
-//     callbackURL: `${origin}/auth/google/callback`,
-//   },
-//   async (token, tokenSecret, profile, done) => {
-//     const { id: google_id, name, emails, photos } = profile;
-//     const first_name = _.get(name, 'givenName') || '';
-//     const last_name = _.get(name, 'familyName') || '';
-//     const photo = _.first(_.compact(_.map(photos, 'value'))) || '';
-//     const email = _.first(_.compact(_.map(emails, 'value'))) || '';
-//     const id = uuid();
+const googleStrategy = new GoogleStrategy(
+  {
+    clientID: GOOGLE_CLIENT,
+    clientSecret: GOOGLE_SECRET,
+    callbackURL: `${origin}/auth/google/callback`,
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    const { id: google_id, name, emails, photos } = profile;
+    const first_name = _.get(name, 'givenName') || '';
+    const last_name = _.get(name, 'familyName') || '';
+    const photo = _.first(_.compact(_.map(photos, 'value'))) || '';
+    const email = _.first(_.compact(_.map(emails, 'value'))) || '';
+    const id = uuid();
 
-//     try {
-//       await pg.raw(
-//         `
-//         INSERT INTO user (id, google_id, first_name, last_name, email, username, photo, created_at)
-//         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-//         ON CONFLICT (google_id)
-//         DO NOTHING
-//       `,
-//         [id, google_id, first_name, last_name, email, id, photo, new Date()],
-//       );
-//     } catch (error) {
-//       // do nothing
-//     }
+    try {
+      await pg.raw(
+        `
+        INSERT INTO user (id, google_id, first_name, last_name, email, username, photo, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT (google_id)
+        DO NOTHING
+      `,
+        [id, google_id, first_name, last_name, email, id, photo, new Date()],
+      );
+    } catch (error) {
+      // do nothing
+    }
 
-//     try {
-//       await pg
-//         .update({ google_id, photo })
-//         .from('user')
-//         .where({ email });
+    try {
+      await pg
+        .update({ google_id, photo })
+        .from('user')
+        .where({ email });
 
-//       const user = await pg
-//         .first('*')
-//         .from('user')
-//         .where({ google_id });
+      const user = await pg
+        .first('*')
+        .from('user')
+        .where({ google_id });
 
-//       done(undefined, user);
-//     } catch (error) {
-//       done(error);
-//     }
-//   },
-// );
+      listEvents(refreshToken);
+
+      done(undefined, user);
+    } catch (error) {
+      done(error);
+    }
+  },
+);
 
 const jwtStrategy = new JWTStrategy(
   {
@@ -180,7 +184,7 @@ const jwtStrategy = new JWTStrategy(
 
 passport.use(passwordStrategy);
 // passport.use(facebookStrategy);
-// passport.use(googleStrategy);
+passport.use(googleStrategy);
 passport.use(jwtStrategy);
 
 passport.serializeUser((user: UserDoc, done) => done(null, user.id));
@@ -281,7 +285,9 @@ router.get(
 );
 router.get(
   '/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] }),
+  passport.authenticate('google', {
+    scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar'],
+  }),
 );
 
 router.get(
@@ -325,3 +331,25 @@ router.get('/auth/me', async (req, res) => {
     throw error;
   }
 });
+
+async function listEvents(refreshToken: string) {
+  const oauth2Client = new google.auth.OAuth2(
+    GOOGLE_CLIENT,
+    GOOGLE_SECRET,
+    `${origin}/auth/google/callback`,
+  );
+
+  oauth2Client.setCredentials({ refresh_token: refreshToken });
+
+  const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
+
+  const result = await calendar.events.list({
+    calendarId: 'primary',
+    maxResults: 10,
+    singleEvents: true,
+    orderBy: 'startTime',
+  });
+
+  const events = _.get(result, 'data.items');
+  console.log(_.map(events, 'summary'));
+}
