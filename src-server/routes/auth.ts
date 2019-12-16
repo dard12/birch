@@ -138,7 +138,7 @@ const googleStrategy = new GoogleStrategy(
 
     try {
       await pg
-        .update({ google_id, photo })
+        .update({ google_id, photo, google_token: refreshToken })
         .from('user')
         .where({ email });
 
