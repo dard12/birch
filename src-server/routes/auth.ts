@@ -286,6 +286,7 @@ router.get(
 router.get(
   '/auth/google',
   passport.authenticate('google', {
+    accessType: 'offline', // offline get us the refresh token
     scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar'],
   }),
 );
