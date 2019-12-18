@@ -5,6 +5,7 @@ import Paging from '../Paging/Paging';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { getQueryParams, setQueryParams } from '../../history';
 import EventSearchPage from '../EventSearchPage/EventSearchPage';
+import { axios } from '../../App';
 
 interface EventEditProps {
   person: string;
@@ -15,6 +16,13 @@ function EventEdit(props: EventEditProps) {
   const { person, onClose } = props;
   const query = getQueryParams('query');
 
+  const createOpenEdit = (openModal: any) => {
+    return () => {
+      axios.post('/api/event', { sync: true });
+      openModal();
+    };
+  };
+
   return (
     <Modal
       onClose={() => {
@@ -22,7 +30,7 @@ function EventEdit(props: EventEditProps) {
         onClose();
       }}
       buttonRender={(openModal: any) => (
-        <div className={styles.editEvents} onClick={openModal}>
+        <div className={styles.editEvents} onClick={createOpenEdit}>
           Edit
         </div>
       )}

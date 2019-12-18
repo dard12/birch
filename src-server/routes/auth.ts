@@ -6,13 +6,11 @@ import passportJWT from 'passport-jwt';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import _ from 'lodash';
-import { google } from 'googleapis';
 import { Request, Response, Errback } from 'express';
 import { v4 as uuid } from 'uuid';
-import { UserDoc, EventDoc } from '../models';
+import { UserDoc } from '../models';
 import { router, origin, Sentry } from '../index';
 import pg from '../pg';
-import { getUpsert } from '../util';
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -331,58 +329,3 @@ router.get('/auth/me', async (req, res) => {
     throw error;
   }
 });
-
-async function syncEvents(userId: string) {
-  const result = await pg
-    .select('google_token')
-    .from('user')
-    .where({ id: userId });
-  const google_token = _.get(result, '[0].google_token');
-
-  if (!google_token) {
-    return;
-  }
-
-  const oauth2Client = new google.auth.OAuth2(
-    GOOGLE_CLIENT,
-    GOOGLE_SECRET,
-    `${origin}/auth/google/callback`,
-  );
-
-  oauth2Client.setCredentials({ refresh_token: google_token });
-
-  const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
-  const calendarResult = await calendar.events.list({
-    calendarId: 'primary',
-    maxResults: 1000,
-    singleEvents: true,
-    orderBy: 'startTime',
-  });
-
-  const events = _.get(calendarResult, 'data.items');
-
-  console.log(_.map(events, 'summary'));
-
-  const eventDocs = _.map(events, ({ id, summary, start }) => ({
-    id: uuid(),
-    gcal_id: id,
-    summary,
-    author_id: userId,
-    start_date: _.get(start, 'dateTime'),
-  }));
-
-  const upsertQueries: any[] = [];
-
-  _.each(eventDocs, async eventDoc => {
-    const pgQuery = getUpsert(
-      { id: eventDoc.id },
-      _.omit(eventDoc, 'id'),
-      'event',
-    );
-    upsertQueries.push(pgQuery);
-  });
-
-  pg.transaction(transaction =>
-    Promise.all(_.map(upsertQueries, query => query.transacting(transaction))),
-  );
-}
