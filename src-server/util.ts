@@ -16,7 +16,7 @@ export async function execute(pgQuery: QueryBuilder, options?: any) {
   return { docs, page, next };
 }
 
-export async function upsert(query: any, updates: any, collection: string) {
+export function getUpsert(query: any, updates: any, collection: string) {
   const fullDoc = { ...query, ...updates };
   const queryFields = _.keys(query);
   const updateFields = _.keys(updates);
@@ -29,7 +29,7 @@ export async function upsert(query: any, updates: any, collection: string) {
   const queryString = _.join(queryFields, ', ');
   const updateString = _.join(_.map(updateFields, f => `${f} = ?`), ', ');
 
-  const result = await pg.raw(
+  return pg.raw(
     `
     INSERT INTO ${collection} (${insertString})
     VALUES (${valueString})
@@ -40,6 +40,10 @@ export async function upsert(query: any, updates: any, collection: string) {
     `,
     [...insertValues, ...updateValues],
   );
+}
+
+export async function upsert(query: any, updates: any, collection: string) {
+  const result = await getUpsert(query, updates, collection);
 
   return _.get(result, 'rows');
 }
