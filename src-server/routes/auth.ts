@@ -360,8 +360,10 @@ async function syncEvents(userId: string) {
   });
 
   const events = _.get(calendarResult, 'data.items');
+
   console.log(_.map(events, 'summary'));
-  const eventDocs: EventDoc[] = _.map(events, ({ id, summary, start }) => ({
+
+  const eventDocs = _.map(events, ({ id, summary, start }) => ({
     id: uuid(),
     gcal_id: id,
     summary,

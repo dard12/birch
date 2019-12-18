@@ -38,10 +38,10 @@ export interface PersonDoc {
 }
 
 export interface EventDoc {
-  id?: string;
+  id: string;
   start_date?: Date;
   summary?: string;
   activity?: string;
-  people?: string[];
+  people: string[];
   gcal_id?: string;
 }
