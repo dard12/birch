@@ -59,54 +59,54 @@ const passwordStrategy = new LocalStrategy(async (username, password, done) => {
   }
 });
 
-// const facebookStrategy = new FacebookStrategy(
-//   {
-//     clientID: FACEBOOK_CLIENT,
-//     clientSecret: FACEBOOK_SECRET,
-//     callbackURL: `${origin}/auth/facebook/callback`,
-//     // https://developers.facebook.com/docs/facebook-login/permissions#reference-default
-//     profileFields: ['id', 'first_name', 'last_name', 'email'],
-//     enableProof: true,
-//   },
-//   async (accessToken, refreshToken, profile, done) => {
-//     const { id: facebook_id, name, emails } = profile;
-//     const first_name = _.get(name, 'givenName') || '';
-//     const last_name = _.get(name, 'familyName') || '';
+const facebookStrategy = new FacebookStrategy(
+  {
+    clientID: FACEBOOK_CLIENT,
+    clientSecret: FACEBOOK_SECRET,
+    callbackURL: `${origin}/auth/facebook/callback`,
+    // https://developers.facebook.com/docs/facebook-login/permissions#reference-default
+    profileFields: ['id', 'first_name', 'last_name', 'email'],
+    enableProof: true,
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    const { id: facebook_id, name, emails } = profile;
+    const first_name = _.get(name, 'givenName') || '';
+    const last_name = _.get(name, 'familyName') || '';
 
-//     const email = _.first(_.compact(_.map(emails, 'value'))) || '';
-//     const id = uuid();
+    const email = _.first(_.compact(_.map(emails, 'value'))) || '';
+    const id = uuid();
 
-//     try {
-//       await pg.raw(
-//         `
-//         INSERT INTO user (id, facebook_id, first_name, last_name, email, username, created_at)
-//         VALUES (?, ?, ?, ?, ?, ?, ?)
-//         ON CONFLICT (facebook_id)
-//         DO NOTHING
-//         `,
-//         [id, facebook_id, first_name, last_name, email, id, new Date()],
-//       );
-//     } catch (error) {
-//       // Do nothing
-//     }
+    try {
+      await pg.raw(
+        `
+        INSERT INTO user (id, facebook_id, first_name, last_name, email, username, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT (facebook_id)
+        DO NOTHING
+        `,
+        [id, facebook_id, first_name, last_name, email, id, new Date()],
+      );
+    } catch (error) {
+      // Do nothing
+    }
 
-//     try {
-//       await pg
-//         .update({ facebook_id })
-//         .from('user')
-//         .where({ email });
+    try {
+      await pg
+        .update({ facebook_id })
+        .from('user')
+        .where({ email });
 
-//       const user = await pg
-//         .first('*')
-//         .from('user')
-//         .where({ facebook_id });
+      const user = await pg
+        .first('*')
+        .from('user')
+        .where({ facebook_id });
 
-//       done(null, user);
-//     } catch (error) {
-//       done(error);
-//     }
-//   },
-// );
+      done(null, user);
+    } catch (error) {
+      done(error);
+    }
+  },
+);
 
 const googleStrategy = new GoogleStrategy(
   {
@@ -183,7 +183,7 @@ const jwtStrategy = new JWTStrategy(
 );
 
 passport.use(passwordStrategy);
-// passport.use(facebookStrategy);
+passport.use(facebookStrategy);
 passport.use(googleStrategy);
 passport.use(jwtStrategy);
 
