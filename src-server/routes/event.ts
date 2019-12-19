@@ -75,9 +75,6 @@ export async function syncEvents(userId: string) {
   });
 
   const events = _.get(calendarResult, 'data.items');
-
-  console.log(_.map(events, 'summary'));
-
   const eventDocs = _.map(events, ({ id, summary, start }) => ({
     id: uuid(),
     gcal_id: id,
@@ -90,8 +87,8 @@ export async function syncEvents(userId: string) {
 
   _.each(eventDocs, eventDoc => {
     const pgQuery = getUpsert(
-      { id: eventDoc.id },
-      _.omit(eventDoc, 'id'),
+      { gcal_id: eventDoc.gcal_id },
+      _.pick(eventDoc, ['summary', 'start_date']),
       'event',
     );
 
