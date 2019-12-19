@@ -75,10 +75,10 @@ export async function syncEvents(userId: string) {
   });
 
   const events = _.get(calendarResult, 'data.items');
-  const eventDocs = _.map(events, ({ id, summary, start }) => ({
+  const eventDocs = _.map(events, ({ id, summary = null, start }) => ({
     id: uuid(),
     gcal_id: id,
-    summary: summary || null,
+    summary,
     author_id: userId,
     start_date: _.get(start, 'dateTime') || null,
   }));

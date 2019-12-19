@@ -19,7 +19,7 @@ export async function execute(pgQuery: QueryBuilder, options?: any) {
 export function getUpsert(query: any, updates: any, collection: string) {
   const fullDoc = { ...query, ...updates };
   const queryFields = _.keys(query);
-  const updateFields = _.keys(updates);
+  const updateFields = _.keys(_.omit(updates, [...queryFields, 'id']));
   const insertFields = _.keys(fullDoc);
   const insertValues = _.map(insertFields, field => fullDoc[field]);
   const updateValues = _.map(updateFields, field => fullDoc[field]);
