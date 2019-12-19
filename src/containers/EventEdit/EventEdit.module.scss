@@ -3,7 +3,7 @@
 .eventModal {
   @extend .shadow-2;
   width: $width-2;
-  height: 500px;
+  min-height: 500px;
   background-color: $white;
   padding: $margin-4;
   border-radius: $border-radius-1;

@@ -3,9 +3,10 @@
 .event {
   display: flex;
   align-items: center;
-  font-size: $text-5;
+  font-size: $text-4;
   font-family: $serif;
   color: $dark-10;
+  white-space: nowrap;
 
   svg {
     margin-right: $margin-2;
