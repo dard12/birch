@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import _ from 'lodash';
 import { google } from 'googleapis';
-import { router, requireAuth } from '../index';
+import { router, origin, requireAuth } from '../index';
 import pg from '../pg';
 import { upsert, execute, getUpsert } from '../util';
 
@@ -86,18 +86,23 @@ export async function syncEvents(userId: string) {
     start_date: _.get(start, 'dateTime'),
   }));
 
-  const upsertQueries: any[] = [];
+  const upserts: any[] = [];
 
-  _.each(eventDocs, async eventDoc => {
+  _.each(eventDocs, eventDoc => {
     const pgQuery = getUpsert(
       { id: eventDoc.id },
       _.omit(eventDoc, 'id'),
       'event',
     );
-    upsertQueries.push(pgQuery);
+
+    upserts.push(pgQuery);
   });
 
-  pg.transaction(transaction =>
-    Promise.all(_.map(upsertQueries, query => query.transacting(transaction))),
-  );
+  pg.transaction(transaction => {
+    _.each(upserts, query => query.transacting(transaction));
+
+    Promise.all(upserts)
+      .then(transaction.commit)
+      .catch(transaction.rollback);
+  });
 }

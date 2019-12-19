@@ -30,7 +30,7 @@ function EventEdit(props: EventEditProps) {
         onClose();
       }}
       buttonRender={(openModal: any) => (
-        <div className={styles.editEvents} onClick={createOpenEdit}>
+        <div className={styles.editEvents} onClick={createOpenEdit(openModal)}>
           Edit
         </div>
       )}
