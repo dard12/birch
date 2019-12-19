@@ -31,14 +31,12 @@ export function getUpsert(query: any, updates: any, collection: string) {
 
   return pg.raw(
     `
-    (
-      INSERT INTO ${collection} (${insertString})
-      VALUES (${valueString})
-      ON CONFLICT (${queryString})
-      DO UPDATE
-      SET ${updateString}
-      RETURNING *
-    )
+    INSERT INTO ${collection} (${insertString})
+    VALUES (${valueString})
+    ON CONFLICT (${queryString})
+    DO UPDATE
+    SET ${updateString}
+    RETURNING *
     `,
     [...insertValues, ...updateValues],
   );

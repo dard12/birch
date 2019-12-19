@@ -78,19 +78,15 @@ export async function syncEvents(userId: string) {
   const eventDocs = _.map(events, ({ id, summary, start }) => ({
     id: uuid(),
     gcal_id: id,
-    summary,
+    summary: summary || null,
     author_id: userId,
-    start_date: _.get(start, 'dateTime'),
+    start_date: _.get(start, 'dateTime') || null,
   }));
 
   const upserts: any[] = [];
 
   _.each(eventDocs, eventDoc => {
-    const pgQuery = getUpsert(
-      { gcal_id: eventDoc.gcal_id },
-      _.pick(eventDoc, ['summary', 'start_date']),
-      'event',
-    );
+    const pgQuery = getUpsert({ gcal_id: eventDoc.gcal_id }, eventDoc, 'event');
 
     upserts.push(pgQuery);
   });
