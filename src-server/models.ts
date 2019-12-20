@@ -39,7 +39,11 @@ export interface PersonDoc {
 
 export interface EventDoc {
   id: string;
-  start_date?: Date;
+  start?: {
+    date?: string;
+    dateTime?: Date;
+    timeZone?: string;
+  };
   summary?: string;
   activity?: string;
   people: string[];
