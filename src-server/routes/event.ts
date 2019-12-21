@@ -67,20 +67,25 @@ export async function syncEvents(userId: string) {
   oauth2Client.setCredentials({ refresh_token: google_token });
 
   const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
-  const calendarResult = await calendar.events.list({
+  const calendarResult = await calendar.calendars.get({
+    calendarId: 'primary',
+  });
+
+  const eventResult = await calendar.events.list({
     calendarId: 'primary',
     maxResults: 500,
     singleEvents: true,
     orderBy: 'startTime',
   });
 
-  const events = _.get(calendarResult, 'data.items');
+  const timeZone = _.get(calendarResult, 'data.timeZone');
+  const events = _.get(eventResult, 'data.items');
   const eventDocs = _.map(events, ({ id, summary = null, start = null }) => ({
     id: uuid(),
     gcal_id: id,
     summary,
     author_id: userId,
-    start,
+    start: { timeZone, ...start },
   }));
 
   const upserts: any[] = [];

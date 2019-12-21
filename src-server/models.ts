@@ -39,13 +39,15 @@ export interface PersonDoc {
 
 export interface EventDoc {
   id: string;
-  start?: {
-    date?: string;
-    dateTime?: Date;
-    timeZone?: string;
-  };
+  start?: Start;
   summary?: string;
   activity?: string;
   people: string[];
   gcal_id?: string;
+}
+
+export interface Start {
+  date?: string;
+  dateTime?: Date;
+  timeZone: string;
 }

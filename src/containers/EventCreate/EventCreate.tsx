@@ -52,14 +52,14 @@ function EventButton(props: EventButtonProps) {
   const createOnClick = (closeModal: any) => {
     return () => {
       const selectedTime = _.first(time);
-      let start_date = _.first(date);
+      let dateTime = _.first(date);
 
-      if (selectedTime && start_date) {
+      if (selectedTime && dateTime) {
         const hours = getHours(selectedTime);
         const minutes = getMinutes(selectedTime);
 
-        start_date = setHours(start_date, hours);
-        start_date = setMinutes(start_date, minutes);
+        dateTime = setHours(dateTime, hours);
+        dateTime = setMinutes(dateTime, minutes);
       }
 
       const peopleIds = _.map(people, 'value');
@@ -67,7 +67,7 @@ function EventButton(props: EventButtonProps) {
       axiosPost(
         '/api/event',
         {
-          start_date,
+          start: { dateTime },
           activity: _.get(activity, 'value'),
           people: peopleIds,
           summary,

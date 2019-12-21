@@ -8,6 +8,7 @@ import TimeAgo from '../../components/TimeAgo/TimeAgo';
 import { createDocSelector } from '../../redux/selectors';
 import { loadDocsAction } from '../../redux/actions';
 import { useAxiosGet, useLoadDocs } from '../../hooks/useAxios';
+import getEventTime from '../../components/EventTime/EventTime';
 
 interface EventProps {
   event: string;
@@ -29,7 +30,8 @@ function Event(props: EventProps) {
     return null;
   }
 
-  const { summary, start_date } = eventDoc;
+  const { summary, start } = eventDoc;
+  const eventTime = getEventTime(start);
 
   return (
     <div className={styles.event}>
@@ -37,11 +39,11 @@ function Event(props: EventProps) {
 
       <div>{summary}</div>
 
-      {start_date && (
+      {eventTime && (
         <span className={styles.eventTime}>
-          on {format(new Date(start_date), 'MMM d')}
+          on {format(new Date(eventTime), 'MMM d')}
           {' — '}
-          <TimeAgo timestamp={start_date} />.
+          <TimeAgo timestamp={eventTime} />.
         </span>
       )}
     </div>
