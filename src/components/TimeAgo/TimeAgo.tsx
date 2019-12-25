@@ -1,8 +1,8 @@
 import React from 'react';
-import { formatDistanceToNow, parseJSON } from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 
 interface TimeAgoProps {
-  timestamp: Date;
+  timestamp: Date | string;
 }
 
 function TimeAgo(props: TimeAgoProps) {
@@ -10,7 +10,7 @@ function TimeAgo(props: TimeAgoProps) {
 
   return (
     <React.Fragment>
-      {formatDistanceToNow(parseJSON(timestamp), { addSuffix: true })}
+      {formatDistanceToNow(new Date(timestamp), { addSuffix: true })}
     </React.Fragment>
   );
 }

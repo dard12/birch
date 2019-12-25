@@ -9,7 +9,6 @@ import { createDocSelector } from '../../redux/selectors';
 import { loadDocsAction } from '../../redux/actions';
 import { useAxiosGet, useLoadDocs, axiosPost } from '../../hooks/useAxios';
 import { Button } from '../../components/Button/Button';
-import getEventTime from '../../components/EventTime/EventTime';
 
 interface EventSearchProps {
   person: string;
@@ -32,7 +31,7 @@ function EventSearch(props: EventSearchProps) {
     return null;
   }
 
-  const { summary, people, start } = eventDoc;
+  const { summary, people, parsed_start } = eventDoc;
   const hasPerson = _.includes(people, person);
 
   const updatePeople = (newPeople: string[]) => {
@@ -53,16 +52,14 @@ function EventSearch(props: EventSearchProps) {
     updatePeople(newPeople);
   };
 
-  const eventTime = getEventTime(start);
-
   return (
     <div className={styles.event}>
       <IoIosCalendar />
       <div>{summary}</div>
 
-      {eventTime && (
+      {parsed_start && (
         <span className={styles.eventTime}>
-          on {format(eventTime, 'MMM d')}
+          on {format(new Date(parsed_start), 'MMM d')}
         </span>
       )}
 

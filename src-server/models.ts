@@ -39,6 +39,7 @@ export interface PersonDoc {
 
 export interface EventDoc {
   id: string;
+  parsed_start: Date;
   start?: Start;
   summary?: string;
   activity?: string;
@@ -49,5 +50,5 @@ export interface EventDoc {
 export interface Start {
   date?: string;
   dateTime?: Date;
-  timeZone: string;
+  timeZone?: string;
 }

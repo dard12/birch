@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import _ from 'lodash';
 import { google } from 'googleapis';
+import { zonedTimeToUtc } from 'date-fns-tz';
 import { router, origin, requireAuth } from '../index';
 import pg from '../pg';
 import { upsert, execute, getUpsert } from '../util';
@@ -9,7 +10,14 @@ const { GOOGLE_CLIENT = '', GOOGLE_SECRET = '' } = process.env;
 
 router.get('/api/event', requireAuth, async (req, res) => {
   const { query, user }: any = req;
-  const { search, people, page, pageSize, ...remaining } = query;
+  const {
+    search,
+    people,
+    page,
+    pageSize,
+    orderBy = 'parsed_start',
+    ...remaining
+  } = query;
   const where = { ...remaining, author_id: user.id };
 
   const pgQuery = pg
@@ -24,6 +32,10 @@ router.get('/api/event', requireAuth, async (req, res) => {
   if (search) {
     const substringSearch = `%${search}%`;
     pgQuery.whereRaw('(summary ILIKE ?)', [substringSearch]);
+  }
+
+  if (orderBy) {
+    pgQuery.orderBy(orderBy, 'desc');
   }
 
   const result = await execute(pgQuery, query);
@@ -87,7 +99,11 @@ export async function syncEvents(userId: string) {
     gcal_id: id,
     summary,
     author_id: userId,
-    start: { timeZone, ...start },
+    start,
+    parsed_start: zonedTimeToUtc(
+      start.dateTime || start.date,
+      start.timeZone || timeZone,
+    ),
   }));
 
   const upserts: any[] = [];
