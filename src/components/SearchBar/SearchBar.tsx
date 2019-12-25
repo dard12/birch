@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import qs from 'qs';
 import _ from 'lodash';
 import { Input } from '../Input/Input';
@@ -9,6 +9,7 @@ interface SearchBarProps {
   placeholder: string;
   pathname?: string;
   query?: string;
+  autoFocus?: boolean;
 }
 
 const submit = _.throttle((newQuery: string, pathname?: string) => {
@@ -20,13 +21,15 @@ const submit = _.throttle((newQuery: string, pathname?: string) => {
 }, 300);
 
 function SearchBar(props: SearchBarProps) {
-  const { pathname, placeholder, query: initialQuery = '' } = props;
+  const { pathname, placeholder, query: initialQuery = '', autoFocus } = props;
   const [query, setQuery] = useState(initialQuery);
 
+  useEffect(() => {
+    submit(query, pathname);
+  }, [query, pathname]);
+
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuery = event.currentTarget.value;
-    setQuery(newQuery);
-    submit(newQuery, pathname);
+    setQuery(event.currentTarget.value);
   };
 
   return (
@@ -35,6 +38,7 @@ function SearchBar(props: SearchBarProps) {
       placeholder={placeholder}
       onChange={onChange}
       value={query}
+      autoFocus={autoFocus}
     />
   );
 }

@@ -59,7 +59,7 @@ function EventSearch(props: EventSearchProps) {
 
       {parsed_start && (
         <span className={styles.eventTime}>
-          on {format(new Date(parsed_start), 'MMM d')}
+          on {format(new Date(parsed_start), 'MMM d, yyyy')}
         </span>
       )}
 

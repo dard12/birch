@@ -38,7 +38,7 @@ export default function Modal(props: ModalProps) {
         className={styles.modal}
         overlayClassName={styles.overlay}
       >
-        {modalRender(closeModal)}
+        {isOpen && modalRender(closeModal)}
       </ReactModal>
     </React.Fragment>
   );
