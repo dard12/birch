@@ -13,6 +13,7 @@ import EventEdit from '../EventEdit/EventEdit';
 import Paging from '../Paging/Paging';
 import EventListPage from '../EventListPage/EventListPage';
 import { createDocListSelector } from '../../redux/selectors';
+import { setQueryParams } from '../../history';
 
 interface PersonProps {
   person: string;
@@ -66,7 +67,10 @@ function Person(props: PersonProps) {
   };
 
   const numberEvents = _.size(personEvents);
-  const editOnClose = () => setLastUpdate(new Date());
+  const editOnClose = () => {
+    setLastUpdate(new Date());
+    setQueryParams({ page: undefined });
+  };
 
   return (
     <div>
