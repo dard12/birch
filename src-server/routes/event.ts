@@ -36,7 +36,9 @@ router.post('/api/event', requireAuth, async (req, res) => {
   const { id = uuid(), sync } = body;
 
   if (sync) {
-    syncEvents(user.id);
+    await syncEvents(user.id);
+    res.status(200).send();
+
     return;
   }
 

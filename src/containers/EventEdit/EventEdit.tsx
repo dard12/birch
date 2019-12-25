@@ -34,7 +34,7 @@ function EventEdit(props: EventEditProps) {
           Edit
         </div>
       )}
-      modalRender={closeModal => (
+      modalRender={() => (
         <div className={styles.eventModal}>
           <div className={styles.modalContent}>
             <SearchBar placeholder="Search for events..." />
