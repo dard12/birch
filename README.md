@@ -7,6 +7,12 @@ with a CTA like
 > there's an app for that!
 > hint: this is content marketing for that app
 
+goals / brand
+live life without waiting for others
+make new connections
+the self love of deciding who gets to be in your life
+maintain those connections, regularity is necessary for closeness
+
 
 server setup process
 

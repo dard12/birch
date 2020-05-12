@@ -277,6 +277,13 @@ textarea {
   margin-left: $margin-2;
 }
 
+.ql-clipboard {
+  position: fixed !important;
+  opacity: 0 !important;
+  left: 50% !important;
+  top: 50% !important;
+}
+
 .ql-editor {
   padding: 0;
 }
