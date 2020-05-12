@@ -78,6 +78,7 @@ class RichText extends Component<RichTextProps> {
       theme: 'bubble',
       placeholder,
       readOnly,
+      scrollingContainer: 'html',
       formats: ['bold', 'italic', 'link', 'blockquote', 'list', 'indent'],
       modules: {
         history: {
