@@ -79,7 +79,15 @@ class RichText extends Component<RichTextProps> {
       placeholder,
       readOnly,
       scrollingContainer: 'html',
-      formats: ['bold', 'italic', 'link', 'blockquote', 'list', 'indent'],
+      formats: [
+        'bold',
+        'italic',
+        'strike',
+        'link',
+        'blockquote',
+        'list',
+        'indent',
+      ],
       modules: {
         history: {
           userOnly: true,
