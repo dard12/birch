@@ -95,6 +95,7 @@ class RichText extends Component<RichTextProps> {
         toolbar: [
           'bold',
           'italic',
+          'strike',
           { list: 'ordered' },
           { list: 'bullet' },
           'blockquote',
